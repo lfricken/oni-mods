@@ -64,6 +64,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>echo F | xcopy /Y /S /R "$(TargetDir)$(TargetName).dll" "$(SolutionDir)\..\mod-bin\$(TargetName).dll"</PostBuildEvent>
+    <PostBuildEvent>custom_build_event</PostBuildEvent>
   </PropertyGroup>
 </Project>
