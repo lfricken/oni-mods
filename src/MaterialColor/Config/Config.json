@@ -1,0 +1,15 @@
+{
+  "Enabled": true,
+  "Debug": false,
+  "TileColorFactor": 2.5,
+  "TileColorShift": 0.275,
+  "LogElementsData": false,
+  "ShowMissingElementColors": false,
+  "TypeFilterInfo": {
+    "Inclusive": false,  // false to exclude buildings 
+    "ExactMatch": false, // true to match to exact bulding id
+    "Rules": [
+      // "Battery"
+    ]
+  }
+}
