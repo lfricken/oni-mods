@@ -1,12 +1,9 @@
 
-<a name="cairath-s-mods-for-oxygen-not-included-omit-in-toc"></a>
-# Cairath&#39;s Mods for Oxygen Not Included <!-- omit in toc -->
+# Cairath's Mods for Oxygen Not Included <!-- omit in toc -->
 <div align="center">
 
-[![](https://img.shields.io/discord/522855083151720466.svg?label=Discord&style=flat-square)](https://discord.gg/7wNFaVd)\
+[![](https://img.shields.io/discord/522855083151720466.svg?label=Discord&style=flat-square)](https://discord.gg/jcZ4M4e)\
 master branch last updated to game version **Q1-303707**
-
-**[for preview branch (Q2) mods please go to the Q2 branch! during preview versions all new mods and updates go to the preview branch](https://github.com/Cairath/ONI-Mods/tree/Q2)**
 
 </div>
 
@@ -20,20 +17,16 @@ master branch last updated to game version **Q1-303707**
 - [Tools Not Included](#tools-not-included)
 - [Special thanks](#special-thanks)
 
-<a name="cairath-s-mods-for-oxygen-not-included-omit-in-toc-forum-discord"></a>
-## Forum &amp; Discord
+## Forum & Discord
 Klei Forum thread: https://forums.kleientertainment.com/forums/topic/94120-mods-cairaths-mod-corner  
 Discord: https://discord.gg/jcZ4M4e
 
-<a name="cairath-s-mods-for-oxygen-not-included-omit-in-toc-support"></a>
 ## Support
 If you like my mods (or [Tools Not Included](https://toolsnotincluded.net)) and would like to say thanks and/or contribute to the server costs please consider supporting me on Patreon\
 \
 [![image](/.README/patreon_button.png)](https://www.patreon.com/bePatron?u=16290546)
 
-<a name="list-of-mods"></a>
 # List of mods
-<a name="list-of-mods-categories-legend"></a>
 ### Categories - legend
 
 | **Category** | **Description**                                                                                  |
@@ -45,7 +38,6 @@ If you like my mods (or [Tools Not Included](https://toolsnotincluded.net)) and 
 
 Some mods have more than one category, for example mod with categories `Decor, Build` means that the mod adds a decor building.
 
-<a name="list-of-mods-mods"></a>
 ### Mods
 |        **Cat.**         | **Name**                            | **Description**                                                                                                                                                                                                                                                                                                            | **Preview** |
 | :---------------------: | :---------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------: |
@@ -86,15 +78,12 @@ Some mods have more than one category, for example mod with categories `Decor, B
 | **Mech**<br/>**Build**  | Wireless Automation                 | Adds two buildings: <b>Wireless Emitter</b> and <b>Wireless Receiver</b>. Allows for sending automation signals wirelessly, matching emitters and receivers using channels. Uses 100W per building.                                                                                                                        |  [soon]   |
 |  **Mech**<br/>**QoL**   | Wounded Go To Med Bed               | Injured dupes (physical damage - light injuries or worse) go to the closest med bed or pharma chamber. Also allows for physical injuries to be cured in pharma chambers.                                                                                                                                                   |  [soon]   |
 
-<a name="instructions"></a>
 # Instructions
-<a name="instructions-download"></a>
 ## Download
 To use the mods you need to install ONI-ModLoader using instructions available [here](https://github.com/javisar/ONI-Modloader#installation)
 
 Compiled mod files are available for download in the [Mods folder](/Mods). You can download separate mods or the or alternatively the [entire zipped pack](https://github.com/Cairath/ONI-Mods/blob/master/Mods/%5ECompletePack.zip) at once.
 
-<a name="instructions-installation"></a>
 ## Installation
 Unzip the downloaded mod archives, then place the mods (in their respective folders) inside the Mods folder (you need to create one manually) in the game root directory.
 The directory tree should look like this:
@@ -105,20 +94,16 @@ The directory tree should look like this:
     * AnotherMod/
       * AnotherMod.dll
 
-<a name="instructions-updates"></a>
 ## Updates
 Please make sure you update mods and remove ones that are not up to date or archived - they are likely to crash the game.
 
-<a name="tools-not-included-https-toolsnotincluded-net"></a>
-# <a href="https://toolsnotincluded.net">Tools Not Included</a>
+# [Tools Not Included](https://toolsnotincluded.net)
 I am also an author of [Tools Not Included](https://toolsnotincluded.net) - a website with game tools, currently featuring a seed database with over 22 000 seeds uploaded. Check it out!
 
-<a name="special-thanks"></a>
 # Special thanks
 To [@pardeike](https://github.com/pardeike), creator of [Harmony](https://github.com/pardeike/Harmony), the library that made these mods possible.  
 To [@EtiamNullam](https://github.com/EtiamNullam), author of [Material Color](https://github.com/EtiamNullam/Etiam-ONI-Modpack) for the initial contribution of the Paint Walls.  
 
-<a name="special-thanks-other-mod-repositories-omit-in-toc"></a>
 ## Other mod repositories <!-- omit in toc -->
 For more mods check out:  
 * [Etiam's repo](https://github.com/EtiamNullam/Etiam-ONI-Modpack)  
@@ -128,4 +113,4 @@ For more mods check out:
 \
 \
 \
-Last readme update: Tuesday, 29th January 2019, 10:30 pm
+Last readme update: {"gitdown": "date", "format": "dddd, Do MMMM YYYY, h:mm a"}
