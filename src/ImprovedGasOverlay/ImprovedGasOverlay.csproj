@@ -63,8 +63,6 @@
     <Compile Include="ColorUtils.cs" />
     <Compile Include="ImprovedGasOverlayPatches.cs" />
     <Compile Include="ImprovedGasOverlayConfig.cs" />
-    <Compile Include="ModCounter\ModCounter.cs" />
-    <Compile Include="ModCounter\ModCounterConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,7 +70,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>custom_build_event</PostBuildEvent>
+    <PostBuildEvent>echo F | xcopy /Y /S /R "$(TargetDir)$(TargetName).dll" "$(SolutionDir)\..\mod-bin\$(TargetName).dll"</PostBuildEvent>
   </PropertyGroup>
   <ProjectExtensions />
 </Project>

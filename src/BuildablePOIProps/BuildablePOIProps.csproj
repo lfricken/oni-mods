@@ -63,8 +63,6 @@
     <Compile Include="Couch\CouchPatches.cs" />
     <Compile Include="DNAStatue\DNAStatueConfig.cs" />
     <Compile Include="DNAStatue\DNAStatuePatches.cs" />
-    <Compile Include="ModCounter\ModCounter.cs" />
-    <Compile Include="ModCounter\ModCounterConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TableWithChairs\TableWithChairsConfig.cs" />
     <Compile Include="TableWithChairs\TableWithChairsPatches.cs" />
@@ -75,6 +73,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>custom_build_event</PostBuildEvent>
+    <PostBuildEvent>echo F | xcopy /Y /S /R "$(TargetDir)$(TargetName).dll" "$(SolutionDir)\..\mod-bin\$(TargetName).dll"</PostBuildEvent>
   </PropertyGroup>
 </Project>

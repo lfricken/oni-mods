@@ -55,8 +55,6 @@
   <ItemGroup>
     <Compile Include="DietUtils.cs" />
     <Compile Include="Hatches\HatchesPatches.cs" />
-    <Compile Include="ModCounter\ModCounter.cs" />
-    <Compile Include="ModCounter\ModCounterConfig.cs" />
     <Compile Include="Pacu\PacuPatches.cs" />
     <Compile Include="Pacu\OutOfLiquidMonitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,6 +66,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>custom_build_event</PostBuildEvent>
+    <PostBuildEvent>echo F | xcopy /Y /S /R "$(TargetDir)$(TargetName).dll" "$(SolutionDir)\..\mod-bin\$(TargetName).dll"</PostBuildEvent>
   </PropertyGroup>
 </Project>
