@@ -1,0 +1,38 @@
+1. Create a gate similar to the gate dupes come in.
+should not be too hard to copy the gate.
+
+
+2. make it possible to fill the gate with materials and dupes
+Also not too hard
+
+3. use an element as activator for the gate ( to make it harder to activate) if the element is supplied the content of the gate is saved
+Thats the first problem
+I had trouble saving things. for my mod i ultimately made my own save files
+Might end up like this too saving it binary.
+
+4. On push of a the big button the dupes /content of the gate are transfered to a fresh map and dumped with all resources on the ground.
+That should be possible main problem might be intializing the map with the content.
+
+5. optional gates: There can be more than one out gate on each world: One gate to ultimate victory dumping the dupes on a inhabited safe world that victory gate yould appear every five or so worlds
+Guess we would need a victory screen somehow.
+
+6. The gate would be hard to access like in the core of the world. And it would have a special description and color depending on where it leads to. The material you need to activate for each dupe would need to come from space and hard to get. Even more hard for the victory gate or special gates.
+The special gates with special worlds generated would create their own challenge.
+I might use my godtool to create that worlds with scripts.
+or maybe look around if there are already worlds somewhere.
+
+
+Further concepts:
+
+Near the printing pod there could be a persistent storage storing all except dupes.
+
+The color of outgates could be colored by parameters: bluish for cold or wet worlds redish for hot or dry worlds.
+Darker for higher difficulty brighter for lower.
+
+A more easy way for the gate could be to make just a buildable gate and on click tranfer all to the new maps.
+
+Add something to the map maybe biomass.
+Biomass is needed to use the printing pod but limited each map.
+
+The endgame gate can be build but it needs ressources you have to collect on each map.
+The endgamegate leads to a very hard new map where you have to "do something" kindof a boss map to win the game.
