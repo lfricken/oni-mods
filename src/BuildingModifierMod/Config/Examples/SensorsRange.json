@@ -1,0 +1,37 @@
+{
+
+    "Modifiers": {
+
+        "LogicPressureSensorGas": {
+            "LogicPressureSensor": {
+                "rangeMax": 25.0
+            }
+        },
+        "LogicPressureSensorLiquid": {
+            "LogicPressureSensor": {
+                "rangeMax": 10000.0
+            }
+        },
+        "LogicTemperatureSensor": {
+            "LogicTemperatureSensor": {
+                "maxTemp": 1573.15
+            }
+        },
+
+        "GasConduitTemperatureSensor": {
+            "ConduitTemperatureSensor": {
+                "Threshold": 280.0,
+                "rangeMin": 0.0,
+                "rangeMax": 573.15
+            }
+        },
+        "LiquidConduitTemperatureSensor": {
+            "ConduitTemperatureSensor": {
+                "Threshold": 280.0,
+                "rangeMin": 0.0,
+                "rangeMax": 573.15
+            }
+        }
+
+    }
+}

@@ -1,0 +1,17 @@
+{
+
+    "Modifiers": {
+        
+        "GasVent": {
+            "Vent": {
+                "overpressureMass": 10000.0
+            }
+        },
+        "GasVentHighPressure": {
+            "Vent": {
+                "overpressureMass": 10000.0
+            }
+        }
+
+    }
+}
