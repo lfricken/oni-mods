@@ -9,29 +9,29 @@ using UnityEngine;
 [HarmonyPatch(typeof(SupermaterialRefineryConfig), "ConfigureBuildingTemplate", null)]
 public static class RadiumForge
 {
-	public static void Postfix( )
-	{
-		float num1 = 0.01f;
-		ComplexRecipe.RecipeElement[] ingredients2 = new ComplexRecipe.RecipeElement[2]
-		{ 
-	  new ComplexRecipe.RecipeElement(SimHashes.SolidMercury.CreateTag(), 50f),
-	  new ComplexRecipe.RecipeElement(SimHashes.TempConductorSolid.CreateTag(), 50f )
-		};
-		ComplexRecipe.RecipeElement[] results2 = new ComplexRecipe.RecipeElement[1]
-		{
-	  new ComplexRecipe.RecipeElement(SimHashes.Radium.CreateTag(), 100f)
-		};
-		ComplexRecipe complexRecipe3 = new ComplexRecipe(ComplexRecipeManager.MakeRecipeID("SupermaterialRefinery", (IList<ComplexRecipe.RecipeElement>)ingredients2, (IList<ComplexRecipe.RecipeElement>)results2), ingredients2, results2);
-		complexRecipe3.time = 80f;
-		complexRecipe3.description = (string)STRINGS.BUILDINGS.PREFABS.SUPERMATERIALREFINERY.SUPERCOOLANT_RECIPE_DESCRIPTION;
-		complexRecipe3.useResultAsDescription = true;
-		ComplexRecipe complexRecipe4 = complexRecipe3;
-		List<Tag> tagList3 = new List<Tag>();
-		tagList3.Add(TagManager.Create("SupermaterialRefinery"));
-		List<Tag> tagList4 = tagList3;
-		complexRecipe4.fabricators = tagList4;
+    public static void Postfix()
+    {
+        float num1 = 0.01f;
+        ComplexRecipe.RecipeElement[] ingredients2 = new ComplexRecipe.RecipeElement[2]
+        {
+            new ComplexRecipe.RecipeElement(SimHashes.SolidMercury.CreateTag(), 50f),
+            new ComplexRecipe.RecipeElement(SimHashes.TempConductorSolid.CreateTag(), 50f )
+        };
+        ComplexRecipe.RecipeElement[] results2 = new ComplexRecipe.RecipeElement[1]
+        {
+            new ComplexRecipe.RecipeElement(SimHashes.Radium.CreateTag(), 100f)
+        };
+        ComplexRecipe complexRecipe3 = new ComplexRecipe(ComplexRecipeManager.MakeRecipeID("SupermaterialRefinery", (IList<ComplexRecipe.RecipeElement>)ingredients2, (IList<ComplexRecipe.RecipeElement>)results2), ingredients2, results2);
+        complexRecipe3.time = 80f;
+        complexRecipe3.description = (string)STRINGS.BUILDINGS.PREFABS.SUPERMATERIALREFINERY.SUPERCOOLANT_RECIPE_DESCRIPTION;
+        complexRecipe3.useResultAsDescription = true;
+        ComplexRecipe complexRecipe4 = complexRecipe3;
+        List<Tag> tagList3 = new List<Tag>();
+        tagList3.Add(TagManager.Create("SupermaterialRefinery"));
+        List<Tag> tagList4 = tagList3;
+        complexRecipe4.fabricators = tagList4;
 
-		/*
+        /*
 		ComplexRecipe.RecipeElement[] ingredients = new ComplexRecipe.RecipeElement[3]
 	{
 		new ComplexRecipe.RecipeElement(ElementLoader.FindElementByHash(SimHashes.Steel).tag, 25f),
@@ -55,5 +55,5 @@ public static class RadiumForge
 	  TagManager.Create("GlassForge")
 	};
 		ComplexRecipeManager.Get().AddObsoleteIDMapping(obsolete_id, str);*/
-	}
+    }
 }

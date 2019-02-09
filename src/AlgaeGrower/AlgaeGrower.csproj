@@ -53,8 +53,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlgaeGrower.cs" />
-    <Compile Include="AlgaeGrowerConfig.cs" />
-    <Compile Include="AlgaeGrowerPatches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
