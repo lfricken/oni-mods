@@ -7,13 +7,20 @@ using TUNING;
 using UnityEngine;
 using BUILDINGS = TUNING.BUILDINGS;
 
+//////////////////////////
+// see Preview.md
+//////////////////////////
+
 namespace AlgaeGrower
 {
     /// <summary>
-    /// 
+    /// Animations, 
     /// </summary>
     public class AlgaeGrower : StateMachineComponent<AlgaeGrower.SMInstance>
     {
+        /// <summary>
+        /// Probably where gas is created by this object?
+        /// </summary>
         [SerializeField]
         public CellOffset PressureSampleOffset = CellOffset.none;
 
@@ -134,7 +141,7 @@ namespace AlgaeGrower
     }
 
     /// <summary>
-    /// Description
+    /// Description, stats, functionality.
     /// </summary>
     public class AlgaeGrowerConfig : IBuildingConfig
     {
@@ -151,6 +158,9 @@ namespace AlgaeGrower
             Storage.StoredItemModifier.Seal
         };
 
+        /// <summary>
+        /// Define construction costs, health, size, noises, random stats.
+        /// </summary>
         public override BuildingDef CreateBuildingDef()
         {
             var buildingDef = BuildingTemplates.CreateBuildingDef(
@@ -183,6 +193,57 @@ namespace AlgaeGrower
 
         public override void ConfigureBuildingTemplate(GameObject go, Tag prefab_tag)
         {
+            DefineStorage(go);
+            DefineConverter(go);
+            DefineDropers(go);
+            DefineCollectors(go);
+
+            go.AddOrGet<AnimTileable>();
+            var algaeHabitat = go.AddOrGet<AlgaeGrower>();
+            algaeHabitat.PressureSampleOffset = new CellOffset(0, 1);
+
+            Prioritizable.AddRef(go);
+        }
+
+        /// <summary>
+        /// This building will automatically drop stuff.
+        /// </summary>
+        protected void DefineDropers(GameObject go)
+        {
+            var elementDropper = go.AddComponent<ElementDropper>();
+            elementDropper.emitMass = 5;
+            elementDropper.emitTag = SimHashes.Algae.CreateTag();
+        }
+
+        /// <summary>
+        /// Collects these elements from the environment automatically.
+        /// </summary>
+        protected void DefineCollectors(GameObject go)
+        {
+            var elementCollector = go.AddOrGet<ElementConsumer>();
+            elementCollector.elementToConsume = SimHashes.CarbonDioxide;
+            elementCollector.consumptionRate = 0.01375f;
+            elementCollector.consumptionRadius = 3;
+            elementCollector.storeOnConsume = true;
+            elementCollector.sampleCellOffset = new Vector3(0.0f, 1f, 0.0f);
+            elementCollector.isRequired = true; // isRequired means that an warning will show in game if the element isn't available
+            elementCollector.showInStatusPanel = true;
+
+            var passiveElementCollector = go.AddComponent<PassiveElementConsumer>();
+            passiveElementCollector.elementToConsume = SimHashes.Water;
+            passiveElementCollector.consumptionRate = 1.2f;
+            passiveElementCollector.consumptionRadius = 1;
+            passiveElementCollector.showDescriptor = false;
+            passiveElementCollector.storeOnConsume = true;
+            passiveElementCollector.capacityKG = 360f;
+            passiveElementCollector.showInStatusPanel = false;
+        }
+
+        /// <summary>
+        /// Elements we can store, and elements that need to be delivered.
+        /// </summary>
+        protected void DefineStorage(GameObject go)
+        {
             var storage1 = go.AddOrGet<Storage>();
             storage1.showInUI = true;
 
@@ -207,10 +268,13 @@ namespace AlgaeGrower
             manualDeliveryKg2.refillMass = 72f;
             manualDeliveryKg2.allowPause = true;
             manualDeliveryKg2.choreTypeIDHash = Db.Get().ChoreTypes.OperateFetch.IdHash;
+        }
 
-            var algaeHabitat = go.AddOrGet<AlgaeGrower>();
-            algaeHabitat.PressureSampleOffset = new CellOffset(0, 1);
-
+        /// <summary>
+        /// Conversion definitions.
+        /// </summary>
+        public void DefineConverter(GameObject go)
+        {
             var elementConverter = go.AddComponent<ElementConverter>();
             elementConverter.consumedElements = new[]
             {
@@ -220,35 +284,9 @@ namespace AlgaeGrower
             };
             elementConverter.outputElements = new[]
             {
-                new ElementConverter.OutputElement(0.005f, SimHashes.Oxygen, 303.15f, false, 0.0f, 1f),
+                new ElementConverter.OutputElement(1.000f, SimHashes.Oxygen, 303.15f, false, 0.0f, 1f),
                 new ElementConverter.OutputElement(0.015f, SimHashes.Algae, 303.15f, true, 0.0f, 1f)
             };
-
-            var elementDropper = go.AddComponent<ElementDropper>();
-            elementDropper.emitMass = 5;
-            elementDropper.emitTag = SimHashes.Algae.CreateTag();
-
-            var elementConsumer = go.AddOrGet<ElementConsumer>();
-            elementConsumer.elementToConsume = SimHashes.CarbonDioxide;
-            elementConsumer.consumptionRate = 0.01375f;
-            elementConsumer.consumptionRadius = 3;
-            elementConsumer.showInStatusPanel = true;
-            elementConsumer.storeOnConsume = true;
-            elementConsumer.sampleCellOffset = new Vector3(0.0f, 1f, 0.0f);
-            elementConsumer.isRequired = true;
-
-            var passiveElementConsumer = go.AddComponent<PassiveElementConsumer>();
-            passiveElementConsumer.elementToConsume = SimHashes.Water;
-            passiveElementConsumer.consumptionRate = 1.2f;
-            passiveElementConsumer.consumptionRadius = 1;
-            passiveElementConsumer.showDescriptor = false;
-            passiveElementConsumer.storeOnConsume = true;
-            passiveElementConsumer.capacityKG = 360f;
-            passiveElementConsumer.showInStatusPanel = false;
-
-            go.AddOrGet<AnimTileable>();
-
-            Prioritizable.AddRef(go);
         }
 
         public override void DoPostConfigureComplete(GameObject go)
@@ -258,7 +296,7 @@ namespace AlgaeGrower
     }
 
     /// <summary>
-    /// Set Name, Description, Effect description, Tech Grouping.
+    /// Set Name, Description, Effect description, Tech Grouping, buildscreen.
     /// </summary>
     public class AlgaeGrowerPatches
     {
