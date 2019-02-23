@@ -1,4 +1,8 @@
-﻿using Harmony;
+﻿/// <summary>
+/// Created by lfricken https://github.com/lfricken/oni-mods
+/// </summary>
+
+using Harmony;
 
 namespace RadiumFuelRod
 {

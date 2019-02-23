@@ -1,4 +1,8 @@
-﻿using Harmony;
+﻿/// <summary>
+/// Created by lfricken https://github.com/lfricken/oni-mods
+/// </summary>
+
+using Harmony;
 using System.Collections.Generic;
 using UnityEngine;
 

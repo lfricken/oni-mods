@@ -1,4 +1,8 @@
-﻿using Database;
+﻿/// <summary>
+/// Created by lfricken https://github.com/lfricken/oni-mods
+/// </summary>
+
+using Database;
 using Harmony;
 using STRINGS;
 using System;
@@ -6,10 +10,6 @@ using System.Collections.Generic;
 using TUNING;
 using UnityEngine;
 using BUILDINGS = TUNING.BUILDINGS;
-
-//////////////////////////
-// see Preview.md
-//////////////////////////
 
 namespace BuildableWaterGeyser
 {

@@ -1,4 +1,8 @@
-﻿namespace RadiumFuelRod
+﻿/// <summary>
+/// Created by lfricken https://github.com/lfricken/oni-mods
+/// </summary>
+
+namespace RadiumFuelRod
 {
 	public class ElementModifier
 	{
