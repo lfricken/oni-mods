@@ -1,5 +1,5 @@
 
-# lfricken's Mods for Oxygen Not Included
+## lfricken's mods for Oxygen Not Included
 
 ### Installation
 1. Install [ONI-ModLoader](https://github.com/javisar/ONI-Modloader#installation).
