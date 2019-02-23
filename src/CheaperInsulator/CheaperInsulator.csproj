@@ -62,6 +62,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>echo F | xcopy /Y /S /R "$(TargetDir)$(TargetName).dll" "$(TargetDir)..\..\..\..\mod-bin\$(TargetName).dll"</PostBuildEvent>
+    <PostBuildEvent>echo F | xcopy /Y /S /R "$(TargetDir)$(TargetName).dll" "$(TargetDir)..\..\..\..\Mods\$(TargetName).dll"</PostBuildEvent>
   </PropertyGroup>
 </Project>
