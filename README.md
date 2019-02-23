@@ -9,10 +9,10 @@
 4. Place those dll files inside the Mods folder.
 
 The directory tree should look like this:
-* .../OxygenNotIncluded/
-  * Mods/
-    * SomeMod.dll
-    * AnotherMod.dll
+    * .../OxygenNotIncluded/
+        * Mods/
+            * SomeMod.dll
+            * AnotherMod.dll
 
 Note that you can optionally put the dll's in subdirectories. As long as the dll files are somewhere inside Mods.
 
