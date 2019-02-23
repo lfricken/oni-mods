@@ -77,6 +77,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WirelessAutomation", "Wirel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuclearPowerMod", "NuclearPowerMod\NuclearPowerMod.csproj", "{1C93D361-309F-4318-9845-3E51C8565C9C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildableWaterGeyser", "BuildableWaterGeyser\BuildableWaterGeyser.csproj", "{12C357B6-EA4D-4876-B694-08505249A819}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheaperInsulator", "CheaperInsulator\CheaperInsulator.csproj", "{D026DB0D-EF32-4837-8608-FEC7687A4A0E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -231,6 +235,14 @@ Global
 		{1C93D361-309F-4318-9845-3E51C8565C9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C93D361-309F-4318-9845-3E51C8565C9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C93D361-309F-4318-9845-3E51C8565C9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12C357B6-EA4D-4876-B694-08505249A819}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12C357B6-EA4D-4876-B694-08505249A819}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12C357B6-EA4D-4876-B694-08505249A819}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12C357B6-EA4D-4876-B694-08505249A819}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D026DB0D-EF32-4837-8608-FEC7687A4A0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D026DB0D-EF32-4837-8608-FEC7687A4A0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D026DB0D-EF32-4837-8608-FEC7687A4A0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D026DB0D-EF32-4837-8608-FEC7687A4A0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
