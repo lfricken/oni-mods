@@ -1,7 +1,5 @@
 
-<div align="center">
 # Geothermal Steam Pump
-</div>
 
 ## About
 Adds a Geothermal Steam Pump building under the [Plumbing](https://oxygennotincluded.gamepedia.com/Plumbing) tab.

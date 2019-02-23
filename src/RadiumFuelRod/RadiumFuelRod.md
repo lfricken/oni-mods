@@ -1,7 +1,5 @@
 
-<div align="center">
 # Nuclear Fuel Rod
-</div>
 
 ## About
 Adds a Nuclear Fuel Rod building under the [Power](https://oxygennotincluded.gamepedia.com/Power) tab.
@@ -10,4 +8,4 @@ It must be constructed out of [Radium](https://oxygennotincluded.gamepedia.com/R
 If it overheats it will explode into ball of hot gas.
 
 
-*Mod File*: RadiumFuelRod.dll
+RadiumFuelRod.dll

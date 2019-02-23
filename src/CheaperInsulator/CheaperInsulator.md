@@ -1,7 +1,5 @@
 
-<div align="center">
 # Cheaper Insulation
-</div>
 
 ## About
 Makes the [Insulation](https://oxygennotincluded.gamepedia.com/Insulation) recipe produce 10 times 
