@@ -11,12 +11,12 @@ using TUNING;
 using UnityEngine;
 using BUILDINGS = TUNING.BUILDINGS;
 
-namespace BuildableWaterGeyser
+namespace BuildableSteamGeyser
 {
 	/// <summary>
 	/// Animations, 
 	/// </summary>
-	public class BuildableWaterGeyser : StateMachineComponent<BuildableWaterGeyser.SMInstance>
+	public class BuildableSteamGeyser : StateMachineComponent<BuildableSteamGeyser.SMInstance>
 	{
 		public const float CelciusOutputTemperature = 175f;
 		public const float EmissionRate = 100f;
@@ -24,7 +24,7 @@ namespace BuildableWaterGeyser
 		[MyCmpGet]
 		private readonly Operational _operational;
 
-		public BuildableWaterGeyser(Operational operational)
+		public BuildableSteamGeyser(Operational operational)
 		{
 			_operational = operational;
 		}
@@ -40,11 +40,11 @@ namespace BuildableWaterGeyser
 			smi.StartSM();
 		}
 
-		public class SMInstance : GameStateMachine<States, SMInstance, BuildableWaterGeyser, object>.GameInstance
+		public class SMInstance : GameStateMachine<States, SMInstance, BuildableSteamGeyser, object>.GameInstance
 		{
 			private readonly Operational _operational;
 
-			public SMInstance(BuildableWaterGeyser master) : base(master)
+			public SMInstance(BuildableSteamGeyser master) : base(master)
 			{
 				_operational = master.GetComponent<Operational>();
 			}
@@ -58,7 +58,7 @@ namespace BuildableWaterGeyser
 			}
 		}
 
-		public class States : GameStateMachine<States, SMInstance, BuildableWaterGeyser>
+		public class States : GameStateMachine<States, SMInstance, BuildableSteamGeyser>
 		{
 			public override void InitializeStates(out BaseState defaultState)
 			{
@@ -73,11 +73,11 @@ namespace BuildableWaterGeyser
 	/// <summary>
 	/// Description, stats, functionality.
 	/// </summary>
-	public class BuildableWaterGeyserConfig : IBuildingConfig
+	public class BuildableSteamGeyserConfig : IBuildingConfig
 	{
-		public static readonly string Id = "BuildableWaterGeyser";
+		public static readonly string Id = "BuildableSteamGeyser";
 		public static readonly string DisplayName = "Geothermal Steam Pump";
-		public static readonly string Description = $"Pumps large amounts of " + UI.FormatAsLink("Steam", "STEAM") + $" at {BuildableWaterGeyser.CelciusOutputTemperature}°C out of the ground. Can't be turned off once active.";
+		public static readonly string Description = $"Pumps large amounts of " + UI.FormatAsLink("Steam", "STEAM") + $" at {BuildableSteamGeyser.CelciusOutputTemperature}°C out of the ground. Can't be turned off once active.";
 		public static readonly LocString Effect = (LocString)("Produces " + UI.FormatAsLink("Steam", "STEAM") + ".");
 
 		/// <summary>
@@ -116,7 +116,7 @@ namespace BuildableWaterGeyser
 		{
 			DefineEmitter(go);
 			go.AddOrGet<AnimTileable>();
-			var waterGeyser = go.AddOrGet<BuildableWaterGeyser>();
+			var waterGeyser = go.AddOrGet<BuildableSteamGeyser>();
 
 			Prioritizable.AddRef(go);
 		}
@@ -128,7 +128,7 @@ namespace BuildableWaterGeyser
 			var emitter = go.AddComponent<ElementEmitter>();
 			emitter.emitRange = 2;
 			emitter.maxPressure = 2761;
-			emitter.outputElement = new ElementConverter.OutputElement(BuildableWaterGeyser.EmissionRate, SimHashes.Steam, BuildableWaterGeyser.CelciusOutputTemperature + kelvinOffset, false, 0f, 0f, false, 1f);
+			emitter.outputElement = new ElementConverter.OutputElement(BuildableSteamGeyser.EmissionRate, SimHashes.Steam, BuildableSteamGeyser.CelciusOutputTemperature + kelvinOffset, false, 0f, 0f, false, 1f);
 		}
 
 		public override void DoPostConfigureComplete(GameObject go)
@@ -137,10 +137,10 @@ namespace BuildableWaterGeyser
 		}
 	}
 
-	/// <summary>BuildableWaterGeyser
+	/// <summary>BuildableSteamGeyser
 	/// Set Name, Description, Effect description, Tech Grouping, buildscreen.
 	/// </summary>
-	public class BuildableWaterGeyserConfigPatches
+	public class BuildableSteamGeyserConfigPatches
 	{
 		[HarmonyPatch(typeof(GeneratedBuildings))]
 		[HarmonyPatch(nameof(GeneratedBuildings.LoadGeneratedBuildings))]
@@ -148,11 +148,11 @@ namespace BuildableWaterGeyser
 		{
 			public static void Prefix()
 			{
-				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{BuildableWaterGeyserConfig.Id.ToUpperInvariant()}.NAME", BuildableWaterGeyserConfig.DisplayName);
-				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{BuildableWaterGeyserConfig.Id.ToUpperInvariant()}.DESC", BuildableWaterGeyserConfig.Description);
-				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{BuildableWaterGeyserConfig.Id.ToUpperInvariant()}.EFFECT", BuildableWaterGeyserConfig.Effect);
+				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{BuildableSteamGeyserConfig.Id.ToUpperInvariant()}.NAME", BuildableSteamGeyserConfig.DisplayName);
+				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{BuildableSteamGeyserConfig.Id.ToUpperInvariant()}.DESC", BuildableSteamGeyserConfig.Description);
+				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{BuildableSteamGeyserConfig.Id.ToUpperInvariant()}.EFFECT", BuildableSteamGeyserConfig.Effect);
 
-				ModUtil.AddBuildingToPlanScreen("Plumbing", BuildableWaterGeyserConfig.Id);
+				ModUtil.AddBuildingToPlanScreen("Plumbing", BuildableSteamGeyserConfig.Id);
 			}
 		}
 
@@ -162,7 +162,7 @@ namespace BuildableWaterGeyser
 		{
 			public static void Prefix()
 			{
-				var tech = new List<string>(Techs.TECH_GROUPING["FarmingTech"]) { BuildableWaterGeyserConfig.Id };
+				var tech = new List<string>(Techs.TECH_GROUPING["FarmingTech"]) { BuildableSteamGeyserConfig.Id };
 				Techs.TECH_GROUPING["FarmingTech"] = tech.ToArray();
 			}
 		}
@@ -174,9 +174,9 @@ namespace BuildableWaterGeyser
 		{
 			public static void Postfix(string type_name, ref Type __result)
 			{
-				if (type_name == "BuildableWaterGeyser.BuildableWaterGeyser")
+				if (type_name == "BuildableSteamGeyser.BuildableSteamGeyser")
 				{
-					__result = typeof(BuildableWaterGeyser);
+					__result = typeof(BuildableSteamGeyser);
 				}
 			}
 		}

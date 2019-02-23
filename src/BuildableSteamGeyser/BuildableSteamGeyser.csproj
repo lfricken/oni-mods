@@ -7,8 +7,8 @@
     <ProjectGuid>{12C357B6-EA4D-4876-B694-08505249A819}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BuildableWaterGeyser</RootNamespace>
-    <AssemblyName>BuildableWaterGeyser</AssemblyName>
+    <RootNamespace>BuildableSteamGeyser</RootNamespace>
+    <AssemblyName>$(TargetName)</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -52,16 +52,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BuildableWaterGeyser.cs" />
+    <Compile Include="BuildableSteamGeyser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="BuildableSteamGeyser.md" />
     <None Include="packages.config" />
-    <None Include="Preview.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>echo F | xcopy /Y /S /R "$(TargetDir)$(TargetName).dll" "$(TargetDir)..\..\..\..\Mods\$(TargetName).dll"</PostBuildEvent>
+    <PostBuildEvent>
+      echo F | xcopy /Y /S /R "$(TargetDir)$(TargetName).dll" "$(TargetDir)..\..\..\..\Mods\$(TargetName).dll"
+      echo F | xcopy /Y /S /R "$(ProjectDir)$(TargetName).md" "$(TargetDir)..\..\..\..\Mods\$(TargetName).md"
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

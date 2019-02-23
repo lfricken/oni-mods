@@ -1,7 +1,3 @@
-<div align="center">
-
-![image](./Preview/banner.png)
-
 # Geothermal Steam Pump
 
 **BUILDING**
