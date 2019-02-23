@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BuildableWaterGeyser
+namespace CheaperInsulator
 {
 	public class SupermaterialRefineryConfigPatches
 	{

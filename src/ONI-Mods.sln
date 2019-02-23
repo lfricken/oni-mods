@@ -81,6 +81,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildableWaterGeyser", "Bui
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheaperInsulator", "CheaperInsulator\CheaperInsulator.csproj", "{D026DB0D-EF32-4837-8608-FEC7687A4A0E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadiumFuelRod", "RadiumFuelRod\RadiumFuelRod.csproj", "{10666963-3740-4736-B782-A8635AB2C2FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -243,6 +245,10 @@ Global
 		{D026DB0D-EF32-4837-8608-FEC7687A4A0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D026DB0D-EF32-4837-8608-FEC7687A4A0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D026DB0D-EF32-4837-8608-FEC7687A4A0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10666963-3740-4736-B782-A8635AB2C2FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10666963-3740-4736-B782-A8635AB2C2FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10666963-3740-4736-B782-A8635AB2C2FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10666963-3740-4736-B782-A8635AB2C2FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
