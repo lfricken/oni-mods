@@ -30,6 +30,9 @@ namespace RadiumFuelRod
 		protected override void OnPrefabInit()
 		{
 			base.OnPrefabInit();
+
+			PrimaryElement component = GetComponent<PrimaryElement>();
+			component.SetElement(SimHashes.RefinedCarbon);
 		}
 
 		protected override void OnSpawn()
@@ -92,7 +95,7 @@ namespace RadiumFuelRod
 				construction_time: BUILDINGS.CONSTRUCTION_TIME_SECONDS.TIER6,
 				construction_mass: BUILDINGS.CONSTRUCTION_MASS_KG.TIER7,
 				construction_materials: new string[1] { "Radium" },
-				melting_point: 40000f,
+				melting_point: 8000f,
 				build_location_rule: BuildLocationRule.Anywhere,
 				decor: BUILDINGS.DECOR.PENALTY.TIER4,
 				noise: NOISE_POLLUTION.NOISY.TIER0);
@@ -110,9 +113,8 @@ namespace RadiumFuelRod
 			buildingDef.UtilityInputOffset = new CellOffset(0, 0);
 			buildingDef.UtilityOutputOffset = new CellOffset(0, 0);
 			buildingDef.ViewMode = OverlayModes.LiquidConduits.ID;
-			buildingDef.ExhaustKilowattsWhenActive = 3000f;
-			buildingDef.SelfHeatKilowattsWhenActive = 3000f;
-			buildingDef.BaseMeltingPoint = 50000f;
+			buildingDef.ExhaustKilowattsWhenActive = 0f;
+			buildingDef.SelfHeatKilowattsWhenActive = 9000f;
 
 			return buildingDef;
 		}
