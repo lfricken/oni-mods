@@ -3,7 +3,7 @@
 
 ### Installation
 1. Install [ONI-ModLoader](https://github.com/javisar/ONI-Modloader#installation).
-2. [Click this to download the mod-bin folder](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/lfricken/oni-mods/tree/master/mod-bin) via DownGit.
+2. [Click here](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/lfricken/oni-mods/tree/master/mod-bin) to download all my mods via DownGit.
 3. Create a Mods folder in the game's root directory which is by default for Steam: 
     * C:\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded
 4. Place those dll files inside the Mods folder.
@@ -19,5 +19,8 @@ Note that you can optionally put the dll's in subdirectories. As long as the dll
 * [Cairath's repo](https://github.com/Cairath/ONI-Mods)
 * [Etiam's repo](https://github.com/EtiamNullam/Etiam-ONI-Modpack)
 * [Javisar's repo](https://github.com/javisar/ONI-Modloader-Mods)
-* [@pardeike](https://github.com/pardeike), creator of [Harmony](https://github.com/pardeike/Harmony), the library that made these mods possible.
+
+### Special Thanks:
+* [Harmony](https://github.com/pardeike/Harmony), the library that made these mods possible!
+* [DownGit](https://minhaskamal.github.io/DownGit/#/home?), downloads individual folders of a repo easily!
 
