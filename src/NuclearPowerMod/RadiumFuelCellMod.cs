@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Harmony;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using Harmony;
-using UnityEngine;
 using TUNING;
 using UnityEngine;
+
+//////////////////////////
+// see Preview.md
+//////////////////////////
 
 namespace NuclearPowerMod
 {
