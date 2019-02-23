@@ -18,6 +18,9 @@ namespace BuildableWaterGeyser
 	/// </summary>
 	public class BuildableWaterGeyser : StateMachineComponent<BuildableWaterGeyser.SMInstance>
 	{
+		public const float CelciusOutputTemperature = 175f;
+		public const float EmissionRate = 100f;
+
 		[MyCmpGet]
 		private readonly Operational _operational;
 
@@ -74,7 +77,7 @@ namespace BuildableWaterGeyser
 	{
 		public static readonly string Id = "BuildableWaterGeyser";
 		public static readonly string DisplayName = "Geothermal Steam Pump";
-		public static readonly string Description = $"Pumps large amounts of dangerously hot Steam out of the ground. Can't be turned off once active.";
+		public static readonly string Description = $"Pumps large amounts of " + UI.FormatAsLink("Steam", "STEAM") + $" at {BuildableWaterGeyser.CelciusOutputTemperature}°C out of the ground. Can't be turned off once active.";
 		public static readonly LocString Effect = (LocString)("Produces " + UI.FormatAsLink("Steam", "STEAM") + ".");
 
 		/// <summary>
@@ -84,8 +87,8 @@ namespace BuildableWaterGeyser
 		{
 			var buildingDef = BuildingTemplates.CreateBuildingDef(
 				id: Id,
-				width: 1,
-				height: 2,
+				width: 5,
+				height: 4,
 				anim: "geyser_oil_cap_kanim",
 				hitpoints: BUILDINGS.HITPOINTS.TIER4,
 				construction_time: BUILDINGS.CONSTRUCTION_TIME_SECONDS.TIER6,
@@ -120,14 +123,12 @@ namespace BuildableWaterGeyser
 
 		public void DefineEmitter(GameObject go)
 		{
-			float emissionRate = 100;
-			float celciusTemperature = 175f;
 
 			float kelvinOffset = 273.15f;
 			var emitter = go.AddComponent<ElementEmitter>();
 			emitter.emitRange = 2;
-			emitter.maxPressure = 9000;
-			emitter.outputElement = new ElementConverter.OutputElement(emissionRate, SimHashes.Water, celciusTemperature + kelvinOffset, false, 0f, 0f, false, 1f);
+			emitter.maxPressure = 2761;
+			emitter.outputElement = new ElementConverter.OutputElement(BuildableWaterGeyser.EmissionRate, SimHashes.Steam, BuildableWaterGeyser.CelciusOutputTemperature + kelvinOffset, false, 0f, 0f, false, 1f);
 		}
 
 		public override void DoPostConfigureComplete(GameObject go)
@@ -151,7 +152,7 @@ namespace BuildableWaterGeyser
 				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{BuildableWaterGeyserConfig.Id.ToUpperInvariant()}.DESC", BuildableWaterGeyserConfig.Description);
 				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{BuildableWaterGeyserConfig.Id.ToUpperInvariant()}.EFFECT", BuildableWaterGeyserConfig.Effect);
 
-				ModUtil.AddBuildingToPlanScreen("Oxygen", BuildableWaterGeyserConfig.Id);
+				ModUtil.AddBuildingToPlanScreen("Plumbing", BuildableWaterGeyserConfig.Id);
 			}
 		}
 

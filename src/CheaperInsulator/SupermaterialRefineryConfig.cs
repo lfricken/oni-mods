@@ -60,7 +60,7 @@ namespace CheaperInsulator
 		public static void Insulator()
 		{
 			// ratios
-			float amountProduced = 2000f;
+			float amountProduced = 1000f;
 			float amount1 = 15f;
 			float amount2 = 5f;
 			float amount3 = amountProduced - amount1 - amount2;
@@ -81,7 +81,7 @@ namespace CheaperInsulator
 			// setup description, add recipe
 			new ComplexRecipe(ComplexRecipeManager.MakeRecipeID("SupermaterialRefinery", inputs, results), inputs, results)
 			{
-				time = 80f,
+				time = 100f,
 				description = STRINGS.BUILDINGS.PREFABS.SUPERMATERIALREFINERY.SUPERINSULATOR_RECIPE_DESCRIPTION,
 				useResultAsDescription = true
 			}.fabricators = new List<Tag>()

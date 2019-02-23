@@ -30,9 +30,6 @@ namespace RadiumFuelRod
 		protected override void OnPrefabInit()
 		{
 			base.OnPrefabInit();
-
-			PrimaryElement component = GetComponent<PrimaryElement>();
-			component.SetElement(SimHashes.RefinedCarbon);
 		}
 
 		protected override void OnSpawn()
@@ -77,7 +74,7 @@ namespace RadiumFuelRod
 	public class RadiumFuelRodConfig : IBuildingConfig
 	{
 		public static readonly string Id = "RadiumFuelRod";
-		public static readonly string DisplayName = "Fuel Rod";
+		public static readonly string DisplayName = "Nuclear Fuel Rod";
 		public static readonly string Description = $"Uses fission to produce heat.";
 		public static readonly LocString Effect = "Produces " + UI.FormatAsLink("Heat", "HEAT") + ".";
 
@@ -95,13 +92,13 @@ namespace RadiumFuelRod
 				construction_time: BUILDINGS.CONSTRUCTION_TIME_SECONDS.TIER6,
 				construction_mass: BUILDINGS.CONSTRUCTION_MASS_KG.TIER7,
 				construction_materials: new string[1] { "Radium" },
-				melting_point: Carbon.MeltingPoint,
+				melting_point: Radium.MeltingPoint,
 				build_location_rule: BuildLocationRule.Anywhere,
 				decor: BUILDINGS.DECOR.PENALTY.TIER4,
 				noise: NOISE_POLLUTION.NOISY.TIER0);
 
 			buildingDef.Overheatable = true;
-			buildingDef.OverheatTemperature = Carbon.MeltingPoint;
+			buildingDef.OverheatTemperature = Radium.MeltingPoint;
 			buildingDef.RequiresPowerInput = false;
 			buildingDef.Floodable = false;
 			buildingDef.Entombable = false;
@@ -112,7 +109,7 @@ namespace RadiumFuelRod
 			buildingDef.UtilityOutputOffset = new CellOffset(0, 0);
 			buildingDef.ViewMode = OverlayModes.LiquidConduits.ID;
 			buildingDef.ExhaustKilowattsWhenActive = 0f;
-			buildingDef.SelfHeatKilowattsWhenActive = 10000f;
+			buildingDef.SelfHeatKilowattsWhenActive = 4064f;
 
 			return buildingDef;
 		}
@@ -130,7 +127,7 @@ namespace RadiumFuelRod
 		{
 			go.AddOrGet<LoopingSounds>();
 			var heater = go.AddOrGet<SuperHeater>();
-			heater.targetTemperature = Carbon.BoilingPoint;
+			heater.targetTemperature = Radium.MeltingPoint + 5;
 		}
 
 		public override void DoPostConfigureComplete(GameObject go)
@@ -154,7 +151,7 @@ namespace RadiumFuelRod
 				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{RadiumFuelRodConfig.Id.ToUpperInvariant()}.DESC", RadiumFuelRodConfig.Description);
 				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{RadiumFuelRodConfig.Id.ToUpperInvariant()}.EFFECT", RadiumFuelRodConfig.Effect);
 
-				ModUtil.AddBuildingToPlanScreen("Oxygen", RadiumFuelRodConfig.Id);
+				ModUtil.AddBuildingToPlanScreen("Power", RadiumFuelRodConfig.Id);
 			}
 		}
 
