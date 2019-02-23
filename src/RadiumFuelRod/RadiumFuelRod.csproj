@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ElementLoaderPatches.cs" />
+    <Compile Include="ElementModifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RadiumFuelRod.cs" />
   </ItemGroup>

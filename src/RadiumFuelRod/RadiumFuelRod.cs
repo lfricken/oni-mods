@@ -95,26 +95,24 @@ namespace RadiumFuelRod
 				construction_time: BUILDINGS.CONSTRUCTION_TIME_SECONDS.TIER6,
 				construction_mass: BUILDINGS.CONSTRUCTION_MASS_KG.TIER7,
 				construction_materials: new string[1] { "Radium" },
-				melting_point: 8000f,
+				melting_point: Carbon.MeltingPoint,
 				build_location_rule: BuildLocationRule.Anywhere,
 				decor: BUILDINGS.DECOR.PENALTY.TIER4,
 				noise: NOISE_POLLUTION.NOISY.TIER0);
 
-			buildingDef.Overheatable = false;
+			buildingDef.Overheatable = true;
+			buildingDef.OverheatTemperature = Carbon.MeltingPoint;
 			buildingDef.RequiresPowerInput = false;
 			buildingDef.Floodable = false;
 			buildingDef.Entombable = false;
 			buildingDef.BaseTimeUntilRepair = -1f;
-			buildingDef.PrimarySideEffect = "PrimarySideEffect";
-			buildingDef.SecondarySideEffect = "SecondarySideEffect";
-			buildingDef.SecondaryUse = "SecondaryUse";
 
 			buildingDef.AudioCategory = "HollowMetal";
 			buildingDef.UtilityInputOffset = new CellOffset(0, 0);
 			buildingDef.UtilityOutputOffset = new CellOffset(0, 0);
 			buildingDef.ViewMode = OverlayModes.LiquidConduits.ID;
 			buildingDef.ExhaustKilowattsWhenActive = 0f;
-			buildingDef.SelfHeatKilowattsWhenActive = 9000f;
+			buildingDef.SelfHeatKilowattsWhenActive = 10000f;
 
 			return buildingDef;
 		}
@@ -132,7 +130,7 @@ namespace RadiumFuelRod
 		{
 			go.AddOrGet<LoopingSounds>();
 			var heater = go.AddOrGet<SuperHeater>();
-			heater.targetTemperature = 8942.15f;
+			heater.targetTemperature = Carbon.BoilingPoint;
 		}
 
 		public override void DoPostConfigureComplete(GameObject go)

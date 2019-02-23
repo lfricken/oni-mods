@@ -2,7 +2,13 @@
 
 namespace RadiumFuelRod
 {
-	class ElementLoaderPatches
+	public static class Carbon
+	{
+		public const float MeltingPoint = 8913.24f;
+		public const float BoilingPoint = 9421.56f;
+	}
+
+	public class ElementLoaderPatches
 	{
 		[HarmonyPatch(typeof(ElementLoader))]
 		[HarmonyPatch("LoadUserElementData")]
@@ -10,15 +16,8 @@ namespace RadiumFuelRod
 		{
 			static void Postfix()
 			{
-				var solidCarbon = ElementLoader.FindElementByHash(SimHashes.RefinedCarbon);
-				solidCarbon.highTemp = 9000;
-				var liqCarbon = ElementLoader.FindElementByHash(SimHashes.MoltenCarbon);
-				liqCarbon.lowTemp = 9000;
-				liqCarbon.highTemp = 9500;
-				var gasCarbon = ElementLoader.FindElementByHash(SimHashes.CarbonGas);
-				gasCarbon.lowTemp = 9500;
-
-				var t = gasCarbon.MemberwiseClone();
+				ElementModifier carbon = new ElementModifier(Carbon.MeltingPoint, Carbon.BoilingPoint, 2.85f, SimHashes.RefinedCarbon, SimHashes.MoltenCarbon, SimHashes.CarbonGas);
+				carbon.ApplyChanges();
 			}
 		}
 	}
