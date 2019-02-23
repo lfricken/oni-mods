@@ -61,10 +61,13 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Preview.md" />
+    <None Include="RadiumFuelRod.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>echo F | xcopy /Y /S /R "$(TargetDir)$(TargetName).dll" "$(TargetDir)..\..\..\..\Mods\$(TargetName).dll"</PostBuildEvent>
+    <PostBuildEvent>
+      echo F | xcopy /Y /S /R "$(TargetDir)$(TargetName).dll" "$(TargetDir)..\..\..\..\Mods\$(TargetName).dll"
+      echo F | xcopy /Y /S /R "$(ProjectDir)$(TargetName).md" "$(TargetDir)..\..\..\..\Mods\$(TargetName).md"
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>
