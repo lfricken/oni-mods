@@ -1,8 +1,7 @@
 
 ## lfricken's mods for Oxygen Not Included
 
-### View Mod Details
-Click on a mod to view it's details.
+### Mod Details
 1. [Geothermal Steam Pump](/Mods/BuildableSteamGeyser.md)
 2. [Cheaper Insulation](/Mods/CheaperInsulator.md)
 3. [Nuclear Fuel Rod](/Mods/RadiumFuelRod.md)
