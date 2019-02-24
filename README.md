@@ -1,8 +1,11 @@
 
 ## lfricken's mods for Oxygen Not Included
 
-### Mods
-1. Read about a mod by clicking on it's _modname_**.md** file in the [Mods](/Mods) folder.
+### View Mod Details
+Click on a mod to view it's details.
+1. [Geothermal Steam Pump](/Mods/BuildableSteamGeyser.md)
+2. [Cheaper Insulation](/Mods/CheaperInsulator.md)
+3. [Nuclear Fuel Rod](/Mods/RadiumFuelRod.md)
 
 ### Installation
 1. Install [ONI-ModLoader](https://github.com/javisar/ONI-Modloader#installation).
