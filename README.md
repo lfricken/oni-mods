@@ -1,6 +1,9 @@
 
 ## lfricken's mods for Oxygen Not Included
 
+### Mods
+1. Read about a mod by clicking on it's _modname_**.md** file in the [Mods](/Mods) folder.
+
 ### Installation
 1. Install [ONI-ModLoader](https://github.com/javisar/ONI-Modloader#installation).
 2. [Click here](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/lfricken/oni-mods/tree/master/Mods) to download all my mods via DownGit.
