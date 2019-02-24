@@ -1,7 +1,5 @@
 
-<div align="center">
 # Nuclear Fuel Rod
-</div>
 
 ## About
 Adds a Nuclear Fuel Rod building in the [Power](https://oxygennotincluded.gamepedia.com/Power) tab that can be constructed out of [Radium](https://oxygennotincluded.gamepedia.com/Radium).
