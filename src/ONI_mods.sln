@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadiumFuelRod", "RadiumFuel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildableSteamGeyser", "BuildableSteamGeyser\BuildableSteamGeyser.csproj", "{12C357B6-EA4D-4876-B694-08505249A819}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MethaneRocketEngine", "MethaneRocketEngine\MethaneRocketEngine.csproj", "{F361F203-4F2F-4D76-AA8C-850F022E62B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{12C357B6-EA4D-4876-B694-08505249A819}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12C357B6-EA4D-4876-B694-08505249A819}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12C357B6-EA4D-4876-B694-08505249A819}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F361F203-4F2F-4D76-AA8C-850F022E62B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F361F203-4F2F-4D76-AA8C-850F022E62B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F361F203-4F2F-4D76-AA8C-850F022E62B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F361F203-4F2F-4D76-AA8C-850F022E62B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
