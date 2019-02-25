@@ -4,7 +4,6 @@
 
 using Database;
 using Harmony;
-using STRINGS;
 using System;
 using System.Collections.Generic;
 using TUNING;
@@ -16,10 +15,8 @@ namespace BuildableSteamGeyser
 	/// <summary>
 	/// Animations, 
 	/// </summary>
-	public class BuildableSteamGeyser : StateMachineComponent<BuildableSteamGeyser.SMInstance>
+	public partial class BuildableSteamGeyser : StateMachineComponent<BuildableSteamGeyser.SMInstance>
 	{
-		public const float CelciusOutputTemperature = 175f;
-		public const float EmissionRate = 100f;
 
 		[MyCmpGet]
 		private readonly Operational _operational;
@@ -75,10 +72,7 @@ namespace BuildableSteamGeyser
 	/// </summary>
 	public class BuildableSteamGeyserConfig : IBuildingConfig
 	{
-		public static readonly string Id = "BuildableSteamGeyser";
-		public static readonly string DisplayName = "Geothermal Steam Pump";
-		public static readonly string Description = $"Pumps large amounts of " + UI.FormatAsLink("Steam", "STEAM") + $" at {BuildableSteamGeyser.CelciusOutputTemperature}°C out of the ground. Can't be turned off once active.";
-		public static readonly LocString Effect = (LocString)("Produces " + UI.FormatAsLink("Steam", "STEAM") + ".");
+		public static readonly string Id = nameof(BuildableSteamGeyser);
 
 		/// <summary>
 		/// Define construction costs, health, size, noises, random stats.
@@ -148,11 +142,11 @@ namespace BuildableSteamGeyser
 		{
 			public static void Prefix()
 			{
-				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{BuildableSteamGeyserConfig.Id.ToUpperInvariant()}.NAME", BuildableSteamGeyserConfig.DisplayName);
-				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{BuildableSteamGeyserConfig.Id.ToUpperInvariant()}.DESC", BuildableSteamGeyserConfig.Description);
-				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{BuildableSteamGeyserConfig.Id.ToUpperInvariant()}.EFFECT", BuildableSteamGeyserConfig.Effect);
+				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{BuildableSteamGeyserConfig.Id.ToUpperInvariant()}.NAME", BuildableSteamGeyser.DisplayName);
+				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{BuildableSteamGeyserConfig.Id.ToUpperInvariant()}.DESC", BuildableSteamGeyser.Description);
+				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{BuildableSteamGeyserConfig.Id.ToUpperInvariant()}.EFFECT", BuildableSteamGeyser.Effect);
 
-				ModUtil.AddBuildingToPlanScreen("Plumbing", BuildableSteamGeyserConfig.Id);
+				ModUtil.AddBuildingToPlanScreen(BuildableSteamGeyser.BuildTab, BuildableSteamGeyserConfig.Id);
 			}
 		}
 
@@ -162,8 +156,14 @@ namespace BuildableSteamGeyser
 		{
 			public static void Prefix()
 			{
-				var tech = new List<string>(Techs.TECH_GROUPING["FarmingTech"]) { BuildableSteamGeyserConfig.Id };
-				Techs.TECH_GROUPING["FarmingTech"] = tech.ToArray();
+				AddTech(BuildableSteamGeyserConfig.Id, BuildableSteamGeyser.TechGroup);
+			}
+
+			private static void AddTech(string id, string techGroup)
+			{
+				var tech = new List<string>(Techs.TECH_GROUPING[techGroup]);
+				tech.Add(id);
+				Techs.TECH_GROUPING[techGroup] = tech.ToArray();
 			}
 		}
 
@@ -174,7 +174,7 @@ namespace BuildableSteamGeyser
 		{
 			public static void Postfix(string type_name, ref Type __result)
 			{
-				if (type_name == "BuildableSteamGeyser.BuildableSteamGeyser")
+				if (type_name == typeof(BuildableSteamGeyser).AssemblyQualifiedName)
 				{
 					__result = typeof(BuildableSteamGeyser);
 				}

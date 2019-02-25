@@ -73,7 +73,7 @@ namespace RadiumFuelRod
 	/// </summary>
 	public class RadiumFuelRodConfig : IBuildingConfig
 	{
-		public static readonly string Id = "RadiumFuelRod";
+		public static readonly string Id = nameof(RadiumFuelRod);
 		/// <summary>
 		/// Define construction costs, health, size, noises, random stats.
 		/// </summary>
@@ -147,7 +147,7 @@ namespace RadiumFuelRod
 				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{RadiumFuelRodConfig.Id.ToUpperInvariant()}.DESC", RadiumFuelRod.Description);
 				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{RadiumFuelRodConfig.Id.ToUpperInvariant()}.EFFECT", RadiumFuelRod.Effect);
 
-				ModUtil.AddBuildingToPlanScreen("Power", RadiumFuelRodConfig.Id);
+				ModUtil.AddBuildingToPlanScreen(RadiumFuelRod.BuildTab, RadiumFuelRodConfig.Id);
 			}
 		}
 
@@ -157,8 +157,14 @@ namespace RadiumFuelRod
 		{
 			public static void Prefix()
 			{
-				var tech = new List<string>(Techs.TECH_GROUPING["FarmingTech"]) { RadiumFuelRodConfig.Id };
-				Techs.TECH_GROUPING["FarmingTech"] = tech.ToArray();
+				AddTech(RadiumFuelRodConfig.Id, RadiumFuelRod.TechGroup);
+			}
+
+			private static void AddTech(string id, string techGroup)
+			{
+				var tech = new List<string>(Techs.TECH_GROUPING[techGroup]);
+				tech.Add(id);
+				Techs.TECH_GROUPING[techGroup] = tech.ToArray();
 			}
 		}
 
@@ -169,7 +175,7 @@ namespace RadiumFuelRod
 		{
 			public static void Postfix(string type_name, ref Type __result)
 			{
-				if (type_name == "RadiumFuelRod.RadiumFuelRod")
+				if (type_name == typeof(RadiumFuelRod).AssemblyQualifiedName)
 				{
 					__result = typeof(RadiumFuelRod);
 				}

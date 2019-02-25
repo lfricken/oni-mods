@@ -1,8 +1,8 @@
-﻿using STRINGS;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿/// <summary>
+/// Created by lfricken https://github.com/lfricken/oni-mods
+/// </summary>
+
+using STRINGS;
 
 namespace RadiumFuelRod
 {
@@ -11,6 +11,9 @@ namespace RadiumFuelRod
 		public static readonly string DisplayName = "Nuclear Fuel Rod";
 		public static readonly string Description = "Uses fission to produce heat.";
 		public static readonly LocString Effect = "Produces " + UI.FormatAsLink("Heat", "HEAT") + ".";
+
+		public static readonly string TechGroup = "Catalytics";
+		public static readonly string BuildTab = "Power";
 
 		public const float HeatOutput = 4064f;
 	}
