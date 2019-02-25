@@ -59,15 +59,15 @@ namespace RadiumFuelRod
 
 	public class Names
 	{
-		public SimHashes Solid = SimHashes.RefinedCarbon;
-		public SimHashes Liquid = SimHashes.MoltenCarbon;
-		public SimHashes Gas = SimHashes.CarbonGas;
+		public SimHashes Solid;
+		public SimHashes Liquid;
+		public SimHashes Gas;
 	}
 
 	public class Temperatures
 	{
-		public float Boiling = 8900.24f;
-		public float Melting = 9421.56f;
-		public float SpecificHeatCapacity = 2.85f;
+		public float Boiling;
+		public float Melting;
+		public float SpecificHeatCapacity;
 	}
 }

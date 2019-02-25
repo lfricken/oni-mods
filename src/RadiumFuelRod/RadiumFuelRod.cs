@@ -17,7 +17,7 @@ namespace RadiumFuelRod
 	/// <summary>
 	/// Animations, 
 	/// </summary>
-	public class RadiumFuelRod : StateMachineComponent<RadiumFuelRod.SMInstance>
+	public partial class RadiumFuelRod : StateMachineComponent<RadiumFuelRod.SMInstance>
 	{
 		[MyCmpGet]
 		private readonly Operational _operational;
@@ -74,10 +74,6 @@ namespace RadiumFuelRod
 	public class RadiumFuelRodConfig : IBuildingConfig
 	{
 		public static readonly string Id = "RadiumFuelRod";
-		public static readonly string DisplayName = "Nuclear Fuel Rod";
-		public static readonly string Description = $"Uses fission to produce heat.";
-		public static readonly LocString Effect = "Produces " + UI.FormatAsLink("Heat", "HEAT") + ".";
-
 		/// <summary>
 		/// Define construction costs, health, size, noises, random stats.
 		/// </summary>
@@ -109,7 +105,7 @@ namespace RadiumFuelRod
 			buildingDef.UtilityOutputOffset = new CellOffset(0, 0);
 			buildingDef.ViewMode = OverlayModes.LiquidConduits.ID;
 			buildingDef.ExhaustKilowattsWhenActive = 0f;
-			buildingDef.SelfHeatKilowattsWhenActive = 4064f;
+			buildingDef.SelfHeatKilowattsWhenActive = RadiumFuelRod.HeatOutput;
 
 			return buildingDef;
 		}
@@ -147,9 +143,9 @@ namespace RadiumFuelRod
 		{
 			public static void Prefix()
 			{
-				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{RadiumFuelRodConfig.Id.ToUpperInvariant()}.NAME", RadiumFuelRodConfig.DisplayName);
-				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{RadiumFuelRodConfig.Id.ToUpperInvariant()}.DESC", RadiumFuelRodConfig.Description);
-				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{RadiumFuelRodConfig.Id.ToUpperInvariant()}.EFFECT", RadiumFuelRodConfig.Effect);
+				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{RadiumFuelRodConfig.Id.ToUpperInvariant()}.NAME", RadiumFuelRod.DisplayName);
+				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{RadiumFuelRodConfig.Id.ToUpperInvariant()}.DESC", RadiumFuelRod.Description);
+				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{RadiumFuelRodConfig.Id.ToUpperInvariant()}.EFFECT", RadiumFuelRod.Effect);
 
 				ModUtil.AddBuildingToPlanScreen("Power", RadiumFuelRodConfig.Id);
 			}

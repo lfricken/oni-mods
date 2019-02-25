@@ -6,18 +6,6 @@ using Harmony;
 
 namespace RadiumFuelRod
 {
-	public static class Carbon
-	{
-		public const float MeltingPoint = 8913.24f;
-		public const float BoilingPoint = 9421.56f;
-	}
-
-	public static class Radium
-	{
-		public const float MeltingPoint = 8913.24f;
-		public const float SpecificHeatCapacity = 2.758f;
-	}
-
 	public class ElementLoaderPatches
 	{
 		[HarmonyPatch(typeof(ElementLoader))]
@@ -26,7 +14,7 @@ namespace RadiumFuelRod
 		{
 			static void Postfix()
 			{
-				ElementModifier carbon = new ElementModifier(Carbon.MeltingPoint, Carbon.BoilingPoint, 2.85f, SimHashes.RefinedCarbon, SimHashes.MoltenCarbon, SimHashes.CarbonGas);
+				ElementModifier carbon = new ElementModifier(Carbon.MeltingPoint, Carbon.BoilingPoint, Carbon.SpecificHeatCapacity, SimHashes.RefinedCarbon, SimHashes.MoltenCarbon, SimHashes.CarbonGas);
 				carbon.ApplyChanges();
 
 				Element radium;

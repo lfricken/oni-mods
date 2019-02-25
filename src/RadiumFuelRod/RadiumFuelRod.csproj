@@ -52,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="ElementLoaderPatches.cs" />
     <Compile Include="ElementModifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

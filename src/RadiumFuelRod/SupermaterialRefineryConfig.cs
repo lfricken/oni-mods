@@ -22,28 +22,28 @@ namespace RadiumFuelRod
 			static void Postfix(GameObject go, Tag prefab_tag)
 			{
 				// add recipe
-				Radium();
+				AddRadium();
 			}
 		}
 
-		public static void Radium()
+		public static void AddRadium()
 		{
 			ComplexRecipe.RecipeElement[] ingredients = new ComplexRecipe.RecipeElement[3]
 			{
-				new ComplexRecipe.RecipeElement(SimHashes.Niobium.CreateTag(), 5f),
-				new ComplexRecipe.RecipeElement(SimHashes.Tungsten.CreateTag(), 95f),
-				new ComplexRecipe.RecipeElement(SimHashes.RefinedCarbon.CreateTag(), 300f),
+				new ComplexRecipe.RecipeElement(SimHashes.Niobium.CreateTag(), Radium.Recipe.Niobium),
+				new ComplexRecipe.RecipeElement(SimHashes.Tungsten.CreateTag(), Radium.Recipe.Tungsten),
+				new ComplexRecipe.RecipeElement(SimHashes.RefinedCarbon.CreateTag(), Radium.Recipe.RefinedCarbon),
 			};
 
 			ComplexRecipe.RecipeElement[] results = new ComplexRecipe.RecipeElement[1]
 			{
-				new ComplexRecipe.RecipeElement(SimHashes.Radium.CreateTag(), 400f)
+				new ComplexRecipe.RecipeElement(SimHashes.Radium.CreateTag(), Radium.Recipe.AmountProduced)
 			};
 
 			new ComplexRecipe(ComplexRecipeManager.MakeRecipeID("SupermaterialRefinery", ingredients, results), ingredients, results)
 			{
-				time = 80f,
-				description = (string)STRINGS.BUILDINGS.PREFABS.SUPERMATERIALREFINERY.TEMPCONDUCTORSOLID_RECIPE_DESCRIPTION,
+				time = Radium.Recipe.Time,
+				description = Radium.Recipe.Description,
 				useResultAsDescription = true
 			}.fabricators = new List<Tag>()
 			{
