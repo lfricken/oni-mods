@@ -11,20 +11,22 @@ from collections import deque
 cargo_bays = 2
 other_modules = 0
 
-# must be in descending efficiency!
-km_per_kg_fuel_array = [110, 80, 60, 40]
+# must be in descending efficiency! km of range per kg of fuel burned
+fuel_efficiencies = [110, 80, 60, 40]
+
+# oxylite is 1.0, lox is 1.33
 oxidizer_efficiency = 1.33
 
-cut_graph_at_peak: bool = True
-kg_fuel_per_tank = 900
-kg_oxy_per_tank = 2700
-kg_per_dry_tank = 100
+stop_graph_at_peak_range: bool = True
+fuel_tank_capacity = 900
+oxy_tank_capacity = 2700
+empty_tank_mass = 100
 
-kg_per_capsule = 200
-kg_per_engine = 500
+capsule_mass = 200
+engine_mass = 500
 
-kg_per_storage_container = 2000
-kg_per_other = 200
+cargo_bay_mass = 2000
+other_module_mass = 200
 
 
 def get_num_tanks(amount: float, amount_per: float) -> int:
@@ -32,22 +34,22 @@ def get_num_tanks(amount: float, amount_per: float) -> int:
 
 
 def get_num_fuel_tanks(kg_fuel: float) -> int:
-	return get_num_tanks(kg_fuel, kg_fuel_per_tank)
+	return get_num_tanks(kg_fuel, fuel_tank_capacity)
 
 
 def get_num_oxy_tanks(kg_oxy: float) -> int:
-	return get_num_tanks(kg_oxy, kg_oxy_per_tank)
+	return get_num_tanks(kg_oxy, oxy_tank_capacity)
 
 
 def get_weight(kg_fuel: float, kg_oxy: float, cargo_bays_units: int, other_modules_units: int) -> float:
 	num_fuel_tanks = get_num_fuel_tanks(kg_fuel)
 	num_oxy_tanks = get_num_oxy_tanks(kg_oxy)
 
-	fuel = num_fuel_tanks * kg_per_dry_tank + kg_fuel
-	oxidizer = num_oxy_tanks * kg_per_dry_tank + kg_oxy
-	capsule_engine = kg_per_capsule + kg_per_engine
-	storage = cargo_bays_units * kg_per_storage_container
-	other = other_modules_units * kg_per_other
+	fuel = num_fuel_tanks * empty_tank_mass + kg_fuel
+	oxidizer = num_oxy_tanks * empty_tank_mass + kg_oxy
+	capsule_engine = capsule_mass + engine_mass
+	storage = cargo_bays_units * cargo_bay_mass
+	other = other_modules_units * other_module_mass
 	return fuel + oxidizer + capsule_engine + storage + other
 
 
@@ -72,12 +74,12 @@ def calc_total_distance(kg_fuel: float, km_per_kg_fuel: float):
 
 
 def test_this():
-	assert (1 == get_num_tanks(1, kg_fuel_per_tank))
-	assert (1 == get_num_tanks(2, kg_fuel_per_tank))
-	assert (1 == get_num_tanks(kg_fuel_per_tank, kg_fuel_per_tank))
-	assert (2 == get_num_tanks(kg_fuel_per_tank + 1, kg_fuel_per_tank))
-	assert (2 == get_num_tanks(kg_fuel_per_tank * 2, kg_fuel_per_tank))
-	assert (3 == get_num_tanks(kg_fuel_per_tank * 2 + 1, kg_fuel_per_tank))
+	assert (1 == get_num_tanks(1, fuel_tank_capacity))
+	assert (1 == get_num_tanks(2, fuel_tank_capacity))
+	assert (1 == get_num_tanks(fuel_tank_capacity, fuel_tank_capacity))
+	assert (2 == get_num_tanks(fuel_tank_capacity + 1, fuel_tank_capacity))
+	assert (2 == get_num_tanks(fuel_tank_capacity * 2, fuel_tank_capacity))
+	assert (3 == get_num_tanks(fuel_tank_capacity * 2 + 1, fuel_tank_capacity))
 
 
 def only_gets_worse(distance_delta_queue: deque) -> bool:
@@ -87,7 +89,7 @@ def only_gets_worse(distance_delta_queue: deque) -> bool:
 	d = distance_delta_queue[3]
 
 	is_getting_worse = 0 > a
-	if cut_graph_at_peak:
+	if stop_graph_at_peak_range:
 		is_getting_worse: bool = True
 
 	return is_getting_worse and a > b > c > d
@@ -98,8 +100,8 @@ def main():
 	max_distance = 0
 	distance_delta_queue: deque = deque()
 
-	for efficiency in km_per_kg_fuel_array:
-		is_most_efficient_fuel: bool = efficiency == km_per_kg_fuel_array[0]
+	for efficiency in fuel_efficiencies:
+		is_most_efficient_fuel: bool = efficiency == fuel_efficiencies[0]
 		x_axis: [int] = []
 		y_axis: [int] = []
 		for fuel_amount in range(max_fuel_amount):
@@ -124,9 +126,14 @@ def main():
 
 	plt.xlabel('Fuel in Kg')
 	plt.ylabel('Range in Km')
-	pylab.legend(loc='upper left')
-	plt.text(max_fuel_amount * 0.3, max_distance * 1.12, 'Cargo Bays: ' + str(cargo_bays), ha='center', va='center')
-	plt.text(max_fuel_amount * 0.6, max_distance * 1.12, 'Other Modules: ' + str(other_modules), ha='center', va='center')
+
+	pylab.legend(title='Fuel Efficiency', loc='upper left')
+
+	plt.text(max_fuel_amount * 0.25, max_distance * 1.12, 'Cargo Bays: ' + str(cargo_bays), ha='center', va='center')
+	plt.text(max_fuel_amount * 0.25, max_distance * 1.18, 'Other Modules: ' + str(other_modules), ha='center', va='center')
+	plt.text(max_fuel_amount * 0.75, max_distance * 1.12, 'Engine Mass: ' + str(engine_mass) + "kg", ha='center', va='center')
+	plt.text(max_fuel_amount * 0.75, max_distance * 1.18, 'Oxidizer Boost: ' + str(oxidizer_efficiency) + "x", ha='center', va='center')
+
 	plt.show()
 
 
