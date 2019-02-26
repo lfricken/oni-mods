@@ -1,0 +1,11 @@
+
+
+
+
+Useful Files:
+
+	Tech Groups: Assembly-CSharp\Database\Techs.cs
+	Building Tabs: Assembly-CSharp\TUNING\BUILDINGS.cs
+
+
+

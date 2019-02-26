@@ -69,9 +69,9 @@ namespace MethaneRocketEngine
 		{
 			public static void Prefix()
 			{
-				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MethaneRocketEngine.Id.ToUpperInvariant()}.NAME", MethaneRocketEngine.DisplayName);
-				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MethaneRocketEngine.Id.ToUpperInvariant()}.DESC", MethaneRocketEngine.Description);
-				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MethaneRocketEngine.Id.ToUpperInvariant()}.EFFECT", MethaneRocketEngine.Effect);
+				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MethaneRocketEngine.Id.ToUpperInvariant()}.NAME", MethaneRocketEngine.NAME);
+				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MethaneRocketEngine.Id.ToUpperInvariant()}.DESC", MethaneRocketEngine.DESC);
+				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MethaneRocketEngine.Id.ToUpperInvariant()}.EFFECT", MethaneRocketEngine.EFFECT);
 
 				ModUtil.AddBuildingToPlanScreen(MethaneRocketEngine.BuildTab, MethaneRocketEngine.Id);
 			}
