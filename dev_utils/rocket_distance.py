@@ -131,8 +131,8 @@ def main():
 
 	plt.text(max_fuel_amount * 0.25, max_distance * 1.12, 'Cargo Bays: ' + str(cargo_bays), ha='center', va='center')
 	plt.text(max_fuel_amount * 0.25, max_distance * 1.18, 'Other Modules: ' + str(other_modules), ha='center', va='center')
-	plt.text(max_fuel_amount * 0.75, max_distance * 1.12, 'Engine Mass: ' + str(engine_mass) + "kg", ha='center', va='center')
-	plt.text(max_fuel_amount * 0.75, max_distance * 1.18, 'Oxidizer Boost: ' + str(oxidizer_efficiency) + "x", ha='center', va='center')
+	plt.text(max_fuel_amount * 0.75, max_distance * 1.12, 'Engine Mass: ' + str(engine_mass) + 'kg', ha='center', va='center')
+	plt.text(max_fuel_amount * 0.75, max_distance * 1.18, 'Oxidizer Boost: ' + str(oxidizer_efficiency) + 'x', ha='center', va='center')
 
 	plt.show()
 
