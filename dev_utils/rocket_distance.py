@@ -122,10 +122,10 @@ def main():
 		plt.plot(x_axis, y_axis, label=str(efficiency) + 'km per kg')
 
 	plt.xlabel('Fuel in Kg')
-	plt.ylabel('Distance in Km')
+	plt.ylabel('Range in Km')
 	pylab.legend(loc='upper left')
 	plt.text(max_fuel_amount * 0.3, max_distance * 1.12, 'Cargo Bays: ' + str(cargo_bays), ha='center', va='center')
-	plt.text(max_fuel_amount * 0.6, max_distance * 1.12, 'Other: ' + str(other_modules), ha='center', va='center')
+	plt.text(max_fuel_amount * 0.6, max_distance * 1.12, 'Other Modules: ' + str(other_modules), ha='center', va='center')
 	plt.show()
 
 
