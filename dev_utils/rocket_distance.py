@@ -1,3 +1,4 @@
+# Created by lfricken https://github.com/lfricken/oni-mods
 # Calculates rocket distances.
 # equations obtained from Assembly-CSharp.RocketStats.GetRocketMaxDistance
 
