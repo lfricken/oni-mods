@@ -19,14 +19,18 @@ r2_base_efficiency = 4
 r3_base_efficiency = 6.5
 r4_base_efficiency = 9
 
+r1_base_range = 0.7
+r2_base_range = 3.25
+r3_base_range = 9
+r4_base_range = 17.85
 
-real_hydrolox = 1
-oni_hydrolox = 1
+real_hydrolox = 4423
+oni_hydrolox = 6.5
 
 # range penalties
-cargo_penalty = 35000
+cargo_penalty = 30000
 science_penalty = 12000
-sight_penalty = 4000
+sight_penalty = 5000
 booster_boost = 17000
 
 # range equation
@@ -35,9 +39,6 @@ exponent = 2.0
 fuel_scalar = 900.0  # fuel per int
 efficiency_scalar = oni_hydrolox / real_hydrolox
 range_scalar = parabolic_extraction * miles_per_int
-
-
-
 
 
 class Rocket:
@@ -74,24 +75,24 @@ def make_rocket() -> Rocket:
 # your furthest rocket should go first!
 rockets: [Rocket] = []
 rockets.append(make_rocket())
-rockets[-1].fuel_efficiency = 9
+rockets[-1].fuel_efficiency = 6127
 rockets[-1].cargo_bays = 0
-rockets[-1].engine_penalty = 17.85 * range_scalar
+rockets[-1].engine_penalty = 2380000
 
 rockets.append(make_rocket())
-rockets[-1].fuel_efficiency = 6.5
+rockets[-1].fuel_efficiency = 4423
 rockets[-1].cargo_bays = 0
-rockets[-1].engine_penalty = 9 * range_scalar
+rockets[-1].engine_penalty = 1200000
 
 rockets.append(make_rocket())
-rockets[-1].fuel_efficiency = 4
+rockets[-1].fuel_efficiency = 2721
 rockets[-1].cargo_bays = 0
-rockets[-1].engine_penalty = 3.25 * range_scalar
+rockets[-1].engine_penalty = 435000
 
 rockets.append(make_rocket())
-rockets[-1].fuel_efficiency = 2
+rockets[-1].fuel_efficiency = 1360
 rockets[-1].cargo_bays = 0
-rockets[-1].engine_penalty = 0.7 * range_scalar
+rockets[-1].engine_penalty = 90000
 rockets[-1].max_fuel = 900
 
 
@@ -149,12 +150,12 @@ def main():
 
 		plt.plot(x_axis, y_axis, label=build_legend(rocket))
 
-	# x_axis = []
-	# y_axis = []
-	# for i in range(max_fuel_amount):
-	# 	x_axis.append(i)
-	# 	y_axis.append(i * booster_boost / 400.0)
-	# plt.plot(x_axis, y_axis, label="All Boosters")
+	x_axis = []
+	y_axis = []
+	for i in range(800):
+		x_axis.append(i)
+		y_axis.append(i * booster_boost / 400.0)
+	plt.plot(x_axis, y_axis, label="All Boosters")
 
 	plt.xlabel('Fuel in Kg')
 	plt.ylabel('Range in Km')
