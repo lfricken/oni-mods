@@ -10,34 +10,43 @@ from collections import deque
 
 
 class Rocket:
-	fuel_efficiency: float
-	oxidizer_efficiency: float
-	engine_mass: int
-	cargo_bays: int
-	other_modules: int
-	additional_mass: float
-
-	def __init__(self, fuel_efficiency, oxidizer_efficiency, engine_mass, cargo_bays=0, other_modules=0, additional_mass=0):
+	def __init__(self, fuel_efficiency, oxidizer_efficiency, engine_mass, cargo_bays=0, engine_penalty=0, other_modules=0):
 		self.fuel_efficiency = fuel_efficiency
 		self.oxidizer_efficiency = oxidizer_efficiency
 		self.engine_mass = engine_mass
+		self.engine_penalty = engine_penalty
 		self.cargo_bays = cargo_bays
 		self.other_modules = other_modules
-		self.additional_mass = additional_mass
+		self.max_fuel = 999999
 
 
 def make_rockets(num: int) -> [Rocket]:
 	rocket_copies: [Rocket] = []
 	for i in range(num):
-		rocket_copies.append(Rocket(60, 1.33, 500, 5))
+		rocket_copies.append(Rocket(60, 1.33, engine_mass=2000, cargo_bays=0, engine_penalty=0, other_modules=5))
 	return rocket_copies
 
 
 # your furthest rocket should go first!
-rockets: [Rocket] = make_rockets(2)
+rockets: [Rocket] = make_rockets(4)
 
-rockets[0].engine_mass = 100
-rockets[0].fuel_efficiency = 180
+rockets[0].fuel_efficiency = 3
+rockets[0].cargo_bays = 0
+rockets[0].engine_penalty = 0
+
+rockets[1].fuel_efficiency = 2.25
+rockets[1].cargo_bays = 0
+rockets[1].engine_penalty = 0
+
+rockets[2].fuel_efficiency = 2
+rockets[2].cargo_bays = 0
+rockets[2].engine_penalty = 0
+
+rockets[3].fuel_efficiency = 2
+rockets[3].cargo_bays = 0
+rockets[3].engine_penalty = 0
+rockets[3].max_fuel = 900
+rockets[3].engine_mass = 0
 
 stop_graph_at_peak_range: bool = False
 fuel_tank_capacity = 900
@@ -45,8 +54,10 @@ oxy_tank_capacity = 2700
 empty_tank_mass = 100
 
 capsule_mass = 200
-cargo_bay_mass = 2000
+cargo_bay_mass = 1000
 other_module_mass = 200
+exponent = 1.5
+weight_divisor = 40.0
 
 
 def get_num_tanks(amount: float, amount_per: float) -> int:
@@ -75,11 +86,11 @@ def get_weight(kg_fuel: float, kg_oxy: float, rocket: Rocket) -> float:
 
 def distance_penalty(weight: float) -> float:
 	weight: float = float(weight)
-	return max(weight, (weight / 300.0) ** 3.2)
+	return max(weight, (weight / float(weight_divisor)) ** float(exponent))
 
 
 def distance(kg_fuel: float, kg_oxy: float, km_per_kg_fuel: float, oxy_efficiency: float) -> float:
-	return min(kg_fuel, kg_oxy) * km_per_kg_fuel * oxy_efficiency
+	return float((min(kg_fuel, kg_oxy))) * float(km_per_kg_fuel) * float(oxy_efficiency)
 
 
 def calc_total_distance(kg_fuel: float, rocket: Rocket):
@@ -89,7 +100,7 @@ def calc_total_distance(kg_fuel: float, rocket: Rocket):
 	penalty = distance_penalty(weight)
 
 	max_dist = distance(kg_fuel, kg_oxy, rocket.fuel_efficiency, rocket.oxidizer_efficiency)
-	final_distance = max_dist - penalty
+	final_distance = max_dist - penalty - rocket.engine_penalty
 	return final_distance
 
 
@@ -127,6 +138,9 @@ def main():
 		x_axis: [int] = []
 		y_axis: [int] = []
 		for fuel_amount in range(max_fuel_amount):
+			if fuel_amount > rocket.max_fuel:
+				break
+
 			new_range = calc_total_distance(fuel_amount, rocket)
 
 			distance_delta_queue.append(new_range)
