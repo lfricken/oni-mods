@@ -8,16 +8,36 @@ import pylab
 import copy
 from collections import deque
 
+stop_graph_at_peak_range: bool = True
+
+# magic numbers
+parabolic_extraction = 3.333
+
+#
+r1_base_efficiency = 2
+r2_base_efficiency = 4
+r3_base_efficiency = 6.5
+r4_base_efficiency = 9
+
+
+real_hydrolox = 1
+oni_hydrolox = 1
+
 # range penalties
-cargo_penalty = 8000
-science_penalty = 2500
-sight_penalty = 3300
-booster_boost = 10000
+cargo_penalty = 35000
+science_penalty = 12000
+sight_penalty = 4000
+booster_boost = 17000
 
 # range equation
-exponent = 2
-fuel_scalar = 10.0
-range_scalar = 5.0
+miles_per_int = 40000.0
+exponent = 2.0
+fuel_scalar = 900.0  # fuel per int
+efficiency_scalar = oni_hydrolox / real_hydrolox
+range_scalar = parabolic_extraction * miles_per_int
+
+
+
 
 
 class Rocket:
@@ -41,45 +61,45 @@ class Rocket:
 
 	def get_raw_range(self, fuel: float) -> float:
 		fuel /= float(fuel_scalar)
-		return range_scalar * (-(fuel ** exponent) + self.fuel_efficiency * fuel - self.engine_penalty)
+		return range_scalar * (-(fuel ** exponent) + self.oxidizer_efficiency * self.fuel_efficiency * fuel * efficiency_scalar) - self.engine_penalty
 
 	def get_total_range(self, fuel: float) -> float:
 		return self.get_raw_range(fuel) + self.get_booster_boost() + self.get_module_penalty()
 
 
-def make_rockets(num: int) -> [Rocket]:
-	rocket_copies: [Rocket] = []
-	for i in range(num):
-		rocket_copies.append(Rocket(60, 1.30, engine_penalty=0, boosters=0, cargo_bays=0, science_bays=0, vision_bays=0))
-	return rocket_copies
+def make_rocket() -> Rocket:
+	return Rocket(60, 1.00, engine_penalty=0, boosters=0, cargo_bays=0, science_bays=0, vision_bays=0)
 
 
 # your furthest rocket should go first!
-rockets: [Rocket] = make_rockets(3)
+rockets: [Rocket] = []
+rockets.append(make_rocket())
+rockets[-1].fuel_efficiency = 9
+rockets[-1].cargo_bays = 0
+rockets[-1].engine_penalty = 17.85 * range_scalar
 
-rockets[0].fuel_efficiency = 600
-rockets[0].cargo_bays = 0
-rockets[0].engine_penalty = 60000
+rockets.append(make_rocket())
+rockets[-1].fuel_efficiency = 6.5
+rockets[-1].cargo_bays = 0
+rockets[-1].engine_penalty = 9 * range_scalar
 
-rockets[1].fuel_efficiency = 400
-rockets[1].cargo_bays = 0
-rockets[1].engine_penalty = 20000
+rockets.append(make_rocket())
+rockets[-1].fuel_efficiency = 4
+rockets[-1].cargo_bays = 0
+rockets[-1].engine_penalty = 3.25 * range_scalar
 
-rockets[2].fuel_efficiency = 200
-rockets[2].cargo_bays = 0
-rockets[2].engine_penalty = 0
-rockets[2].max_fuel = 900
+rockets.append(make_rocket())
+rockets[-1].fuel_efficiency = 2
+rockets[-1].cargo_bays = 0
+rockets[-1].engine_penalty = 0.7 * range_scalar
+rockets[-1].max_fuel = 900
+
 
 # rockets[3].fuel_efficiency = 2
 # rockets[3].cargo_bays = 0
 # rockets[3].engine_penalty = 0
 # rockets[3].max_fuel = 900
 # rockets[3].engine_mass = 0
-
-stop_graph_at_peak_range: bool = False
-
-fuel_tank_capacity = 900
-oxy_tank_capacity = 2700
 
 
 def only_gets_worse(distance_delta_queue: deque) -> bool:
@@ -128,6 +148,13 @@ def main():
 			print('Your rocket was so bad that it cant even get 1 km of range! Try improving fuel efficiency or reducing weight.')
 
 		plt.plot(x_axis, y_axis, label=build_legend(rocket))
+
+	# x_axis = []
+	# y_axis = []
+	# for i in range(max_fuel_amount):
+	# 	x_axis.append(i)
+	# 	y_axis.append(i * booster_boost / 400.0)
+	# plt.plot(x_axis, y_axis, label="All Boosters")
 
 	plt.xlabel('Fuel in Kg')
 	plt.ylabel('Range in Km')

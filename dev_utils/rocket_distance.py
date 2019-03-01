@@ -12,7 +12,7 @@ cargo_bays = 2
 other_modules = 0
 
 # must be in descending efficiency! km of range per kg of fuel burned
-fuel_efficiencies = [110, 80, 60, 40]
+fuel_efficiencies = [60, 40, 20]
 
 # oxylite is 1.0, lox is 1.33
 oxidizer_efficiency = 1.33
