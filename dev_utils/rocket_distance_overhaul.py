@@ -8,109 +8,78 @@ import pylab
 import copy
 from collections import deque
 
+# range penalties
+cargo_penalty = 8000
+science_penalty = 2500
+sight_penalty = 3300
+booster_boost = 10000
+
+# range equation
+exponent = 2
+fuel_scalar = 10.0
+range_scalar = 5.0
+
 
 class Rocket:
-	def __init__(self, fuel_efficiency, oxidizer_efficiency, engine_mass, cargo_bays=0, engine_penalty=0, other_modules=0):
+	def __init__(self, fuel_efficiency, oxidizer_efficiency, engine_penalty, boosters=0, cargo_bays=0, science_bays=0, vision_bays=0):
 		self.fuel_efficiency = fuel_efficiency
 		self.oxidizer_efficiency = oxidizer_efficiency
-		self.engine_mass = engine_mass
 		self.engine_penalty = engine_penalty
-		self.cargo_bays = cargo_bays
-		self.other_modules = other_modules
 		self.max_fuel = 999999
+
+		self.boosters = boosters
+
+		self.cargo_bays = cargo_bays
+		self.science_bays = science_bays
+		self.sight_bays = vision_bays
+
+	def get_module_penalty(self) -> float:
+		return -(self.cargo_bays * cargo_penalty + self.science_bays * science_penalty + self.sight_bays * sight_penalty)
+
+	def get_booster_boost(self) -> float:
+		return self.boosters * booster_boost
+
+	def get_raw_range(self, fuel: float) -> float:
+		fuel /= float(fuel_scalar)
+		return range_scalar * (-(fuel ** exponent) + self.fuel_efficiency * fuel - self.engine_penalty)
+
+	def get_total_range(self, fuel: float) -> float:
+		return self.get_raw_range(fuel) + self.get_booster_boost() + self.get_module_penalty()
 
 
 def make_rockets(num: int) -> [Rocket]:
 	rocket_copies: [Rocket] = []
 	for i in range(num):
-		rocket_copies.append(Rocket(60, 1.33, engine_mass=2000, cargo_bays=0, engine_penalty=0, other_modules=5))
+		rocket_copies.append(Rocket(60, 1.30, engine_penalty=0, boosters=0, cargo_bays=0, science_bays=0, vision_bays=0))
 	return rocket_copies
 
 
 # your furthest rocket should go first!
-rockets: [Rocket] = make_rockets(4)
+rockets: [Rocket] = make_rockets(3)
 
-rockets[0].fuel_efficiency = 3
+rockets[0].fuel_efficiency = 600
 rockets[0].cargo_bays = 0
-rockets[0].engine_penalty = 0
+rockets[0].engine_penalty = 60000
 
-rockets[1].fuel_efficiency = 2.25
+rockets[1].fuel_efficiency = 400
 rockets[1].cargo_bays = 0
-rockets[1].engine_penalty = 0
+rockets[1].engine_penalty = 20000
 
-rockets[2].fuel_efficiency = 2
+rockets[2].fuel_efficiency = 200
 rockets[2].cargo_bays = 0
 rockets[2].engine_penalty = 0
+rockets[2].max_fuel = 900
 
-rockets[3].fuel_efficiency = 2
-rockets[3].cargo_bays = 0
-rockets[3].engine_penalty = 0
-rockets[3].max_fuel = 900
-rockets[3].engine_mass = 0
+# rockets[3].fuel_efficiency = 2
+# rockets[3].cargo_bays = 0
+# rockets[3].engine_penalty = 0
+# rockets[3].max_fuel = 900
+# rockets[3].engine_mass = 0
 
 stop_graph_at_peak_range: bool = False
+
 fuel_tank_capacity = 900
 oxy_tank_capacity = 2700
-empty_tank_mass = 100
-
-capsule_mass = 200
-cargo_bay_mass = 1000
-other_module_mass = 200
-exponent = 1.5
-weight_divisor = 40.0
-
-
-def get_num_tanks(amount: float, amount_per: float) -> int:
-	return math.ceil(max(float(1), amount) / amount_per)
-
-
-def get_num_fuel_tanks(kg_fuel: float) -> int:
-	return get_num_tanks(kg_fuel, fuel_tank_capacity)
-
-
-def get_num_oxy_tanks(kg_oxy: float) -> int:
-	return get_num_tanks(kg_oxy, oxy_tank_capacity)
-
-
-def get_weight(kg_fuel: float, kg_oxy: float, rocket: Rocket) -> float:
-	num_fuel_tanks = get_num_fuel_tanks(kg_fuel)
-	num_oxy_tanks = get_num_oxy_tanks(kg_oxy)
-
-	fuel = num_fuel_tanks * empty_tank_mass + kg_fuel
-	oxidizer = num_oxy_tanks * empty_tank_mass + kg_oxy
-	capsule_engine = capsule_mass + rocket.engine_mass
-	storage = rocket.cargo_bays * cargo_bay_mass
-	other = rocket.other_modules * other_module_mass
-	return fuel + oxidizer + capsule_engine + storage + other
-
-
-def distance_penalty(weight: float) -> float:
-	weight: float = float(weight)
-	return max(weight, (weight / float(weight_divisor)) ** float(exponent))
-
-
-def distance(kg_fuel: float, kg_oxy: float, km_per_kg_fuel: float, oxy_efficiency: float) -> float:
-	return float((min(kg_fuel, kg_oxy))) * float(km_per_kg_fuel) * float(oxy_efficiency)
-
-
-def calc_total_distance(kg_fuel: float, rocket: Rocket):
-	kg_oxy = kg_fuel
-
-	weight = get_weight(kg_fuel, kg_oxy, rocket)
-	penalty = distance_penalty(weight)
-
-	max_dist = distance(kg_fuel, kg_oxy, rocket.fuel_efficiency, rocket.oxidizer_efficiency)
-	final_distance = max_dist - penalty - rocket.engine_penalty
-	return final_distance
-
-
-def test_this():
-	assert (1 == get_num_tanks(1, fuel_tank_capacity))
-	assert (1 == get_num_tanks(2, fuel_tank_capacity))
-	assert (1 == get_num_tanks(fuel_tank_capacity, fuel_tank_capacity))
-	assert (2 == get_num_tanks(fuel_tank_capacity + 1, fuel_tank_capacity))
-	assert (2 == get_num_tanks(fuel_tank_capacity * 2, fuel_tank_capacity))
-	assert (3 == get_num_tanks(fuel_tank_capacity * 2 + 1, fuel_tank_capacity))
 
 
 def only_gets_worse(distance_delta_queue: deque) -> bool:
@@ -126,7 +95,7 @@ def only_gets_worse(distance_delta_queue: deque) -> bool:
 
 
 def build_legend(rocket: Rocket) -> str:
-	return '[' + str(rocket.fuel_efficiency) + ',' + str(rocket.engine_mass) + ',' + str(rocket.cargo_bays) + ']'
+	return '[' + str(rocket.fuel_efficiency) + ',' + str(rocket.engine_penalty) + ',' + str(rocket.cargo_bays) + ']'
 
 
 def main():
@@ -141,7 +110,7 @@ def main():
 			if fuel_amount > rocket.max_fuel:
 				break
 
-			new_range = calc_total_distance(fuel_amount, rocket)
+			new_range = rocket.get_total_range(fuel_amount)
 
 			distance_delta_queue.append(new_range)
 			if len(distance_delta_queue) >= 3:
@@ -168,5 +137,4 @@ def main():
 	plt.show()
 
 
-test_this()  # uncomment to test
 main()
