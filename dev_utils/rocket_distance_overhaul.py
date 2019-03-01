@@ -10,20 +10,40 @@ from collections import deque
 
 stop_graph_at_peak_range: bool = True
 
-# magic numbers
+# https://www.desmos.com/calculator/htfdxbgqdt
+# https://www.wolframalpha.com/
+#
+# p = -0.075
+# (h,k)
+#
+# Vertex: (1,1)
+# y = -3.33333 x^2 + 6.66667 x - 2.33333
+#
+# Vertex: (2,2.5)
+# y = -3.33333 x^2 + 13.3333 x - 10.8333
+#
+# Vertex: (3.25,5)
+# y = -3.33333 x^2 + 21.6667 x - 30.2083
+#
+# Vertex: (4.5,8)
+# y = -3.33333 x^2 + 30.0 x - 59.5
+
+# multiplied by whole equation
 parabolic_extraction = 3.333
 
-#
+# multiplied by x
 r1_base_efficiency = 2
 r2_base_efficiency = 4
 r3_base_efficiency = 6.5
 r4_base_efficiency = 9
 
+# multiplied by constant
 r1_base_range = 0.7
 r2_base_range = 3.25
 r3_base_range = 9
 r4_base_range = 17.85
 
+# convert to real life exhaust velocities
 real_hydrolox = 4423
 oni_hydrolox = 6.5
 
@@ -31,18 +51,20 @@ oni_hydrolox = 6.5
 cargo_penalty = 30000
 science_penalty = 12000
 sight_penalty = 5000
-booster_boost = 17000
+booster_boost = 14000
 
 # range equation
-miles_per_int = 40000.0
+miles_per_y_value = 40000.0
 exponent = 2.0
-fuel_scalar = 900.0  # fuel per int
+fuel_per_x_value = 900.0  # fuel per int
 efficiency_scalar = oni_hydrolox / real_hydrolox
-range_scalar = parabolic_extraction * miles_per_int
+range_scalar = parabolic_extraction * miles_per_y_value
 
 
 class Rocket:
 	def __init__(self, fuel_efficiency, oxidizer_efficiency, engine_penalty, boosters=0, cargo_bays=0, science_bays=0, vision_bays=0):
+		self.name = ""
+
 		self.fuel_efficiency = fuel_efficiency
 		self.oxidizer_efficiency = oxidizer_efficiency
 		self.engine_penalty = engine_penalty
@@ -61,7 +83,7 @@ class Rocket:
 		return self.boosters * booster_boost
 
 	def get_raw_range(self, fuel: float) -> float:
-		fuel /= float(fuel_scalar)
+		fuel /= float(fuel_per_x_value)
 		return range_scalar * (-(fuel ** exponent) + self.oxidizer_efficiency * self.fuel_efficiency * fuel * efficiency_scalar) - self.engine_penalty
 
 	def get_total_range(self, fuel: float) -> float:
@@ -75,32 +97,29 @@ def make_rocket() -> Rocket:
 # your furthest rocket should go first!
 rockets: [Rocket] = []
 rockets.append(make_rocket())
+rockets[-1].name = "Methane"
 rockets[-1].fuel_efficiency = 6127
 rockets[-1].cargo_bays = 0
 rockets[-1].engine_penalty = 2380000
 
 rockets.append(make_rocket())
+rockets[-1].name = "Hydrogen"
 rockets[-1].fuel_efficiency = 4423
 rockets[-1].cargo_bays = 0
 rockets[-1].engine_penalty = 1200000
 
 rockets.append(make_rocket())
+rockets[-1].name = "Petroleum"
 rockets[-1].fuel_efficiency = 2721
 rockets[-1].cargo_bays = 0
 rockets[-1].engine_penalty = 435000
 
 rockets.append(make_rocket())
+rockets[-1].name = "Steam"
 rockets[-1].fuel_efficiency = 1360
 rockets[-1].cargo_bays = 0
 rockets[-1].engine_penalty = 90000
-rockets[-1].max_fuel = 900
-
-
-# rockets[3].fuel_efficiency = 2
-# rockets[3].cargo_bays = 0
-# rockets[3].engine_penalty = 0
-# rockets[3].max_fuel = 900
-# rockets[3].engine_mass = 0
+rockets[-1].max_fuel = 902
 
 
 def only_gets_worse(distance_delta_queue: deque) -> bool:
@@ -116,15 +135,18 @@ def only_gets_worse(distance_delta_queue: deque) -> bool:
 
 
 def build_legend(rocket: Rocket) -> str:
-	return '[' + str(rocket.fuel_efficiency) + ',' + str(rocket.engine_penalty) + ',' + str(rocket.cargo_bays) + ']'
+	return '[' + str(rocket.name) + ']'
 
 
 def main():
 	max_fuel_amount = 50000
 	max_distance = 0
-	distance_delta_queue: deque = deque()
+
+	peaks: [(int, int)] = []
 
 	for rocket in rockets:
+		distance_delta_queue: deque = deque()
+		peaked = False
 		x_axis: [int] = []
 		y_axis: [int] = []
 		for fuel_amount in range(max_fuel_amount):
@@ -135,10 +157,13 @@ def main():
 
 			distance_delta_queue.append(new_range)
 			if len(distance_delta_queue) >= 3:
-				if max_distance == 0 and only_gets_worse(distance_delta_queue):
-					max_distance = new_range
-					max_fuel_amount = fuel_amount
-					break  # rocket distance will never go up again
+				if only_gets_worse(distance_delta_queue) and not peaked:
+					peaks.append((fuel_amount, new_range))
+					peaked = True
+					if max_distance == 0:
+						max_distance = new_range
+						max_fuel_amount = fuel_amount
+						break  # rocket distance will never go up again
 
 				distance_delta_queue.popleft()
 
@@ -152,15 +177,23 @@ def main():
 
 	x_axis = []
 	y_axis = []
-	for i in range(800):
+	for i in range(max_fuel_amount):
 		x_axis.append(i)
 		y_axis.append(i * booster_boost / 400.0)
 	plt.plot(x_axis, y_axis, label="All Boosters")
 
+	for start in peaks:
+		x_axis = []
+		y_axis = []
+		for i in range(800):
+			x_axis.append(i + start[0])
+			y_axis.append(i * booster_boost / 400.0 + start[1])
+		plt.plot(x_axis, y_axis, label="+2 Boosters")
+
 	plt.xlabel('Fuel in Kg')
 	plt.ylabel('Range in Km')
 
-	pylab.legend(title='[Efficiency,EngineMass,CargoBays]', loc='upper left')
+	pylab.legend(title='Legend', loc='upper left')
 
 	plt.show()
 
