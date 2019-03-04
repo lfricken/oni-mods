@@ -27,6 +27,7 @@ stop_graph_at_peak_range: bool = True
 #
 # Vertex: (4.5,8)
 # y = -3.33333 x^2 + 30.0 x - 59.5
+# petroleum has been tweaked slightly
 
 # multiplied by whole equation
 parabolic_extraction = 3.333
@@ -61,6 +62,11 @@ exponent = 2.0
 fuel_per_x_value = 900.0  # fuel per int
 efficiency_scalar = oni_hydrolox / real_hydrolox
 range_scalar = parabolic_extraction * miles_per_y_value
+
+# oxidizer options
+oxy_mixed = 1.2
+oxy_lox = 1.0
+oxy_solid = 0.8
 
 
 class Rocket:
@@ -106,7 +112,7 @@ class Rocket:
 
 
 def make_rocket() -> Rocket:
-	return Rocket(60, 1.2, engine_penalty=0, boosters=0, cargo_bays=0, science_bays=0, vision_bays=0)
+	return Rocket(0, oxidizer_efficiency=oxy_mixed, engine_penalty=0, boosters=0, cargo_bays=0, science_bays=0, vision_bays=0)
 
 
 # your furthest rocket should go first!

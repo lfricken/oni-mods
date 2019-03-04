@@ -1,4 +1,4 @@
-### Rocket Distance
+### Rocket Distance: rocket_distance.py
 * Graphs a rocket's distance with any specified fuel efficiency. You can easily modify anything at the top of the file. 
 * If you want to know whether your new rocket engine mod would be OP, look no further.
 * Useful for playing with rocket mechanics: Fuel Efficiency, Weight, etc.
@@ -8,3 +8,9 @@
 
 ![rocket efficiency graph](rocket_distance.png "The red line is the rocket with your mom on it.")
 
+### Rocket Overhaul Mod Distance: rocket_distance_overhaul.py
+* [Get the mod here]().
+* Notice the _best_ engine isn't always best?
+* Boosters are always useful!
+
+![new rocket efficiency graph](new_equation.png "Just kidding about the rocket with your mom on it. The rocket was never built due to budget concerns.")

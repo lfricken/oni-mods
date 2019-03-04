@@ -8,11 +8,12 @@ import pylab
 from collections import deque
 
 # what is on your rocket?
-cargo_bays = 2
+cargo_bays = 0
 other_modules = 0
 
 # must be in descending efficiency! km of range per kg of fuel burned
 fuel_efficiencies = [60, 40, 20]
+fuel_names = ['Hydrogen', 'Petroleum', 'Steam']
 
 # oxylite is 1.0, lox is 1.33
 oxidizer_efficiency = 1.33
@@ -100,12 +101,16 @@ def main():
 	max_distance = 0
 	distance_delta_queue: deque = deque()
 
-	for efficiency in fuel_efficiencies:
+	for i in range(len(fuel_efficiencies)):
+		efficiency = fuel_efficiencies[i]
 		is_most_efficient_fuel: bool = efficiency == fuel_efficiencies[0]
 		x_axis: [int] = []
 		y_axis: [int] = []
 		for fuel_amount in range(max_fuel_amount):
 			new_range = calc_total_distance(fuel_amount, efficiency)
+
+			if fuel_amount > 900 and efficiency == 20:
+				break
 
 			distance_delta_queue.append(new_range)
 			if len(distance_delta_queue) >= 4:
@@ -122,7 +127,7 @@ def main():
 		if len(x_axis) == 0:
 			print('Your rocket was so bad that it cant even get 1 km of range! Try improving fuel efficiency or reducing weight.')
 
-		plt.plot(x_axis, y_axis, label=str(efficiency) + 'km per kg')
+		plt.plot(x_axis, y_axis, label=fuel_names[i])
 
 	plt.xlabel('Fuel in Kg')
 	plt.ylabel('Range in Km')
