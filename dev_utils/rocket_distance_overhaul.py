@@ -125,16 +125,17 @@ rockets[-1].engine_penalty = 1200000
 
 rockets.append(make_rocket())
 rockets[-1].name = "Petroleum"
-rockets[-1].fuel_efficiency = 2721
+rockets[-1].fuel_efficiency = 2751
 rockets[-1].cargo_bays = 0
 rockets[-1].engine_penalty = 435000
 
 rockets.append(make_rocket())
 rockets[-1].name = "Steam"
-rockets[-1].fuel_efficiency = 760
+rockets[-1].fuel_efficiency = 765
 rockets[-1].cargo_bays = 0
 rockets[-1].engine_penalty = 20000
 rockets[-1].max_fuel = 515
+rockets[-1].oxidizer_efficiency = 1.0
 
 
 def only_gets_worse(distance_delta_queue: deque) -> bool:
