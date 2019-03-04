@@ -13,7 +13,9 @@ The normal ONI rocket equation means that the rocket with the best fuel is alway
 RocketOverhaul.dll
 
 ## Old Equation
+Notice a [Hydrogen Engine](https://oxygennotincluded.gamepedia.com/Hydrogen_Engine) is the best rocket no matter what?
 ![rocket efficiency graph](../dev_utils/rocket_distance.png "The red line is the rocket with your mom on it.")
 
 ## New Equation
-![new rocket efficiency graph](../dev_utils/new_equation.png "Just kidding about the rocket with your mom on it. The rocket was never built due to budget concerns.")
+Notice the _best_ rocket depends on how far you plan to go.
+![new rocket efficiency graph](../dev_utils/new_equation.png "Just kidding about the rocket with your mom on it. That rocket was never built due to budget concerns.")
