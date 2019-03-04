@@ -51,7 +51,9 @@ oni_hydrolox = 6.5
 cargo_penalty = 30000
 science_penalty = 12000
 sight_penalty = 5000
-booster_boost = 14000
+
+booster_boost_ranges = [30000, 20000, 10000, 0]
+fuel_per_booster = 400
 
 # range equation
 miles_per_y_value = 40000.0
@@ -79,19 +81,32 @@ class Rocket:
 	def get_module_penalty(self) -> float:
 		return -(self.cargo_bays * cargo_penalty + self.science_bays * science_penalty + self.sight_bays * sight_penalty)
 
-	def get_booster_boost(self) -> float:
-		return self.boosters * booster_boost
+	@staticmethod
+	def get_booster_boost(booster_fuel_total: float) -> float:
+		if booster_fuel_total < 0:
+			return 0
+
+		remaining_booster = booster_fuel_total / fuel_per_booster
+		total_range = 0
+		for i in range(min(len(booster_boost_ranges), math.ceil(remaining_booster))):
+			if remaining_booster >= 1:
+				total_range += 1 * booster_boost_ranges[i]
+			else:
+				total_range += remaining_booster * booster_boost_ranges[i]
+			remaining_booster -= 1
+
+		return total_range
 
 	def get_raw_range(self, fuel: float) -> float:
 		fuel /= float(fuel_per_x_value)
-		return range_scalar * (-(fuel ** exponent) + self.oxidizer_efficiency * self.fuel_efficiency * fuel * efficiency_scalar) - self.engine_penalty
+		return range_scalar * (-(fuel ** exponent) + self.fuel_efficiency * fuel * efficiency_scalar) - self.engine_penalty
 
 	def get_total_range(self, fuel: float) -> float:
-		return self.get_raw_range(fuel) + self.get_booster_boost() + self.get_module_penalty()
+		return self.oxidizer_efficiency * self.get_raw_range(fuel) + self.get_booster_boost(self.boosters * fuel_per_booster) + self.get_module_penalty()
 
 
 def make_rocket() -> Rocket:
-	return Rocket(60, 1.00, engine_penalty=0, boosters=0, cargo_bays=0, science_bays=0, vision_bays=0)
+	return Rocket(60, 1.2, engine_penalty=0, boosters=0, cargo_bays=0, science_bays=0, vision_bays=0)
 
 
 # your furthest rocket should go first!
@@ -116,10 +131,10 @@ rockets[-1].engine_penalty = 435000
 
 rockets.append(make_rocket())
 rockets[-1].name = "Steam"
-rockets[-1].fuel_efficiency = 1360
+rockets[-1].fuel_efficiency = 760
 rockets[-1].cargo_bays = 0
-rockets[-1].engine_penalty = 90000
-rockets[-1].max_fuel = 902
+rockets[-1].engine_penalty = 20000
+rockets[-1].max_fuel = 515
 
 
 def only_gets_worse(distance_delta_queue: deque) -> bool:
@@ -175,20 +190,24 @@ def main():
 
 		plt.plot(x_axis, y_axis, label=build_legend(rocket))
 
+	# add boosters to graph
 	x_axis = []
 	y_axis = []
-	for i in range(max_fuel_amount):
-		x_axis.append(i)
-		y_axis.append(i * booster_boost / 400.0)
-	plt.plot(x_axis, y_axis, label="All Boosters")
-
-	for start in peaks:
+	for start in reversed(peaks):
 		x_axis = []
 		y_axis = []
-		for i in range(800):
+		for i in range(fuel_per_booster * 3):
 			x_axis.append(i + start[0])
-			y_axis.append(i * booster_boost / 400.0 + start[1])
-		plt.plot(x_axis, y_axis, label="+2 Boosters")
+			y_axis.append(Rocket.get_booster_boost(i) + start[1])
+		plt.plot(x_axis, y_axis, label="+3 Boosters")
+
+	# draw ROI
+	x_axis2 = []
+	y_axis2 = []
+	for i in range(x_axis[-1]):
+		x_axis2.append(i)
+		y_axis2.append(cargo_penalty / 500 * i)
+	plt.plot(x_axis2, y_axis2, label="Break Even Fuel+Oxy vs Cargo")
 
 	plt.xlabel('Fuel in Kg')
 	plt.ylabel('Range in Km')
