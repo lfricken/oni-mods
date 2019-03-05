@@ -9,11 +9,11 @@ using System.Collections.Generic;
 using TUNING;
 using UnityEngine;
 
-namespace MethaneRocketEngine
+namespace RocketOverhaul
 {
-	public partial class MethaneRocketEngineConfig : HydrogenEngineConfig
+	public partial class MethaneEngine : HydrogenEngineConfig
 	{
-		public new const string ID = nameof(MethaneRocketEngine);
+		public new const string ID = nameof(MethaneEngine);
 
 		public override BuildingDef CreateBuildingDef()
 		{
@@ -30,7 +30,7 @@ namespace MethaneRocketEngine
 			float melting_point = 9999f;
 			BuildLocationRule build_location_rule = BuildLocationRule.OnFloor;
 			EffectorValues tieR2 = NOISE_POLLUTION.NOISY.TIER2;
-			BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef(nameof(MethaneRocketEngine), width, height, anim, hitpoints, construction_time, engineMassLarge, construction_materials, melting_point, build_location_rule, BUILDINGS.DECOR.NONE, tieR2, 0.2f);
+			BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef(nameof(MethaneEngine), width, height, anim, hitpoints, construction_time, engineMassLarge, construction_materials, melting_point, build_location_rule, BUILDINGS.DECOR.NONE, tieR2, 0.2f);
 			BuildingTemplates.CreateRocketBuildingDef(buildingDef);
 			buildingDef.SceneLayer = Grid.SceneLayer.BuildingFront;
 			buildingDef.OverheatTemperature = 2273.15f;
@@ -45,23 +45,23 @@ namespace MethaneRocketEngine
 
 		public override void DoPostConfigureComplete(GameObject go)
 		{
-			RocketEngine rocketEngine = go.AddOrGet<RocketEngine>();
-			rocketEngine.fuelTag = ElementLoader.FindElementByHash(SimHashes.Methane).tag;
-			rocketEngine.efficiency = ROCKETRY.ENGINE_EFFICIENCY.STRONG;
-			rocketEngine.explosionEffectHash = SpawnFXHashes.MeteorImpactDust;
-			rocketEngine.exhaustElement = SimHashes.Steam;
-			rocketEngine.exhaustTemperature = 2000f;
+			OverhaulRocketEngine engine = go.AddOrGet<OverhaulRocketEngine>();
+			engine.fuelTag = ElementLoader.FindElementByHash(SimHashes.LiquidMethane).tag;
+			engine.efficiency = ROCKETRY.ENGINE_EFFICIENCY.STRONG;
+			engine.explosionEffectHash = SpawnFXHashes.MeteorImpactDust;
+			engine.exhaustElement = SimHashes.Steam;
+			engine.exhaustTemperature = 2000f;
 			EntityTemplates.ExtendBuildingToRocketModule(go);
 			go.AddOrGet<RocketModule>().SetBGKAnim(Assets.GetAnim("rocket_hydrogen_engine_bg_kanim"));
 		}
 	}
 
 	/// <summary>
-	/// Adds the <see cref="MethaneRocketEngine"/> to the:
+	/// Adds the <see cref="MethaneEngine"/> to the:
 	/// Buildings Tab,
 	/// Tech Tree,
 	/// </summary>
-	public class MethaneRocketEngine_AddToBuildings
+	public class MethaneEngine_AddToBuildings
 	{
 		[HarmonyPatch(typeof(GeneratedBuildings))]
 		[HarmonyPatch(nameof(GeneratedBuildings.LoadGeneratedBuildings))]
@@ -69,11 +69,11 @@ namespace MethaneRocketEngine
 		{
 			public static void Prefix()
 			{
-				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MethaneRocketEngine.Id.ToUpperInvariant()}.NAME", MethaneRocketEngine.NAME);
-				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MethaneRocketEngine.Id.ToUpperInvariant()}.DESC", MethaneRocketEngine.DESC);
-				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MethaneRocketEngine.Id.ToUpperInvariant()}.EFFECT", MethaneRocketEngine.EFFECT);
+				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MethaneEngine.Id.ToUpperInvariant()}.NAME", MethaneEngine.NAME);
+				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MethaneEngine.Id.ToUpperInvariant()}.DESC", MethaneEngine.DESC);
+				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MethaneEngine.Id.ToUpperInvariant()}.EFFECT", MethaneEngine.EFFECT);
 
-				ModUtil.AddBuildingToPlanScreen(MethaneRocketEngine.BuildTab, MethaneRocketEngine.Id);
+				ModUtil.AddBuildingToPlanScreen(MethaneEngine.BuildTab, MethaneEngine.Id);
 			}
 		}
 
@@ -83,7 +83,7 @@ namespace MethaneRocketEngine
 		{
 			public static void Prefix()
 			{
-				AddTech(MethaneRocketEngine.Id, MethaneRocketEngine.TechGroup);
+				AddTech(MethaneEngine.Id, MethaneEngine.TechGroup);
 			}
 
 			private static void AddTech(string id, string techGroup)
@@ -101,9 +101,9 @@ namespace MethaneRocketEngine
 		{
 			public static void Postfix(string type_name, ref Type __result)
 			{
-				if (type_name == typeof(MethaneRocketEngine).AssemblyQualifiedName)
+				if (type_name == typeof(MethaneEngine).AssemblyQualifiedName)
 				{
-					__result = typeof(MethaneRocketEngine);
+					__result = typeof(MethaneEngine);
 				}
 			}
 		}

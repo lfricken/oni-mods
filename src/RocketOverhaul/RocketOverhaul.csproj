@@ -52,6 +52,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MethaneRocketEngine.cs" />
+    <Compile Include="OverhaulRocketEngine - Copy.cs" />
+    <Compile Include="CommandModule.cs" />
+    <Compile Include="RocketStatsPatches.cs" />
+    <Compile Include="RocketStatsOverhaul.cs" />
     <Compile Include="RocketOverhaul.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
