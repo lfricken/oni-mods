@@ -12,6 +12,30 @@ namespace RocketOverhaul
 	public class RocketStatsPatches
 	{
 		[HarmonyPatch(typeof(RocketStats))]
+		[HarmonyPatch(nameof(RocketStats.GetAverageOxidizerEfficiency))]
+		public static class GetAverageOxidizerEfficiency
+		{
+			static bool Prefix() { return true; } // skip original method
+			static void Postfix(RocketStats __instance, ref float __result)
+			{
+				RocketStatsOverhaul _this = (RocketStatsOverhaul)__instance;
+				__result = _this.GetAverageOxidizerEfficiency();
+			}
+		}
+
+		[HarmonyPatch(typeof(RocketStats))]
+		[HarmonyPatch(nameof(RocketStats.GetBoosterThrust))]
+		public static class GetBoosterThrust
+		{
+			static bool Prefix() { return true; } // skip original method
+			static void Postfix(RocketStats __instance, ref float __result)
+			{
+				RocketStatsOverhaul _this = (RocketStatsOverhaul)__instance;
+				__result = _this.GetBoosterThrust();
+			}
+		}
+
+		[HarmonyPatch(typeof(RocketStats))]
 		[HarmonyPatch(nameof(RocketStats.GetRocketMaxDistance))]
 		public static class GetRocketMaxDistance
 		{
@@ -24,14 +48,14 @@ namespace RocketOverhaul
 		}
 
 		[HarmonyPatch(typeof(RocketStats))]
-		[HarmonyPatch(nameof(RocketStats.GetAverageOxidizerEfficiency))]
-		public static class GetAverageOxidizerEfficiency
+		[HarmonyPatch(nameof(RocketStats.GetTotalThrust))]
+		public static class GetTotalThrust
 		{
 			static bool Prefix() { return true; } // skip original method
 			static void Postfix(RocketStats __instance, ref float __result)
 			{
 				RocketStatsOverhaul _this = (RocketStatsOverhaul)__instance;
-				__result = _this.GetAverageOxidizerEfficiency();
+				__result = _this.GetTotalThrust();
 			}
 		}
 	}

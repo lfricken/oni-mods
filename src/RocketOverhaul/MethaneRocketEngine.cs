@@ -11,9 +11,9 @@ using UnityEngine;
 
 namespace RocketOverhaul
 {
-	public partial class MethaneEngine : HydrogenEngineConfig
+	public partial class MethaneEngineConfig : HydrogenEngineConfig
 	{
-		public new const string ID = nameof(MethaneEngine);
+		public const string Id = nameof(MethaneEngineConfig);
 
 		public override BuildingDef CreateBuildingDef()
 		{
@@ -30,7 +30,7 @@ namespace RocketOverhaul
 			float melting_point = 9999f;
 			BuildLocationRule build_location_rule = BuildLocationRule.OnFloor;
 			EffectorValues tieR2 = NOISE_POLLUTION.NOISY.TIER2;
-			BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef(nameof(MethaneEngine), width, height, anim, hitpoints, construction_time, engineMassLarge, construction_materials, melting_point, build_location_rule, BUILDINGS.DECOR.NONE, tieR2, 0.2f);
+			BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef(nameof(MethaneEngineConfig), width, height, anim, hitpoints, construction_time, engineMassLarge, construction_materials, melting_point, build_location_rule, BUILDINGS.DECOR.NONE, tieR2, 0.2f);
 			BuildingTemplates.CreateRocketBuildingDef(buildingDef);
 			buildingDef.SceneLayer = Grid.SceneLayer.BuildingFront;
 			buildingDef.OverheatTemperature = 2273.15f;
@@ -45,9 +45,10 @@ namespace RocketOverhaul
 
 		public override void DoPostConfigureComplete(GameObject go)
 		{
-			OverhaulRocketEngine engine = go.AddOrGet<OverhaulRocketEngine>();
-			engine.fuelTag = ElementLoader.FindElementByHash(SimHashes.LiquidMethane).tag;
-			engine.efficiency = ROCKETRY.ENGINE_EFFICIENCY.STRONG;
+			RocketEngineImproved engine = go.AddOrGet<RocketEngineImproved>();
+			engine.ExhaustVelocity = MethaneEngineStats.ExhaustVelocity;
+			engine.RangePenalty = MethaneEngineStats.DistancePenalty;
+			engine.fuelTag = ElementLoader.FindElementByHash(MethaneEngineStats.FuelType).tag;
 			engine.explosionEffectHash = SpawnFXHashes.MeteorImpactDust;
 			engine.exhaustElement = SimHashes.Steam;
 			engine.exhaustTemperature = 2000f;
@@ -69,11 +70,11 @@ namespace RocketOverhaul
 		{
 			public static void Prefix()
 			{
-				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MethaneEngine.Id.ToUpperInvariant()}.NAME", MethaneEngine.NAME);
-				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MethaneEngine.Id.ToUpperInvariant()}.DESC", MethaneEngine.DESC);
-				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MethaneEngine.Id.ToUpperInvariant()}.EFFECT", MethaneEngine.EFFECT);
+				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MethaneEngineConfig.Id.ToUpperInvariant()}.NAME", MethaneEngineStats.NAME);
+				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MethaneEngineConfig.Id.ToUpperInvariant()}.DESC", MethaneEngineStats.DESC);
+				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MethaneEngineConfig.Id.ToUpperInvariant()}.EFFECT", MethaneEngineStats.EFFECT);
 
-				ModUtil.AddBuildingToPlanScreen(MethaneEngine.BuildTab, MethaneEngine.Id);
+				ModUtil.AddBuildingToPlanScreen(MethaneEngineStats.BuildTab, MethaneEngineConfig.Id);
 			}
 		}
 
@@ -83,7 +84,7 @@ namespace RocketOverhaul
 		{
 			public static void Prefix()
 			{
-				AddTech(MethaneEngine.Id, MethaneEngine.TechGroup);
+				AddTech(MethaneEngineConfig.Id, MethaneEngineStats.TechGroup);
 			}
 
 			private static void AddTech(string id, string techGroup)
@@ -101,9 +102,9 @@ namespace RocketOverhaul
 		{
 			public static void Postfix(string type_name, ref Type __result)
 			{
-				if (type_name == typeof(MethaneEngine).AssemblyQualifiedName)
+				if (type_name == typeof(MethaneEngineConfig).AssemblyQualifiedName)
 				{
-					__result = typeof(MethaneEngine);
+					__result = typeof(MethaneEngineConfig);
 				}
 			}
 		}

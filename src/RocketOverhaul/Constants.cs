@@ -10,11 +10,18 @@ namespace RocketOverhaul
 	/// <summary>
 	/// Computed via https://github.com/lfricken/oni-mods/blob/master/dev_utils/rocket_distance_overhaul.py
 	/// </summary>
-	public class Scalars
+	public class DistanceEquationScalars
 	{
 		public static readonly float Efficiency = 0.00146959f;
 		public static readonly int Exponent = 2;
 		public static readonly float Range = 133320.0f;
+	}
+
+	public class ModulePenalties
+	{
+		public static readonly float ResearchPenalty = 2000f;
+		public static readonly float TouristPenalty = 8000f;
+		public static readonly float CargoPenalty = 30000f;
 	}
 
 	public class OxidizerEfficiency
@@ -34,7 +41,6 @@ namespace RocketOverhaul
 	{
 		public static string Element = "Methane";
 
-		public static string Id = Element + "Engine";
 		public static string NAME = UI.FormatAsLink(Element + " Engine", Element + "Engine");
 		public static string DESC = $"{Element} engines have an exhaust velocity of {ExhaustVelocity} m/s and a distance penalty of {DistancePenalty} km. " +
 									$"\n" + EngineBaseStats.Equation;
@@ -43,6 +49,7 @@ namespace RocketOverhaul
 		public static readonly string TechGroup = "EnginesIII";
 		public static readonly string BuildTab = "Rocketry";
 
+		public static readonly SimHashes FuelType = SimHashes.LiquidMethane;
 		public static readonly float ExhaustVelocity = 6127;
 		public static readonly float DistancePenalty = 2380000;
 	}
@@ -51,7 +58,6 @@ namespace RocketOverhaul
 	{
 		public static string Element = "Hydrogen";
 
-		public static string Id = Element + "Engine";
 		public static string NAME = UI.FormatAsLink(Element + " Engine", Element + "Engine");
 		public static string DESC = $"{Element} engines have an exhaust velocity of {ExhaustVelocity} m/s and a distance penalty of {DistancePenalty} km. " +
 									$"\n" + EngineBaseStats.Equation;
@@ -68,7 +74,6 @@ namespace RocketOverhaul
 	{
 		public static string Element = "Petroleum";
 
-		public static string Id = Element + "Engine";
 		public static string NAME = UI.FormatAsLink(Element + " Engine", Element + "Engine");
 		public static string DESC = $"{Element} engines have an exhaust velocity of {ExhaustVelocity} m/s and a distance penalty of {DistancePenalty} km. " +
 									$"\n" + EngineBaseStats.Equation;
@@ -85,7 +90,6 @@ namespace RocketOverhaul
 	{
 		public static string Element = "Steam";
 
-		public static string Id = Element + "Engine";
 		public static string NAME = UI.FormatAsLink(Element + " Engine", Element + "Engine");
 		public static string DESC = $"{Element} engines have an exhaust velocity of {ExhaustVelocity} m/s and a distance penalty of {DistancePenalty} km. \n" +
 									$"Internally stores {MaxStorage} Kg of {Element} \n" +
@@ -105,7 +109,6 @@ namespace RocketOverhaul
 		private static string Element1 = "Iron";
 		private static string Element2 = "Oxylite";
 
-		public static string Id = nameof(SolidBooster);
 		public static string NAME = UI.FormatAsLink("Solid Booster", nameof(SolidBooster));
 		public static string DESC = $"Boosters increase the range of a rocket:\n" +
 									$"First:  +30,000 km\n" +

@@ -21,7 +21,7 @@ namespace RocketOverhaul
 		public CommandModule CommandModule { get; set; }
 
 		/// <summary>
-		/// 
+		/// Adds a public copy of CommandModule.
 		/// </summary>
 		public RocketStatsOverhaul(CommandModule commandModule) : base(commandModule)
 		{
@@ -30,7 +30,7 @@ namespace RocketOverhaul
 		}
 
 		/// <summary>
-		/// 
+		/// Iterates over game objects in AttachableBuilding.GetAttachedNetwork
 		/// </summary>
 		public IEnumerable<GameObject> BuildingNetworkEnumerable()
 		{
@@ -39,11 +39,20 @@ namespace RocketOverhaul
 				yield return gameObject;
 			}
 		}
+
+		/// <summary>
+		/// Given 100 returns 1.0
+		/// </summary>
+		public static float PercentageToFraction(float percentage)
+		{
+			return percentage / 100f;
+		}
 		#endregion
 
 		#region Oxidizer
 		/// <summary>
-		/// 
+		/// Return a value representing the 
+		/// Returns 100 for 100% effective.
 		/// </summary>
 		public new float GetAverageOxidizerEfficiency()
 		{
@@ -69,14 +78,12 @@ namespace RocketOverhaul
 				}
 			}
 
-			return 100.0f * GetEfficiency(lox, oxyRock);
+			return 100f * GetEfficiency(lox, oxyRock);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="lox"></param>
-		/// <param name="oxyRock"></param>
 		public float GetEfficiency(float lox, float oxyRock)
 		{
 			float totalOxidizer = lox + oxyRock;
@@ -119,7 +126,7 @@ namespace RocketOverhaul
 		}
 
 		/// <summary>
-		/// 
+		/// Return how much boosters increase our range by.
 		/// </summary>
 		/// <param name="numEffectiveBoosters">How many boosters worth of booster fuel do we have?</param>
 		public static float GetBoosterContribution(float numEffectiveBoosters)
@@ -145,17 +152,18 @@ namespace RocketOverhaul
 
 		#region Thrust
 		/// <summary>
-		/// 
+		/// Expected distance of this rocket.
 		/// </summary>
 		public new float GetRocketMaxDistance()
 		{
 			float thrust = GetTotalThrust() - GetRangePenalty();
 			float dist = Mathf.Max(0, thrust);
+			dist *= PercentageToFraction(GetAverageOxidizerEfficiency());
 			return dist;
 		}
 
 		/// <summary>
-		/// All contributions to distance in km summed.
+		/// All contributions to distance in km summed. Includes engine penalty.
 		/// </summary>
 		public new float GetTotalThrust()
 		{
@@ -163,25 +171,56 @@ namespace RocketOverhaul
 		}
 
 		/// <summary>
-		/// 
+		/// Returns the total contribution by the engine. This includes the engine penalty.
 		/// </summary>
 		public float GetEngineThrust()
 		{
-			return GetAverageOxidizerEfficiency() * GetTotalOxidizableFuel() * Scalars.Efficiency;
+			RocketEngineImproved engine = GetMainEngine() as RocketEngineImproved;
+			if (engine == null)
+			{
+				Debug.Log("A rocket engine does not implement the RocketOverhaul.RocketEngineImproved.");
+				return 0;
+			}
+
+			return GetTotalOxidizableFuel() * DistanceEquationScalars.Efficiency - engine.RangePenalty;
 		}
 		#endregion
 
 		#region Penalty
+		/// <summary>
+		/// Returns the total penalty from modules.
+		/// </summary>
 		public float GetRangePenalty()
 		{
-			return 0;
+			GetModuleCount(out int cargoBays, out int touristModules, out int researchModules);
+			float penalty = ModulePenalties.CargoPenalty * cargoBays + ModulePenalties.TouristPenalty * touristModules + ModulePenalties.ResearchPenalty * researchModules;
+			return penalty;
 		}
 
-		public void GetModuleCount(out int cargoBays, out int seeingModules, out int scienceBays)
+		/// <summary>
+		/// Outputs the number of each module on this rocket.
+		/// </summary>
+		public void GetModuleCount(out int cargoBays, out int touristModules, out int researchModules)
 		{
 			cargoBays = 0;
-			seeingModules = 0;
-			scienceBays = 0;
+			touristModules = 0;
+			researchModules = 0;
+
+			foreach (GameObject gameObject in BuildingNetworkEnumerable())
+			{
+				if (gameObject.GetComponent<CargoBay>() != null)
+				{
+					cargoBays += 1;
+				}
+				else if (gameObject.GetComponent<TouristModule>() != null)
+				{
+					touristModules += 1;
+				}
+				else if (gameObject.GetComponent<ResearchModule>() != null)
+				{
+					researchModules += 1;
+				}
+			}
 		}
 		#endregion
 	}

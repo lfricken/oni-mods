@@ -191,6 +191,11 @@ namespace RadiumFuelRod
 		[MyCmpReq]
 		private Operational operational;
 
+		public SuperHeater(Operational _operational)
+		{
+			operational = _operational;
+		}
+
 		public float TargetTemperature
 		{
 			get
