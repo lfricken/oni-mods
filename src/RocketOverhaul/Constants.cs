@@ -12,9 +12,10 @@ namespace RocketOverhaul
 	/// </summary>
 	public class DistanceEquationScalars
 	{
-		public static readonly float Efficiency = 0.00146959f;
+		public static readonly float Exhaust = 0.00146959f;
 		public static readonly int Exponent = 2;
 		public static readonly float Range = 133320.0f;
+		public static readonly float FuelPerXTick = 900f;
 	}
 
 	public class ModulePenalties

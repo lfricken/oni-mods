@@ -15,11 +15,11 @@ namespace RocketOverhaul
 		/// <summary>
 		/// 
 		/// </summary>
-		public float RangePenalty { get; set; }
+		public float RangePenalty;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public float ExhaustVelocity { get; set; }
+		public float ExhaustVelocity;
 	}
 }

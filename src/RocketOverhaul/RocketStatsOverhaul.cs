@@ -156,9 +156,8 @@ namespace RocketOverhaul
 		/// </summary>
 		public new float GetRocketMaxDistance()
 		{
-			float thrust = GetTotalThrust() - GetRangePenalty();
+			float thrust = GetTotalThrust() - GetModulePenalty();
 			float dist = Mathf.Max(0, thrust);
-			dist *= PercentageToFraction(GetAverageOxidizerEfficiency());
 			return dist;
 		}
 
@@ -182,15 +181,46 @@ namespace RocketOverhaul
 				return 0;
 			}
 
-			return GetTotalOxidizableFuel() * DistanceEquationScalars.Efficiency - engine.RangePenalty;
+			float efficiency = PercentageToFraction(GetAverageOxidizerEfficiency());
+
+			float fuel = GetTotalOxidizableFuel();
+
+			fuel /= DistanceEquationScalars.FuelPerXTick;
+			float exponentPenalty = -GetFuelPenalty(fuel);
+			float linearBenefit = fuel * engine.ExhaustVelocity * DistanceEquationScalars.Exhaust;
+
+			float thrust = exponentPenalty + linearBenefit;
+			float max_range = DistanceEquationScalars.Range * thrust - engine.RangePenalty;
+
+			max_range *= efficiency;
+
+			RocketStatsPatches.TryLog(nameof(fuel) + fuel);
+			RocketStatsPatches.TryLog(nameof(exponentPenalty) + exponentPenalty);
+			RocketStatsPatches.TryLog(nameof(linearBenefit) + linearBenefit);
+			RocketStatsPatches.TryLog(nameof(thrust) + thrust);
+			RocketStatsPatches.TryLog(nameof(max_range) + max_range);
+			RocketStatsPatches.TryLog(nameof(efficiency) + efficiency);
+			RocketStatsPatches.TryLog(nameof(engine.RangePenalty) + engine.RangePenalty);
+			RocketStatsPatches.TryLog(nameof(engine.ExhaustVelocity) + engine.ExhaustVelocity);
+			RocketStatsPatches.TryLog(nameof(DistanceEquationScalars.Exhaust) + DistanceEquationScalars.Exhaust);
+
+			return max_range;
 		}
 		#endregion
 
 		#region Penalty
 		/// <summary>
+		/// Computes the diminishing return value of fuel.
+		/// </summary>
+		public float GetFuelPenalty(float fuel)
+		{
+			return fuel * fuel;
+		}
+
+		/// <summary>
 		/// Returns the total penalty from modules.
 		/// </summary>
-		public float GetRangePenalty()
+		public float GetModulePenalty()
 		{
 			GetModuleCount(out int cargoBays, out int touristModules, out int researchModules);
 			float penalty = ModulePenalties.CargoPenalty * cargoBays + ModulePenalties.TouristPenalty * touristModules + ModulePenalties.ResearchPenalty * researchModules;

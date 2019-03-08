@@ -105,14 +105,19 @@ class Rocket:
 
 	def get_raw_range(self, fuel: float) -> float:
 		fuel /= float(fuel_per_x_value)
-		return range_scalar * (-(fuel ** exponent) + self.fuel_efficiency * fuel * efficiency_scalar) - self.engine_penalty
+		exponent_penalty = -(fuel ** exponent)
+		linear_benefit = self.fuel_efficiency * fuel * efficiency_scalar
+		thrust = exponent_penalty + linear_benefit
+		max_range = range_scalar * thrust - self.engine_penalty
+		max_range *= self.oxidizer_efficiency
+		return max_range
 
 	def get_total_range(self, fuel: float) -> float:
-		return self.oxidizer_efficiency * self.get_raw_range(fuel) + self.get_booster_boost(self.boosters * fuel_per_booster) + self.get_module_penalty()
+		return self.get_raw_range(fuel) + self.get_booster_boost(self.boosters * fuel_per_booster) + self.get_module_penalty()
 
 
 def make_rocket() -> Rocket:
-	return Rocket(0, oxidizer_efficiency=oxy_mixed, engine_penalty=0, boosters=0, cargo_bays=0, science_bays=0, vision_bays=0)
+	return Rocket(0, oxidizer_efficiency=oxy_lox, engine_penalty=0, boosters=0, cargo_bays=0, science_bays=0, vision_bays=0)
 
 
 # your furthest rocket should go first!
@@ -161,6 +166,9 @@ def build_legend(rocket: Rocket) -> str:
 
 
 def main():
+	dist = rockets[0].get_total_range(fuel=3600)
+	print(dist)
+
 	max_fuel_amount = 50000
 	max_distance = 0
 

@@ -52,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="MethaneRocketEngine.cs" />
     <Compile Include="RocketEngineImproved.cs" />
     <Compile Include="CommandModule.cs" />

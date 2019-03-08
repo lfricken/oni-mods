@@ -11,6 +11,11 @@ namespace RocketOverhaul
 	/// </summary>
 	public class RocketStatsPatches
 	{
+		public static void TryLog(string message)
+		{
+			Debug.Log(message);
+		}
+
 		[HarmonyPatch(typeof(RocketStats))]
 		[HarmonyPatch(nameof(RocketStats.GetAverageOxidizerEfficiency))]
 		public static class GetAverageOxidizerEfficiency
@@ -20,6 +25,7 @@ namespace RocketOverhaul
 			{
 				RocketStatsOverhaul _this = (RocketStatsOverhaul)__instance;
 				__result = _this.GetAverageOxidizerEfficiency();
+				TryLog(nameof(GetAverageOxidizerEfficiency) + ": " + __result);
 			}
 		}
 
@@ -32,6 +38,7 @@ namespace RocketOverhaul
 			{
 				RocketStatsOverhaul _this = (RocketStatsOverhaul)__instance;
 				__result = _this.GetBoosterThrust();
+				TryLog(nameof(GetBoosterThrust) + ": " + __result);
 			}
 		}
 
@@ -44,6 +51,7 @@ namespace RocketOverhaul
 			{
 				RocketStatsOverhaul _this = (RocketStatsOverhaul)__instance;
 				__result = _this.GetRocketMaxDistance();
+				TryLog(nameof(GetRocketMaxDistance) + ": " + __result);
 			}
 		}
 
@@ -56,6 +64,7 @@ namespace RocketOverhaul
 			{
 				RocketStatsOverhaul _this = (RocketStatsOverhaul)__instance;
 				__result = _this.GetTotalThrust();
+				TryLog(nameof(GetTotalThrust) + ": " + __result);
 			}
 		}
 	}
