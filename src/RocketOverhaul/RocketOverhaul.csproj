@@ -56,6 +56,8 @@
     <Compile Include="MethaneRocketEngine.cs" />
     <Compile Include="RocketEngineImproved.cs" />
     <Compile Include="CommandModule.cs" />
+    <Compile Include="StarmapScreenOverhaul.cs" />
+    <Compile Include="StarmapScreenPatches.cs" />
     <Compile Include="RocketStatsPatches.cs" />
     <Compile Include="RocketStatsOverhaul.cs" />
     <Compile Include="RocketOverhaul.cs" />
