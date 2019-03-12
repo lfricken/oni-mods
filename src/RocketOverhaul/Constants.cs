@@ -53,6 +53,8 @@ namespace RocketOverhaul
 		public static readonly SimHashes FuelType = SimHashes.LiquidMethane;
 		public static readonly float ExhaustVelocity = 6127;
 		public static readonly float DistancePenalty = 2380000;
+		public static readonly float MinFuel = 3200;
+		public static readonly float MaxFuel = 4000;
 	}
 
 	public partial class HydrogenEngineStats
@@ -69,6 +71,8 @@ namespace RocketOverhaul
 
 		public static readonly float ExhaustVelocity = 4423;
 		public static readonly float DistancePenalty = 1200000;
+		public static readonly float MinFuel = 2200;
+		public static readonly float MaxFuel = 2900;
 	}
 
 	public class PetroleumEngineStats
@@ -85,6 +89,8 @@ namespace RocketOverhaul
 
 		public static readonly float ExhaustVelocity = 2751;
 		public static readonly float DistancePenalty = 435000;
+		public static readonly float MinFuel = 1200;
+		public static readonly float MaxFuel = 1700;
 	}
 
 	public class SteamEngineStats
@@ -102,6 +108,8 @@ namespace RocketOverhaul
 
 		public static readonly float ExhaustVelocity = 2751;
 		public static readonly float DistancePenalty = 435000;
+		public static readonly float MinFuel = 250;
+		public static readonly float MaxFuel = 500;
 		public static readonly float MaxStorage = 500;
 	}
 

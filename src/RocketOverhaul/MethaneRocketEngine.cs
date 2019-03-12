@@ -48,6 +48,8 @@ namespace RocketOverhaul
 			RocketEngineImproved engine = go.AddOrGet<RocketEngineImproved>();
 			engine.ExhaustVelocity = MethaneEngineStats.ExhaustVelocity;
 			engine.RangePenalty = MethaneEngineStats.DistancePenalty;
+			engine.MinFuel = MethaneEngineStats.MinFuel;
+			engine.MaxFuel = MethaneEngineStats.MaxFuel;
 			engine.fuelTag = ElementLoader.FindElementByHash(MethaneEngineStats.FuelType).tag;
 			engine.explosionEffectHash = SpawnFXHashes.MeteorImpactDust;
 			engine.exhaustElement = SimHashes.Steam;

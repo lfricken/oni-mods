@@ -21,5 +21,15 @@ namespace RocketOverhaul
 		/// 
 		/// </summary>
 		public float ExhaustVelocity;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public float MinFuel;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public float MaxFuel;
 	}
 }

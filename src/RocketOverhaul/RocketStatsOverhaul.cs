@@ -56,8 +56,45 @@ namespace RocketOverhaul
 		/// </summary>
 		public new float GetAverageOxidizerEfficiency()
 		{
-			float lox = 0;
-			float oxyRock = 0;
+			return 100f * GetEfficiency();
+		}
+
+		public float GetOxyMultiplier()
+		{
+			return PercentageToFraction(GetAverageOxidizerEfficiency());
+		}
+
+		public float GetOxidizerContributions()
+		{
+			return GetOxidizerContributions(out float oxyrock, out float lox, out float mixed);
+		}
+
+		public float GetOxidizerContributions(out float oxyrock, out float lox, out float mixed)
+		{
+			float baseRange = GetEngineThrust();
+			float totalAmount = GetOxidizerAmounts(out oxyrock, out lox, out mixed);
+			float[] oxidizers = new float[] { oxyrock, lox, mixed };
+			for (int i = 0; i < oxidizers.Length; ++i)
+				oxidizers[i] /= totalAmount * baseRange;
+
+			oxyrock = oxidizers[0] * (OxidizerEfficiency.OxyRock - 1f);
+			lox = oxidizers[1] * (OxidizerEfficiency.Lox - 1f);
+			mixed = oxidizers[2] * (OxidizerEfficiency.Mixed - 1f);
+
+			return oxyrock + lox + mixed;
+		}
+
+		public float GetOxidizerAmounts(out float oxyrock, out float lox, out float mixed)
+		{
+			GetOxidizerAmounts(out float totalOxyrock, out float totalLox);
+			GetEfficiencyAmounts(totalOxyrock, totalLox, out oxyrock, out lox, out mixed);
+			return totalOxyrock + totalLox;
+		}
+
+		public void GetOxidizerAmounts(out float oxyrock, out float lox)
+		{
+			oxyrock = 0;
+			lox = 0;
 
 			foreach (GameObject gameObject in BuildingNetworkEnumerable())
 			{
@@ -72,28 +109,31 @@ namespace RocketOverhaul
 						}
 						else if (oxidizer.Key == SimHashes.OxyRock.CreateTag())
 						{
-							oxyRock += oxidizer.Value;
+							oxyrock += oxidizer.Value;
 						}
 					}
 				}
 			}
-
-			return 100f * GetEfficiency(lox, oxyRock);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public float GetEfficiency(float lox, float oxyRock)
+		public void GetEfficiencyAmounts(float oxyRock, float lox, out float oxyRockAmount, out float loxAmount, out float mixedAmount)
 		{
-			float totalOxidizer = lox + oxyRock;
+			oxyRockAmount = Mathf.Max(0, oxyRock - lox);
+			loxAmount = Mathf.Max(0, lox - oxyRock);
+			mixedAmount = Mathf.Min(lox, oxyRock) * 2;
+		}
 
-			float mixedAmount = Mathf.Min(lox, oxyRock) * 2;
-			float extraLox = Mathf.Max(0, lox - oxyRock);
-			float extraOxyRock = Mathf.Max(0, oxyRock - lox);
-			Assert.AreApproximatelyEqual(totalOxidizer, mixedAmount + extraLox + extraOxyRock);
+		/// <summary>
+		/// 
+		/// </summary>
+		public float GetEfficiency()
+		{
+			float totalOxidizer = GetOxidizerAmounts(out float oxyrockAmount, out float loxAmount, out float mixedAmount);
 
-			float sum = OxidizerEfficiency.Mixed * mixedAmount + OxidizerEfficiency.Lox * extraLox + OxidizerEfficiency.OxyRock * extraOxyRock;
+			float sum = OxidizerEfficiency.OxyRock * oxyrockAmount + OxidizerEfficiency.Lox * loxAmount + OxidizerEfficiency.Mixed * mixedAmount;
 			return sum / totalOxidizer;
 		}
 		#endregion
@@ -166,13 +206,19 @@ namespace RocketOverhaul
 		/// </summary>
 		public new float GetTotalThrust()
 		{
-			return GetEngineThrust() + GetBoosterThrust();
+			return GetEngineThrust() + GetOxidizerContributions() + GetBoosterThrust();
 		}
 
 		/// <summary>
 		/// Returns the total contribution by the engine. This includes the engine penalty.
 		/// </summary>
 		public float GetEngineThrust()
+		{
+			float fuel = GetTotalOxidizableFuel();
+			return GetEngineContribution(fuel);
+		}
+
+		public float GetEngineContribution(float fuel)
 		{
 			RocketEngineImproved engine = GetMainEngine() as RocketEngineImproved;
 			if (engine == null)
@@ -181,10 +227,6 @@ namespace RocketOverhaul
 				return 0;
 			}
 
-			float efficiency = PercentageToFraction(GetAverageOxidizerEfficiency());
-
-			float fuel = GetTotalOxidizableFuel();
-
 			fuel /= DistanceEquationScalars.FuelPerXTick;
 			float exponentPenalty = -GetFuelPenalty(fuel);
 			float linearBenefit = fuel * engine.ExhaustVelocity * DistanceEquationScalars.Exhaust;
@@ -192,20 +234,9 @@ namespace RocketOverhaul
 			float thrust = exponentPenalty + linearBenefit;
 			float max_range = DistanceEquationScalars.Range * thrust - engine.RangePenalty;
 
-			max_range *= efficiency;
-
-			RocketStatsPatches.TryLog(nameof(fuel) + fuel);
-			RocketStatsPatches.TryLog(nameof(exponentPenalty) + exponentPenalty);
-			RocketStatsPatches.TryLog(nameof(linearBenefit) + linearBenefit);
-			RocketStatsPatches.TryLog(nameof(thrust) + thrust);
-			RocketStatsPatches.TryLog(nameof(max_range) + max_range);
-			RocketStatsPatches.TryLog(nameof(efficiency) + efficiency);
-			RocketStatsPatches.TryLog(nameof(engine.RangePenalty) + engine.RangePenalty);
-			RocketStatsPatches.TryLog(nameof(engine.ExhaustVelocity) + engine.ExhaustVelocity);
-			RocketStatsPatches.TryLog(nameof(DistanceEquationScalars.Exhaust) + DistanceEquationScalars.Exhaust);
-
 			return max_range;
 		}
+
 		#endregion
 
 		#region Penalty
