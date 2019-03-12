@@ -75,6 +75,7 @@ namespace RocketOverhaul
 				__instance.Get(out CommandModule currentCommandModule, nameof(currentCommandModule));
 				RocketStatsOverhaul stats = (RocketStatsOverhaul)currentCommandModule.rocketStats;
 				RocketEngineImproved engine = (RocketEngineImproved)stats.GetMainEngine();
+				list.ClearRows();
 
 				string fuelRange = StarmapScreenOverhaul.FormatDistance(engine.MinFuel, "", "kg") + " to " + StarmapScreenOverhaul.FormatDistance(engine.MinFuel, "", "kg");
 
