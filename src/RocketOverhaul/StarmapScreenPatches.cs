@@ -30,11 +30,8 @@ namespace RocketOverhaul
 
 				list.ClearRows();
 
-				float oxidizerContribution = stats.GetOxidizerContributions();
-				float oxidizerEfficiency = stats.GetAverageOxidizerEfficiency();
-
 				AddImportant(list, StarmapScreenOverhaul.Caption.TotalEngineThrust, stats.GetEngineThrust());
-				AddImportantOxidizer(list, StarmapScreenOverhaul.Caption.TotalOxidizerEfficiency, oxidizerEfficiency, oxidizerContribution);
+				AddImportantOxidizer(list, StarmapScreenOverhaul.Caption.TotalOxidizerEfficiency, stats.GetAverageOxidizerEfficiency(), stats.GetEfficiencyContribution());
 				AddImportant(list, StarmapScreenOverhaul.Caption.TotalBoosterThrust, stats.GetBoosterThrust());
 				AddImportant(list, StarmapScreenOverhaul.Caption.TotalPayload, -stats.GetModulePenalty());
 				AddImportant(list, StarmapScreenOverhaul.Caption.TotalDistance, stats.GetRocketMaxDistance());
@@ -43,7 +40,7 @@ namespace RocketOverhaul
 
 		public static void AddImportantOxidizer(BreakdownList list, string caption, float percent, float value)
 		{
-			AddImportant(list, caption + ": " + percent + "%", value);
+			AddImportant(list, caption + ": " + (int)percent + "%", value);
 		}
 
 		public static void AddImportant(BreakdownList list, string caption, float value)
@@ -75,9 +72,10 @@ namespace RocketOverhaul
 				__instance.Get(out CommandModule currentCommandModule, nameof(currentCommandModule));
 				RocketStatsOverhaul stats = (RocketStatsOverhaul)currentCommandModule.rocketStats;
 				RocketEngineImproved engine = (RocketEngineImproved)stats.GetMainEngine();
+				list.SetTitle(StarmapScreenOverhaul.Caption.TotalEngineThrust);
 				list.ClearRows();
 
-				string fuelRange = StarmapScreenOverhaul.FormatDistance(engine.MinFuel, "", "kg") + " to " + StarmapScreenOverhaul.FormatDistance(engine.MinFuel, "", "kg");
+				string fuelRange = StarmapScreenOverhaul.FormatDistance(engine.MinFuel, "", "kg") + " to " + StarmapScreenOverhaul.FormatDistance(engine.MaxFuel, "", "kg");
 
 				list.AddRow().ShowData(StarmapScreenOverhaul.Caption.EngineExhaustVelocity, StarmapScreenOverhaul.FormatDistance(engine.ExhaustVelocity, "", "m/s"));
 				list.AddRow().ShowData(StarmapScreenOverhaul.Caption.RecommendedOxidizableFuel, fuelRange);
@@ -103,15 +101,14 @@ namespace RocketOverhaul
 				list.gameObject.name = nameof(rocketDetailsStorage);
 				list.ClearRows();
 
-
-				float totalContribution = stats.GetOxidizerContributions(out float oxyrock, out float lox, out float mixed);
+				stats.GetOxidizerAmounts(out float oxyrockAmount, out float loxAmount, out float mixedAmount);
 				float totalEfficiency = stats.GetAverageOxidizerEfficiency();
 
-				list.AddRow().ShowData(StarmapScreenOverhaul.Caption.OxyRock, StarmapScreenOverhaul.FormatDistance(oxyrock));
-				list.AddRow().ShowData(StarmapScreenOverhaul.Caption.LiquidOxygen, StarmapScreenOverhaul.FormatDistance(lox));
-				list.AddRow().ShowData(StarmapScreenOverhaul.Caption.Mixed, StarmapScreenOverhaul.FormatDistance(mixed));
+				list.AddRow().ShowData(StarmapScreenOverhaul.Caption.OxyRock, StarmapScreenOverhaul.FormatDistance(oxyrockAmount, "", "kg"));
+				list.AddRow().ShowData(StarmapScreenOverhaul.Caption.LiquidOxygen, StarmapScreenOverhaul.FormatDistance(loxAmount, "", "kg"));
+				list.AddRow().ShowData(StarmapScreenOverhaul.Caption.Mixed, StarmapScreenOverhaul.FormatDistance(mixedAmount, "", "kg"));
 
-				AddImportantOxidizer(list, StarmapScreenOverhaul.Caption.TotalOxidizerEfficiency, totalEfficiency, totalContribution);
+				AddImportantOxidizer(list, StarmapScreenOverhaul.Caption.TotalOxidizerEfficiency, totalEfficiency, stats.GetEfficiencyContribution());
 			}
 		}
 

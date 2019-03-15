@@ -47,9 +47,10 @@ namespace RocketOverhaul
 		{
 			RocketEngineImproved engine = go.AddOrGet<RocketEngineImproved>();
 			engine.ExhaustVelocity = MethaneEngineStats.ExhaustVelocity;
-			engine.RangePenalty = MethaneEngineStats.DistancePenalty;
+			engine.RangePenalty = MethaneEngineStats.RangePenalty;
 			engine.MinFuel = MethaneEngineStats.MinFuel;
 			engine.MaxFuel = MethaneEngineStats.MaxFuel;
+
 			engine.fuelTag = ElementLoader.FindElementByHash(MethaneEngineStats.FuelType).tag;
 			engine.explosionEffectHash = SpawnFXHashes.MeteorImpactDust;
 			engine.exhaustElement = SimHashes.Steam;
@@ -68,9 +69,9 @@ namespace RocketOverhaul
 	{
 		[HarmonyPatch(typeof(GeneratedBuildings))]
 		[HarmonyPatch(nameof(GeneratedBuildings.LoadGeneratedBuildings))]
-		public static class GeneratedBuildings_LoadGeneratedBuildings_Patch
+		public static class LoadGeneratedBuildings
 		{
-			public static void Prefix()
+			public static void Postfix()
 			{
 				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MethaneEngineConfig.Id.ToUpperInvariant()}.NAME", MethaneEngineStats.NAME);
 				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{MethaneEngineConfig.Id.ToUpperInvariant()}.DESC", MethaneEngineStats.DESC);

@@ -51,7 +51,7 @@ namespace RocketOverhaul
 
 		#region Oxidizer
 		/// <summary>
-		/// Return a value representing the 
+		/// Return a value representing the oxidizer efficiency.
 		/// Returns 100 for 100% effective.
 		/// </summary>
 		public new float GetAverageOxidizerEfficiency()
@@ -62,26 +62,6 @@ namespace RocketOverhaul
 		public float GetOxyMultiplier()
 		{
 			return PercentageToFraction(GetAverageOxidizerEfficiency());
-		}
-
-		public float GetOxidizerContributions()
-		{
-			return GetOxidizerContributions(out float oxyrock, out float lox, out float mixed);
-		}
-
-		public float GetOxidizerContributions(out float oxyrock, out float lox, out float mixed)
-		{
-			float baseRange = GetEngineThrust();
-			float totalAmount = GetOxidizerAmounts(out oxyrock, out lox, out mixed);
-			float[] oxidizers = new float[] { oxyrock, lox, mixed };
-			for (int i = 0; i < oxidizers.Length; ++i)
-				oxidizers[i] /= totalAmount * baseRange;
-
-			oxyrock = oxidizers[0] * (OxidizerEfficiency.OxyRock - 1f);
-			lox = oxidizers[1] * (OxidizerEfficiency.Lox - 1f);
-			mixed = oxidizers[2] * (OxidizerEfficiency.Mixed - 1f);
-
-			return oxyrock + lox + mixed;
 		}
 
 		public float GetOxidizerAmounts(out float oxyrock, out float lox, out float mixed)
@@ -135,6 +115,11 @@ namespace RocketOverhaul
 
 			float sum = OxidizerEfficiency.OxyRock * oxyrockAmount + OxidizerEfficiency.Lox * loxAmount + OxidizerEfficiency.Mixed * mixedAmount;
 			return sum / totalOxidizer;
+		}
+
+		public float GetEfficiencyContribution()
+		{
+			return (GetEfficiency() - 1) * GetEngineThrust();
 		}
 		#endregion
 
@@ -206,7 +191,7 @@ namespace RocketOverhaul
 		/// </summary>
 		public new float GetTotalThrust()
 		{
-			return GetEngineThrust() + GetOxidizerContributions() + GetBoosterThrust();
+			return GetEngineThrust() * GetAverageOxidizerEfficiency() + GetBoosterThrust();
 		}
 
 		/// <summary>
