@@ -70,8 +70,11 @@ namespace RocketOverhaul
 				BreakdownList list = rocketDetailsMass;
 				__instance.Get(out RocketThrustWidget rocketThrustWidget, nameof(rocketThrustWidget));
 				__instance.Get(out CommandModule currentCommandModule, nameof(currentCommandModule));
+				RocketStatsPatches.TryLog("before cast");
 				RocketStatsOverhaul stats = (RocketStatsOverhaul)currentCommandModule.rocketStats;
+				RocketStatsPatches.TryLog("after1 cast");
 				RocketEngineImproved engine = (RocketEngineImproved)stats.GetMainEngine();
+				RocketStatsPatches.TryLog("after2 cast");
 				list.SetTitle(StarmapScreenOverhaul.Caption.TotalEngineThrust);
 				list.ClearRows();
 

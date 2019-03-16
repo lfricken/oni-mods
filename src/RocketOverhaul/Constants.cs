@@ -12,24 +12,24 @@ namespace RocketOverhaul
 	/// </summary>
 	public class DistanceEquationScalars
 	{
-		public static readonly float Exhaust = 0.00146959f;
-		public static readonly int Exponent = 2;
-		public static readonly float Range = 133320.0f;
-		public static readonly float FuelPerXTick = 900f;
+		public const float Exhaust = 0.00146959f;
+		public const int Exponent = 2;
+		public const float Range = 133320.0f;
+		public const float FuelPerXTick = 900f;
 	}
 
 	public class ModulePenalties
 	{
-		public static readonly float ResearchPenalty = 2000f;
-		public static readonly float TouristPenalty = 8000f;
-		public static readonly float CargoPenalty = 30000f;
+		public const float ResearchPenalty = 2000f;
+		public const float TouristPenalty = 8000f;
+		public const float CargoPenalty = 30000f;
 	}
 
 	public class OxidizerEfficiency
 	{
-		public static readonly float Mixed = 1.2f;
-		public static readonly float Lox = 1.0f;
-		public static readonly float OxyRock = 0.8f;
+		public const float Mixed = 1.2f;
+		public const float Lox = 1.0f;
+		public const float OxyRock = 0.8f;
 	}
 
 	public partial class EngineBaseStats
@@ -50,7 +50,7 @@ namespace RocketOverhaul
 
 		public static string GetEffect(string element)
 		{
-			return "Burns " + UI.FormatAsLink(element, element.ToUpper()) + " to propel rockets for space exploration.";
+			return "Burns " + UI.FormatAsLink(element, element.ToUpper() + " (Liquid)") + " to propel rockets for space exploration.";
 		}
 	}
 
@@ -62,14 +62,14 @@ namespace RocketOverhaul
 		public static string DESC = EngineBaseStats.GetDescription(Element, ExhaustVelocity, MinFuel, MaxFuel);
 		public static string EFFECT = EngineBaseStats.GetEffect(Element);
 
-		public static readonly string TechGroup = "EnginesIII";
-		public static readonly string BuildTab = "Rocketry";
+		public const string TechGroup = "EnginesIII";
+		public const string BuildTab = "Rocketry";
 
-		public static readonly SimHashes FuelType = SimHashes.LiquidMethane;
-		public static readonly float ExhaustVelocity = 6127;
-		public static readonly float RangePenalty = 2380000;
-		public static readonly float MinFuel = 3200;
-		public static readonly float MaxFuel = 4000;
+		public const SimHashes FuelType = SimHashes.LiquidMethane;
+		public const float ExhaustVelocity = 6127;
+		public const float RangePenalty = 2380000;
+		public const float MinFuel = 3200;
+		public const float MaxFuel = 4000;
 	}
 
 	public partial class HydrogenEngineStats
@@ -80,13 +80,13 @@ namespace RocketOverhaul
 		public static string DESC = EngineBaseStats.GetDescription(Element, ExhaustVelocity, MinFuel, MaxFuel);
 		public static string EFFECT = EngineBaseStats.GetEffect(Element);
 
-		public static readonly string TechGroup = "EnginesIII";
-		public static readonly string BuildTab = "Rocketry";
+		public const string TechGroup = "EnginesIII";
+		public const string BuildTab = "Rocketry";
 
-		public static readonly float ExhaustVelocity = 4423;
-		public static readonly float RangePenalty = 1200000;
-		public static readonly float MinFuel = 2200;
-		public static readonly float MaxFuel = 2900;
+		public const float ExhaustVelocity = 4423;
+		public const float RangePenalty = 1200000;
+		public const float MinFuel = 2200;
+		public const float MaxFuel = 2900;
 	}
 
 	public class PetroleumEngineStats
@@ -97,13 +97,13 @@ namespace RocketOverhaul
 		public static string DESC = EngineBaseStats.GetDescription(Element, ExhaustVelocity, MinFuel, MaxFuel);
 		public static string EFFECT = EngineBaseStats.GetEffect(Element);
 
-		public static readonly string TechGroup = "EnginesII";
-		public static readonly string BuildTab = "Rocketry";
+		public const string TechGroup = "EnginesII";
+		public const string BuildTab = "Rocketry";
 
-		public static readonly float ExhaustVelocity = 2751;
-		public static readonly float RangePenalty = 435000;
-		public static readonly float MinFuel = 1200;
-		public static readonly float MaxFuel = 1700;
+		public const float ExhaustVelocity = 2751;
+		public const float RangePenalty = 435000;
+		public const float MinFuel = 1200;
+		public const float MaxFuel = 1700;
 	}
 
 	public class SteamEngineStats
@@ -115,14 +115,14 @@ namespace RocketOverhaul
 									+ $"Stores {StarmapScreenOverhaul.FormatDistance(MaxStorage, "", "kg")} of {UI.FormatAsLink(Element, Element.ToUpper())}. Can't utilize additional fuel tanks.";
 		public static string EFFECT = "Uses " + UI.FormatAsLink(Element, Element.ToUpper()) + " to propel rockets for space exploration.";
 
-		public static readonly string TechGroup = "BasicRocketry";
-		public static readonly string BuildTab = "Rocketry";
+		public const string TechGroup = "BasicRocketry";
+		public const string BuildTab = "Rocketry";
 
-		public static readonly float ExhaustVelocity = 2751;
-		public static readonly float RangePenalty = 435000;
-		public static readonly float MinFuel = 250;
-		public static readonly float MaxFuel = 500;
-		public static readonly float MaxStorage = 500;
+		public const float ExhaustVelocity = 2751;
+		public const float RangePenalty = 435000;
+		public const float MinFuel = 250;
+		public const float MaxFuel = 500;
+		public const float MaxStorage = 500;
 	}
 
 	public class SolidBoosterStats
@@ -138,11 +138,11 @@ namespace RocketOverhaul
 
 		public static string EFFECT = "Burns " + UI.FormatAsLink(Element1, Element1.ToUpper()) + " and " + UI.FormatAsLink(Element2, Element2.ToUpper()) + " to boost the range of a rocket.";
 
-		public static readonly string TechGroup = "EnginesI";
-		public static readonly string BuildTab = "Rocketry";
+		public const string TechGroup = "EnginesI";
+		public const string BuildTab = "Rocketry";
 
-		public static readonly float MaxFuelStorage = 400;
-		public static readonly float MaxOxyStorage = 400;
+		public const float MaxFuelStorage = 400;
+		public const float MaxOxyStorage = 400;
 
 		/// <summary>
 		/// Range contributions per booster.

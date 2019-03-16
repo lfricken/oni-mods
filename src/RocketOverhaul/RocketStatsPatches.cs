@@ -11,9 +11,11 @@ namespace RocketOverhaul
 	/// </summary>
 	public class RocketStatsPatches
 	{
+		public static bool log = false;
 		public static void TryLog(string message)
 		{
-			Debug.Log(message);
+			if (log)
+				Debug.Log(message);
 		}
 
 		[HarmonyPatch(typeof(RocketStats))]

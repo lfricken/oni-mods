@@ -2,11 +2,7 @@
 /// Created by lfricken https://github.com/lfricken/oni-mods
 /// </summary>
 
-using Database;
 using Harmony;
-using System;
-using System.Collections.Generic;
-using TUNING;
 using UnityEngine;
 
 namespace RocketOverhaul
@@ -20,6 +16,7 @@ namespace RocketOverhaul
 			static bool Prefix() { return true; } // skip original method
 			static void Postfix(GameObject go)
 			{
+				TryDebug.Log(nameof(DoPostConfigureComplete), " called");
 				RocketEngineImproved rocketEngine = go.AddOrGet<RocketEngineImproved>();
 				rocketEngine.ExhaustVelocity = HydrogenEngineStats.ExhaustVelocity;
 				rocketEngine.RangePenalty = HydrogenEngineStats.RangePenalty;
@@ -32,7 +29,6 @@ namespace RocketOverhaul
 				rocketEngine.exhaustTemperature = 2000f;
 				EntityTemplates.ExtendBuildingToRocketModule(go);
 				go.AddOrGet<RocketModule>().SetBGKAnim(Assets.GetAnim("rocket_hydrogen_engine_bg_kanim"));
-
 			}
 		}
 
@@ -40,7 +36,7 @@ namespace RocketOverhaul
 		[HarmonyPatch(nameof(GeneratedBuildings.LoadGeneratedBuildings))]
 		public static class LoadGeneratedBuildings
 		{
-			public static void Postfix()
+			static void Postfix()
 			{
 				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{HydrogenEngineConfig.ID.ToUpperInvariant()}.NAME", HydrogenEngineStats.NAME);
 				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{HydrogenEngineConfig.ID.ToUpperInvariant()}.DESC", HydrogenEngineStats.DESC);

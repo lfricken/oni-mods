@@ -191,7 +191,7 @@ namespace RocketOverhaul
 		/// </summary>
 		public new float GetTotalThrust()
 		{
-			return GetEngineThrust() * GetAverageOxidizerEfficiency() + GetBoosterThrust();
+			return GetEngineThrust() * GetOxyMultiplier() + GetBoosterThrust();
 		}
 
 		/// <summary>
@@ -203,12 +203,28 @@ namespace RocketOverhaul
 			return GetEngineContribution(fuel);
 		}
 
+
+		public new RocketEngineImproved GetMainEngine()
+		{
+			RocketEngineImproved rocketEngine = null;
+			foreach (GameObject gameObject in BuildingNetworkEnumerable())
+			{
+				rocketEngine = gameObject.GetComponent<RocketEngineImproved>();
+				if (rocketEngine != null)
+				{
+					if (rocketEngine.mainEngine)
+						break;
+				}
+			}
+			return rocketEngine;
+		}
+
 		public float GetEngineContribution(float fuel)
 		{
 			RocketEngineImproved engine = GetMainEngine() as RocketEngineImproved;
 			if (engine == null)
 			{
-				Debug.Log("A rocket engine does not implement the RocketOverhaul.RocketEngineImproved.");
+				Debug.Log($"A rocket engine does not implement the {nameof(RocketEngineImproved)}.");
 				return 0;
 			}
 
