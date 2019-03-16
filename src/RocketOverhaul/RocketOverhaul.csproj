@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Debug.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="PetroleumEngine.cs" />
     <Compile Include="HydrogenEngine.cs" />
     <Compile Include="MethaneEngine.cs" />
     <Compile Include="RocketEngineImproved.cs" />
