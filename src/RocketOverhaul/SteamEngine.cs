@@ -10,14 +10,19 @@ namespace RocketOverhaul
 {
 	public class SteamEngine
 	{
-		[HarmonyPatch(typeof(KeroseneEngineConfig))]
-		[HarmonyPatch(nameof(KeroseneEngineConfig.DoPostConfigureComplete))]
+		[HarmonyPatch(typeof(SteamEngineConfig))]
+		[HarmonyPatch(nameof(SteamEngineConfig.DoPostConfigureComplete))]
 		public static class DoPostConfigureComplete
 		{
 			static bool Prefix() { return true; } // skip original method
 			static void Postfix(GameObject go)
 			{
-				RocketEngine rocketEngine = go.AddOrGet<RocketEngine>();
+				RocketEngineImproved rocketEngine = go.AddOrGet<RocketEngineImproved>();
+				rocketEngine.ExhaustVelocity = SteamEngineStats.ExhaustVelocity;
+				rocketEngine.RangePenalty = SteamEngineStats.RangePenalty;
+				rocketEngine.MinFuel = SteamEngineStats.MinFuel;
+				rocketEngine.MaxFuel = SteamEngineStats.MaxFuel;
+
 				rocketEngine.fuelTag = ElementLoader.FindElementByHash(SimHashes.Steam).tag;
 				rocketEngine.explosionEffectHash = SpawnFXHashes.MeteorImpactDust;
 				rocketEngine.requireOxidizer = false;
@@ -26,18 +31,18 @@ namespace RocketOverhaul
 				FuelTank fuelTank = go.AddOrGet<FuelTank>();
 				fuelTank.capacityKg = fuelTank.minimumLaunchMass;
 				fuelTank.FuelType = ElementLoader.FindElementByHash(SimHashes.Steam).tag;
-				var list = new List<Storage.StoredItemModifier>()
-				{
-					Storage.StoredItemModifier.Hide,
-					Storage.StoredItemModifier.Seal,
-					Storage.StoredItemModifier.Insulate
-				};
+
+				var list = new List<Storage.StoredItemModifier>();
+				list.Add(Storage.StoredItemModifier.Hide);
+				list.Add(Storage.StoredItemModifier.Seal);
+				list.Add(Storage.StoredItemModifier.Insulate);
 				fuelTank.SetDefaultStoredItemModifiers(list);
+
 				ConduitConsumer conduitConsumer = go.AddOrGet<ConduitConsumer>();
 				conduitConsumer.conduitType = ConduitType.Gas;
 				conduitConsumer.consumptionRate = 10f;
 				conduitConsumer.capacityTag = fuelTank.FuelType;
-				conduitConsumer.capacityKG = fuelTank.capacityKg;
+				conduitConsumer.capacityKG = SteamEngineStats.MaxStorage;
 				conduitConsumer.forceAlwaysSatisfied = true;
 				conduitConsumer.wrongElementResult = ConduitConsumer.WrongElementResult.Dump;
 				go.AddOrGet<RocketModule>().SetBGKAnim(Assets.GetAnim("rocket_steam_engine_bg_kanim"));
@@ -51,9 +56,9 @@ namespace RocketOverhaul
 		{
 			static void Postfix()
 			{
-				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{KeroseneEngineConfig.ID.ToUpperInvariant()}.NAME", PetroleumEngineStats.NAME);
-				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{KeroseneEngineConfig.ID.ToUpperInvariant()}.DESC", PetroleumEngineStats.DESC);
-				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{KeroseneEngineConfig.ID.ToUpperInvariant()}.EFFECT", PetroleumEngineStats.EFFECT);
+				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{SteamEngineConfig.ID.ToUpperInvariant()}.NAME", SteamEngineStats.NAME);
+				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{SteamEngineConfig.ID.ToUpperInvariant()}.DESC", SteamEngineStats.DESC);
+				Strings.Add($"STRINGS.BUILDINGS.PREFABS.{SteamEngineConfig.ID.ToUpperInvariant()}.EFFECT", SteamEngineStats.EFFECT);
 			}
 		}
 	}

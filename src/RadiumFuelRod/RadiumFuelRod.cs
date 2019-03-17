@@ -87,7 +87,7 @@ namespace RadiumFuelRod
 				hitpoints: BUILDINGS.HITPOINTS.TIER4,
 				construction_time: BUILDINGS.CONSTRUCTION_TIME_SECONDS.TIER6,
 				construction_mass: BUILDINGS.CONSTRUCTION_MASS_KG.TIER7,
-				construction_materials: new string[1] { "Radium" },
+				construction_materials: new string[1] { Radium.Name },
 				melting_point: Radium.MeltingPoint,
 				build_location_rule: BuildLocationRule.Anywhere,
 				decor: BUILDINGS.DECOR.PENALTY.TIER4,

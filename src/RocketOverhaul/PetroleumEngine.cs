@@ -22,7 +22,7 @@ namespace RocketOverhaul
 				rocketEngine.MinFuel = PetroleumEngineStats.MinFuel;
 				rocketEngine.MaxFuel = PetroleumEngineStats.MaxFuel;
 
-				rocketEngine.fuelTag = ElementLoader.FindElementByHash(SimHashes.LiquidHydrogen).tag;
+				rocketEngine.fuelTag = ElementLoader.FindElementByHash(SimHashes.Petroleum).tag;
 				rocketEngine.explosionEffectHash = SpawnFXHashes.MeteorImpactDust;
 				EntityTemplates.ExtendBuildingToRocketModule(go);
 				go.AddOrGet<RocketModule>().SetBGKAnim(Assets.GetAnim("rocket_petroleum_engine_bg_kanim"));

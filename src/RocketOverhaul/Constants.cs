@@ -34,9 +34,9 @@ namespace RocketOverhaul
 
 	public partial class EngineBaseStats
 	{
-		public static string GetName(string element)
+		public static string GetElementLinkEngine(string element)
 		{
-			return UI.FormatAsLink(element + " Engine", element + "Engine");
+			return UI.FormatAsLink(element + " Engine", element + "ENGINE");
 		}
 
 		public static string GetDescription(string element, float exhaustVelocity, float minFuel, float maxFuel)
@@ -45,22 +45,30 @@ namespace RocketOverhaul
 			string lowFuel = StarmapScreenOverhaul.FormatDistance(minFuel, "", "kg");
 			string highFuel = StarmapScreenOverhaul.FormatDistance(maxFuel, "", "kg");
 
-			return $"{UI.FormatAsLink(element, element.ToUpper())} engines have an exhaust velocity of {velocity} and need {lowFuel} to {highFuel} of fuel to operate efficiently.";
+			return $"{GetElementLink(element)} engines have an exhaust velocity of {velocity} and need {lowFuel} to {highFuel} of fuel to operate efficiently.";
+		}
+
+		public static string GetElementLink(string element)
+		{
+			string additional = "";
+			if (element == "Hydrogen")
+				additional = "LIQUID";
+			return UI.FormatAsLink(element, additional + element.ToUpper());
 		}
 
 		public static string GetEffect(string element)
 		{
-			return "Burns " + UI.FormatAsLink(element, element.ToUpper() + " (Liquid)") + " to propel rockets for space exploration.";
+			return $"Burns {GetElementLink(element)} to propel rockets for space exploration.";
 		}
 	}
 
 	public partial class MethaneEngineStats
 	{
-		public static string Element = "Methane";
+		public static readonly string Element = "Methane";
 
-		public static string NAME = EngineBaseStats.GetName(Element);
-		public static string DESC = EngineBaseStats.GetDescription(Element, ExhaustVelocity, MinFuel, MaxFuel);
-		public static string EFFECT = EngineBaseStats.GetEffect(Element);
+		public static readonly string NAME = EngineBaseStats.GetElementLinkEngine(Element);
+		public static readonly string DESC = EngineBaseStats.GetDescription(Element, ExhaustVelocity, MinFuel, MaxFuel);
+		public static readonly string EFFECT = EngineBaseStats.GetEffect(Element);
 
 		public const string TechGroup = "EnginesIII";
 		public const string BuildTab = "Rocketry";
@@ -74,11 +82,11 @@ namespace RocketOverhaul
 
 	public partial class HydrogenEngineStats
 	{
-		public static string Element = "Hydrogen";
+		public static readonly string Element = "Hydrogen";
 
-		public static string NAME = EngineBaseStats.GetName(Element);
-		public static string DESC = EngineBaseStats.GetDescription(Element, ExhaustVelocity, MinFuel, MaxFuel);
-		public static string EFFECT = EngineBaseStats.GetEffect(Element);
+		public static readonly string NAME = EngineBaseStats.GetElementLinkEngine(Element);
+		public static readonly string DESC = EngineBaseStats.GetDescription(Element, ExhaustVelocity, MinFuel, MaxFuel);
+		public static readonly string EFFECT = EngineBaseStats.GetEffect(Element);
 
 		public const string TechGroup = "EnginesIII";
 		public const string BuildTab = "Rocketry";
@@ -91,11 +99,11 @@ namespace RocketOverhaul
 
 	public class PetroleumEngineStats
 	{
-		public static string Element = "Petroleum";
+		public static readonly string Element = "Petroleum";
 
-		public static string NAME = EngineBaseStats.GetName(Element);
-		public static string DESC = EngineBaseStats.GetDescription(Element, ExhaustVelocity, MinFuel, MaxFuel);
-		public static string EFFECT = EngineBaseStats.GetEffect(Element);
+		public static readonly string NAME = EngineBaseStats.GetElementLinkEngine(Element);
+		public static readonly string DESC = EngineBaseStats.GetDescription(Element, ExhaustVelocity, MinFuel, MaxFuel);
+		public static readonly string EFFECT = EngineBaseStats.GetEffect(Element);
 
 		public const string TechGroup = "EnginesII";
 		public const string BuildTab = "Rocketry";
@@ -108,12 +116,12 @@ namespace RocketOverhaul
 
 	public class SteamEngineStats
 	{
-		public static string Element = "Steam";
+		public static readonly string Element = "Steam";
 
-		public static string NAME = EngineBaseStats.GetName(Element);
-		public static string DESC = EngineBaseStats.GetDescription(Element, ExhaustVelocity, MinFuel, MaxFuel)
-									+ $"Stores {StarmapScreenOverhaul.FormatDistance(MaxStorage, "", "kg")} of {UI.FormatAsLink(Element, Element.ToUpper())}. Can't utilize additional fuel tanks.";
-		public static string EFFECT = "Uses " + UI.FormatAsLink(Element, Element.ToUpper()) + " to propel rockets for space exploration.";
+		public static readonly string NAME = EngineBaseStats.GetElementLinkEngine(Element);
+		public static readonly string DESC = EngineBaseStats.GetDescription(Element, ExhaustVelocity, MinFuel, MaxFuel)
+									+ $"Stores {StarmapScreenOverhaul.FormatDistance(MaxStorage, "", "kg")} of {EngineBaseStats.GetElementLink(Element)}. Can't utilize additional fuel tanks.";
+		public static readonly string EFFECT = $"Uses {EngineBaseStats.GetElementLink(Element)} to propel rockets for space exploration.";
 
 		public const string TechGroup = "BasicRocketry";
 		public const string BuildTab = "Rocketry";
@@ -127,16 +135,16 @@ namespace RocketOverhaul
 
 	public class SolidBoosterStats
 	{
-		private static string Element1 = "Iron";
-		private static string Element2 = "Oxylite";
+		private static readonly string Element1 = "Iron";
+		private static readonly string Element2 = "Oxylite";
 
-		public static string NAME = UI.FormatAsLink("Solid Booster", nameof(SolidBooster));
-		public static string DESC = $"Boosters increase the range of a rocket:\n" +
+		public static readonly string NAME = UI.FormatAsLink("Solid Booster", nameof(SolidBooster).ToUpper());
+		public static readonly string DESC = $"Boosters increase the range of a rocket:\n" +
 									$"First:  {StarmapScreenOverhaul.FormatDistance(Ranges[0])}\n" +
 									$"Second: {StarmapScreenOverhaul.FormatDistance(Ranges[1])}\n" +
 									$"Third:  {StarmapScreenOverhaul.FormatDistance(Ranges[2])}\n";
 
-		public static string EFFECT = "Burns " + UI.FormatAsLink(Element1, Element1.ToUpper()) + " and " + UI.FormatAsLink(Element2, Element2.ToUpper()) + " to boost the range of a rocket.";
+		public static readonly string EFFECT = $"Burns {EngineBaseStats.GetElementLink(Element1)} and {EngineBaseStats.GetElementLink(Element2)} to boost the range of a rocket.";
 
 		public const string TechGroup = "EnginesI";
 		public const string BuildTab = "Rocketry";
