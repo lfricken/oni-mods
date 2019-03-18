@@ -39,14 +39,6 @@ namespace RocketOverhaul
 				yield return gameObject;
 			}
 		}
-
-		/// <summary>
-		/// Given 100 returns 1.0
-		/// </summary>
-		public static float PercentageToFraction(float percentage)
-		{
-			return percentage / 100f;
-		}
 		#endregion
 
 		#region Oxidizer
@@ -57,11 +49,6 @@ namespace RocketOverhaul
 		public new float GetAverageOxidizerEfficiency()
 		{
 			return 100f * GetEfficiency();
-		}
-
-		public float GetOxyMultiplier()
-		{
-			return PercentageToFraction(GetAverageOxidizerEfficiency());
 		}
 
 		public float GetOxidizerAmounts(out float oxyrock, out float lox, out float mixed)
@@ -113,8 +100,14 @@ namespace RocketOverhaul
 		{
 			float totalOxidizer = GetOxidizerAmounts(out float oxyrockAmount, out float loxAmount, out float mixedAmount);
 
-			float sum = OxidizerEfficiency.OxyRock * oxyrockAmount + OxidizerEfficiency.Lox * loxAmount + OxidizerEfficiency.Mixed * mixedAmount;
-			return sum / totalOxidizer;
+			var value = 1f;
+			if (totalOxidizer > 0)
+			{
+				float sum = OxidizerEfficiency.OxyRock * oxyrockAmount + OxidizerEfficiency.Lox * loxAmount + OxidizerEfficiency.Mixed * mixedAmount;
+				value = sum / totalOxidizer;
+			}
+
+			return value;
 		}
 
 		public float GetEfficiencyContribution()
@@ -191,7 +184,7 @@ namespace RocketOverhaul
 		/// </summary>
 		public new float GetTotalThrust()
 		{
-			return GetEngineThrust() * GetOxyMultiplier() + GetBoosterThrust();
+			return GetEngineThrust() * GetEfficiency() + GetBoosterThrust();
 		}
 
 		/// <summary>

@@ -51,7 +51,7 @@ namespace RocketOverhaul
 		public static string GetElementLink(string element)
 		{
 			string additional = "";
-			if (element == "Hydrogen")
+			if (element == MethaneEngineStats.Element || element == HydrogenEngineStats.Element)
 				additional = "LIQUID";
 			return UI.FormatAsLink(element, additional + element.ToUpper());
 		}

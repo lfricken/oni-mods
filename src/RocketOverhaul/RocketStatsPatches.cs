@@ -11,7 +11,7 @@ namespace RocketOverhaul
 	/// </summary>
 	public class RocketStatsPatches
 	{
-		public static bool log = false;
+		public static bool log = true;
 		public static void TryLog(string message)
 		{
 			if (log)
