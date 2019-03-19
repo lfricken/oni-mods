@@ -8,7 +8,7 @@
 4. [Cheaper Insulation](/Mods/CheaperInsulator.md)
 
 ### Installation
-1. [Click here and install ONI-ModLoader](https://github.com/javisar/ONI-Modloader#quick-start).
+1. Install [ONI-ModLoader](https://github.com/javisar/ONI-Modloader#quick-start).
 2. [Click here](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/lfricken/oni-mods/tree/master/Mods) to download all my mods via DownGit.
 3. Move the _unzipped_ Mods folder to the game's root directory which is, by default for Steam: 
     * C:\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded
