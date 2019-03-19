@@ -9,4 +9,4 @@
 ![rocket efficiency graph](/../../images/rocket_distance.png "The green line is the rocket with your mom on it.")
 
 ### Rocket Overhaul Mod Distance: rocket_distance_overhaul.py
-![new rocket efficiency graph](/../../tree/master/images/new_equation.png "Just kidding about the rocket with your mom on it. The rocket was never built due to budget concerns.")
+![new rocket efficiency graph](/images/new_equation.png "Just kidding about the rocket with your mom on it. The rocket was never built due to budget concerns.")
