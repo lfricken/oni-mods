@@ -2,9 +2,10 @@
 ## lfricken's mods for Oxygen Not Included
 
 ### Mod Details
-1. [Geothermal Steam Pump](/Mods/BuildableSteamGeyser.md)
-2. [Cheaper Insulation](/Mods/CheaperInsulator.md)
+1. [Rocket Overhaul](/Mods/RocketOverhaul.md)
+2. [Geothermal Steam Pump](/Mods/BuildableSteamGeyser.md)
 3. [Nuclear Fuel Rod](/Mods/RadiumFuelRod.md)
+4. [Cheaper Insulation](/Mods/CheaperInsulator.md)
 
 ### Installation
 1. Install [ONI-ModLoader](https://github.com/javisar/ONI-Modloader#installation).
