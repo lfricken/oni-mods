@@ -1,7 +1,7 @@
 
 ## lfricken's mods for Oxygen Not Included
 
-### Mod Details
+### Mods
 1. [Rocket Overhaul](/Mods/RocketOverhaul.md)
 2. [Geothermal Steam Pump](/Mods/BuildableSteamGeyser.md)
 3. [Nuclear Fuel Rod](/Mods/RadiumFuelRod.md)
