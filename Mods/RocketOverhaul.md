@@ -23,6 +23,6 @@ Notice the _best_ rocket depends on how far you plan to go.
 
 ![new rocket efficiency graph](/images/new_equation.png "Just kidding about the rocket with your mom on it. That rocket was never built due to budget concerns.")
 
-## New Starscreen
+## New Starscreen (new vs old)
 ![new_starscreen](/images/compare_screen.png "No more jokes. Download my mod.")
 
