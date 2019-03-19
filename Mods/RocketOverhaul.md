@@ -16,7 +16,7 @@ RocketOverhaul.dll
 ## Old Equation
 Notice a [Hydrogen Engine](https://oxygennotincluded.gamepedia.com/Hydrogen_Engine) is the best rocket no matter what?
 
-![rocket efficiency graph](/images/rocket_distance.png "The red line is the rocket with your mom on it.")
+![rocket efficiency graph](/images/rocket_distance.png "The green line is the rocket with your mom on it.")
 
 ## New Equation
 Notice the _best_ rocket depends on how much you want to invest.
