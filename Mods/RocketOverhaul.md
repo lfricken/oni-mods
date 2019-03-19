@@ -19,7 +19,7 @@ Notice a [Hydrogen Engine](https://oxygennotincluded.gamepedia.com/Hydrogen_Engi
 ![rocket efficiency graph](/images/rocket_distance.png "The red line is the rocket with your mom on it.")
 
 ## New Equation
-Notice the _best_ rocket depends on how far you plan to go.
+Notice the _best_ rocket depends on how much you want to invest.
 
 ![new rocket efficiency graph](/images/new_equation.png "Just kidding about the rocket with your mom on it. That rocket was never built due to budget concerns.")
 
