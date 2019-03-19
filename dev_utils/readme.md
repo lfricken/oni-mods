@@ -6,7 +6,7 @@
 * Equations obtained from Assembly-CSharp.RocketStats.GetRocketMaxDistance 
 * Check out [oni-assistant](https://oni-assistant.com/). It's a web app version of this!
 
-![rocket efficiency graph](/../images/rocket_distance.png "The green line is the rocket with your mom on it.")
+![rocket efficiency graph](/../../images/rocket_distance.png "The green line is the rocket with your mom on it.")
 
 ### Rocket Overhaul Mod Distance: rocket_distance_overhaul.py
 * [Get the mod here]().
