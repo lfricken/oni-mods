@@ -6,11 +6,7 @@
 * Equations obtained from Assembly-CSharp.RocketStats.GetRocketMaxDistance 
 * Check out [oni-assistant](https://oni-assistant.com/). It's a web app version of this!
 
-![rocket efficiency graph](/../images/rocket_distance.png "The green line is the rocket with your mom on it.")
+![rocket efficiency graph](/images/rocket_distance.png "The green line is the rocket with your mom on it.")
 
 ### Rocket Overhaul Mod Distance: rocket_distance_overhaul.py
-* [Get the mod here]().
-* Notice the _best_ engine isn't always best?
-* Boosters are always useful!
-
-![new rocket efficiency graph](/../images/new_equation.png "Just kidding about the rocket with your mom on it. The rocket was never built due to budget concerns.")
+![new rocket efficiency graph](/images/new_equation.png "Just kidding about the rocket with your mom on it. The rocket was never built due to budget concerns.")
