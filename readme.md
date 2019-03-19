@@ -19,7 +19,7 @@
             * AnotherMod.dll
 5. To uninstall a mod, just remove it's dll file from your Mods folder.
 
-Note that you can optionally put the dll's in subdirectories. As long as the dll files are somewhere inside Mods.
+Note that you can optionally put the dll's in subdirectories. As long as the dll files are somewhere under the Mods directory.
 
 ### For more mods:
 * [Cairath's repo](https://github.com/Cairath/ONI-Mods)
