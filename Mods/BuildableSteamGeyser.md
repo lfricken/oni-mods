@@ -7,6 +7,7 @@
 * This provides a large amount of water if you can deal with the heat!
 * Does not require an operator.
 * The catch is you can't turn it off.
+* You probably need to be in Space Tech to handle the heat.
 
 
 BuildableSteamGeyser.dll
