@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace RocketOverhaul
 {
-	public class PetroleumEngine
+	public class PetroleumEngineConfigPatches
 	{
 		[HarmonyPatch(typeof(KeroseneEngineConfig))]
 		[HarmonyPatch(nameof(KeroseneEngineConfig.DoPostConfigureComplete))]

@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace RocketOverhaul
 {
-	public class SteamEngine
+	public class SteamEngineConfigPatches
 	{
 		[HarmonyPatch(typeof(SteamEngineConfig))]
 		[HarmonyPatch(nameof(SteamEngineConfig.DoPostConfigureComplete))]
