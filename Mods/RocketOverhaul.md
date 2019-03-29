@@ -12,7 +12,7 @@ The normal ONI rocket equation means that the rocket with the best fuel is alway
 * Gives a reason to use different engines under different circumstances.
 * Mixing [Oxylite](https://oxygennotincluded.gamepedia.com/Oxylite) _and_ [Liquid Oxygen](https://oxygennotincluded.gamepedia.com/Liquid_Oxygen) equally gives the largest boost to efficiency, providing a reason to make both.
 * Makes it possible for the best rockets to return more mass via [Cargo Bays](https://oxygennotincluded.gamepedia.com/Cargo_Bay) then it costs to launch it.
-* Makes Boosters useful instead of [useless](https://forums.kleientertainment.com/forums/topic/97074-solid-booster-useless-solved/). (Past a certain rocket size, a full Booster actually reduces your range)
+* Makes Boosters useful instead of [useless](https://forums.kleientertainment.com/forums/topic/97074-solid-booster-useless-solved/).  (For most rockets a full Booster actually reduces range)
 
 
 RocketOverhaul.dll
