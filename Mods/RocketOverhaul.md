@@ -4,7 +4,7 @@
 ## About
 The normal ONI rocket equation means that the rocket with the best fuel is always the rocket you should use, and that [Oxylite](https://oxygennotincluded.gamepedia.com/Oxylite) is useless after you can manufacture [Liquid Oxygen](https://oxygennotincluded.gamepedia.com/Liquid_Oxygen). This mod:
 * Adds a new Methane Engine which is even more powerful than the [Hydrogen Engine](https://oxygennotincluded.gamepedia.com/Hydrogen_Engine).
-* New equations mean you build huge rockets with great return on investment.
+* New equations mean you can build huge rockets with great return on investment.
 * Makes Boosters and Module range boosts and penalties linear, so the calculation is easier to understand.
 * The first Booster provides +30,000km, then +20,000km, +10,000km, and then none.
 * Cargo Bay: -30,000km
