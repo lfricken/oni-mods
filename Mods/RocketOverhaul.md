@@ -17,6 +17,14 @@ The normal ONI rocket equation means that the rocket with the best fuel is alway
 
 RocketOverhaul.dll
 
+
+## Notes
+Technically, this is less realistic than the games default equations, but that's ok. If you want a super realistic game, go play real life, (or KSP). The purpose of some games is to provide more [[interesting, fun, achievable, varied]] challenges than you can find in real life. Sometimes, in order to achieve that you need to modify the fundamental equations of reality, in this case, how are rockets propelled. For example, KSP shrinks the size of planets by 10x!
+
+This new equation is unrealistic because it mostly ignores [Tsiolkovsky's Rocket Equation](https://en.wikipedia.org/wiki/Tsiolkovsky_rocket_equation) and instead opts for a combination of linear and quadratic equations to compute rocket distance. You can think of the number of intersections between lines in the range graphs as points where one strategy starts becoming better than another. Examining both graphs, its easy to see that the default equation has no intersection points. The new equation has many.
+
+You might argue that my plots don't take into account the relative cost of manufacturing the fuel, which is true. But that is very hard to calculate, and from playing the game myself, once the infrastructure was up and running, the costs were relatively low.
+
 ## Old Equation
 * Notice a [Hydrogen Engine](https://oxygennotincluded.gamepedia.com/Hydrogen_Engine) is the best rocket no matter what?
 
