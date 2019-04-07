@@ -126,8 +126,8 @@ namespace RocketOverhaul
 		public const string TechGroup = "BasicRocketry";
 		public const string BuildTab = "Rocketry";
 
-		public const float ExhaustVelocity = 2751;
-		public const float RangePenalty = 435000;
+		public const float ExhaustVelocity = 765;
+		public const float RangePenalty = 20000;
 		public const float MinFuel = 250;
 		public const float MaxFuel = 500;
 		public const float MaxStorage = 500;

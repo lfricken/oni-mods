@@ -22,6 +22,7 @@ namespace RocketOverhaul
 				rocketEngine.RangePenalty = SteamEngineStats.RangePenalty;
 				rocketEngine.MinFuel = SteamEngineStats.MinFuel;
 				rocketEngine.MaxFuel = SteamEngineStats.MaxFuel;
+				rocketEngine.OnlyFuel = true;
 
 				rocketEngine.fuelTag = ElementLoader.FindElementByHash(SimHashes.Steam).tag;
 				rocketEngine.explosionEffectHash = SpawnFXHashes.MeteorImpactDust;
@@ -29,7 +30,7 @@ namespace RocketOverhaul
 				rocketEngine.exhaustElement = SimHashes.Steam;
 				rocketEngine.exhaustTemperature = ElementLoader.FindElementByHash(SimHashes.Steam).lowTemp + 50f;
 				FuelTank fuelTank = go.AddOrGet<FuelTank>();
-				fuelTank.capacityKg = fuelTank.minimumLaunchMass;
+				fuelTank.capacityKg = SteamEngineStats.MaxStorage;
 				fuelTank.FuelType = ElementLoader.FindElementByHash(SimHashes.Steam).tag;
 
 				var list = new List<Storage.StoredItemModifier>();
@@ -47,6 +48,23 @@ namespace RocketOverhaul
 				conduitConsumer.wrongElementResult = ConduitConsumer.WrongElementResult.Dump;
 				go.AddOrGet<RocketModule>().SetBGKAnim(Assets.GetAnim("rocket_steam_engine_bg_kanim"));
 				EntityTemplates.ExtendBuildingToRocketModule(go);
+			}
+		}
+
+		[HarmonyPatch(typeof(FuelTank))]
+		[HarmonyPatch(nameof(FuelTank.MaxCapacity), MethodType.Getter)]
+		public static class FuelTank_MaxCapacity
+		{
+			static void Postfix(FuelTank __instance, ref float __result)
+			{
+				if (__instance.FuelType == ElementLoader.FindElementByHash(SimHashes.Steam).tag)
+				{
+					__result = SteamEngineStats.MaxStorage;
+				}
+				else
+				{
+					__result = 900;
+				}
 			}
 		}
 

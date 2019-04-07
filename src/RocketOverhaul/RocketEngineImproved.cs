@@ -31,5 +31,10 @@ namespace RocketOverhaul
 		/// 
 		/// </summary>
 		public float MaxFuel;
+
+		/// <summary>
+		/// True if this engine only uses fuel.
+		/// </summary>
+		public bool OnlyFuel;
 	}
 }

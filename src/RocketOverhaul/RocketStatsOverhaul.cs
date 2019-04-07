@@ -220,6 +220,10 @@ namespace RocketOverhaul
 				Debug.Log($"A rocket engine does not implement the {nameof(RocketEngineImproved)}.");
 				return 0;
 			}
+			if (engine.OnlyFuel)
+			{
+				fuel = GetTotalFuel(false);
+			}
 
 			fuel /= DistanceEquationScalars.FuelPerXTick;
 			float exponentPenalty = -GetFuelPenalty(fuel);
