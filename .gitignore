@@ -3,9 +3,7 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-/lib/*.dll
-/lib/*.xml
-/lib/*.exe
+/lib/*
 
 
 
