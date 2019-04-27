@@ -21,9 +21,11 @@ namespace RadiumFuelRod
 			temps.Melting = melting;
 			temps.Boiling = boiling;
 			temps.SpecificHeatCapacity = specificHeatCapacity;
+
+			ApplyChanges();
 		}
 
-		public void ApplyChanges()
+		private void ApplyChanges()
 		{
 			Element element;
 

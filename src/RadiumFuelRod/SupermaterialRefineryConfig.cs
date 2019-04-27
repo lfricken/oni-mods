@@ -13,7 +13,7 @@ namespace RadiumFuelRod
 	/// </summary>
 	public class SupermaterialRefineryConfigPatches
 	{
-		public const string ID = "SupermaterialRefinery";
+		public const string Id = SupermaterialRefineryConfig.ID;
 
 		[HarmonyPatch(typeof(SupermaterialRefineryConfig))]
 		[HarmonyPatch(nameof(SupermaterialRefineryConfig.ConfigureBuildingTemplate))]
@@ -21,7 +21,6 @@ namespace RadiumFuelRod
 		{
 			static void Postfix(GameObject go, Tag prefab_tag)
 			{
-				// add recipe
 				AddRadium();
 			}
 		}
@@ -40,14 +39,14 @@ namespace RadiumFuelRod
 				new ComplexRecipe.RecipeElement(SimHashes.Radium.CreateTag(), Radium.Recipe.AmountProduced)
 			};
 
-			new ComplexRecipe(ComplexRecipeManager.MakeRecipeID("SupermaterialRefinery", ingredients, results), ingredients, results)
+			new ComplexRecipe(ComplexRecipeManager.MakeRecipeID(Id, ingredients, results), ingredients, results)
 			{
 				time = Radium.Recipe.Time,
 				description = Radium.Recipe.Description,
 				useResultAsDescription = true
 			}.fabricators = new List<Tag>()
 			{
-				TagManager.Create("SupermaterialRefinery")
+				TagManager.Create(Id)
 			};
 		}
 	}
