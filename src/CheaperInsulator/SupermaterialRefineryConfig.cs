@@ -21,11 +21,12 @@ namespace CheaperInsulator
 		{
 			static void Postfix(GameObject go, Tag prefab_tag)
 			{
-				Insulator();
+				RemoveInsulator();
+				AddInsulator();
 			}
 		}
 
-		public static void Insulator()
+		public static void AddInsulator()
 		{
 			// ratios
 			float amountProduced = 1000f;
@@ -48,9 +49,6 @@ namespace CheaperInsulator
 
 			// remove the original recipe
 			string recipeId = ComplexRecipeManager.MakeRecipeID(Id, inputs, results);
-			ComplexRecipe recipe = ComplexRecipeManager.Get().GetRecipe(recipeId);
-			if(recipe != null)
-				ComplexRecipeManager.Get().recipes.Remove(recipe);
 
 			// setup description, add recipe
 			new ComplexRecipe(recipeId, inputs, results)
@@ -62,6 +60,30 @@ namespace CheaperInsulator
 			{
 				TagManager.Create(Id)
 			};
+		}
+
+		public static void RemoveInsulator()
+		{
+			float num3 = 0.15f;
+			float num4 = 0.05f;
+			float num5 = 1f - num4 - num3;
+			ComplexRecipe.RecipeElement[] ingredients2 = new ComplexRecipe.RecipeElement[3]
+			{
+				new ComplexRecipe.RecipeElement(SimHashes.Isoresin.CreateTag(), 100f * num3),
+				new ComplexRecipe.RecipeElement(SimHashes.Katairite.CreateTag(), 100f * num5),
+				new ComplexRecipe.RecipeElement(BasicFabricConfig.ID.ToTag(), 100f * num4)
+			};
+			ComplexRecipe.RecipeElement[] results2 = new ComplexRecipe.RecipeElement[1]
+			{
+				new ComplexRecipe.RecipeElement(SimHashes.SuperInsulator.CreateTag(), 100f)
+			};
+
+			string recipeId = ComplexRecipeManager.MakeRecipeID(Id, ingredients2, results2);
+			ComplexRecipe recipe = ComplexRecipeManager.Get().GetRecipe(recipeId);
+			if (recipe != null)
+				ComplexRecipeManager.Get().recipes.Remove(recipe);
+			else
+				Debug.Log(nameof(ComplexRecipeManager) + " failed to add the new recipe.");
 		}
 	}
 }
