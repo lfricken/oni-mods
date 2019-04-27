@@ -12,10 +12,12 @@ namespace AdvancedRoboMiner
 
 		public partial class Range
 		{
-			public static readonly int x = 20;
-			public static readonly int y = 11;
+			public static readonly int width = 20;
+			public static readonly int height = 11;
 
-			public static readonly int xOffset = x / 2;
+			public static readonly int xOffset = (-width / 2) + 1;
+
+			public static readonly CellOffset VisionOffset = new CellOffset(0, 1);
 		}
 	}
 }
