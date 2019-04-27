@@ -52,13 +52,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Debug.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="SolidBooster.cs" />
-    <Compile Include="SteamEngine.cs" />
-    <Compile Include="PetroleumEngine.cs" />
-    <Compile Include="HydrogenEngine.cs" />
-    <Compile Include="MethaneEngine.cs" />
+    <Compile Include="Misc\Debug.cs" />
+    <Compile Include="Misc\GlobalSuppressions.cs" />
+    <Compile Include="Engines\SolidBooster.cs" />
+    <Compile Include="Engines\SteamEngine.cs" />
+    <Compile Include="Engines\PetroleumEngine.cs" />
+    <Compile Include="Engines\HydrogenEngine.cs" />
+    <Compile Include="Engines\MethaneEngine.cs" />
     <Compile Include="RocketEngineImproved.cs" />
     <Compile Include="CommandModule.cs" />
     <Compile Include="StarmapScreenOverhaul.cs" />
@@ -66,7 +66,7 @@
     <Compile Include="RocketStatsPatches.cs" />
     <Compile Include="RocketStatsOverhaul.cs" />
     <Compile Include="RocketOverhaul.cs" />
-    <Compile Include="Constants.cs" />
+    <Compile Include="Engines\EngineConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
