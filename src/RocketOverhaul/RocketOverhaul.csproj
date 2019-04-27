@@ -67,14 +67,12 @@
     <Compile Include="RocketStatsOverhaul.cs" />
     <Compile Include="RocketOverhaul.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="RocketOverhaul.md" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
