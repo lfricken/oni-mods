@@ -3,24 +3,24 @@
 /// </summary>
 
 using Harmony;
-using TUNING;
+using System;
 using UnityEngine;
 
 namespace AdvancedRoboMiner
 {
 	class AutoMinerConfigPatches
 	{
-		//[HarmonyPatch(typeof(AutoMinerConfig))]
-		//[HarmonyPatch(nameof(AutoMinerConfig.CreateBuildingDef))]
-		//public static class CreateBuildingDef
-		//{
-		//	static bool Prefix() { return false; } // skip original method
-		//	static void Postfix(ref BuildingDef __result)
-		//	{
-		//		__result.EnergyConsumptionWhenActive = AdvancedRoboMiner.EnergyConsumption;
-		//		__result.SelfHeatKilowattsWhenActive = AdvancedRoboMiner.HeatProduction;
-		//	}
-		//}
+		[HarmonyPatch(typeof(AutoMinerConfig))]
+		[HarmonyPatch(nameof(AutoMinerConfig.CreateBuildingDef))]
+		public static class CreateBuildingDef
+		{
+			static bool Prefix() { return false; }
+			static void Postfix(ref BuildingDef __result)
+			{
+				__result.EnergyConsumptionWhenActive = AdvancedRoboMiner.EnergyConsumption;
+				__result.SelfHeatKilowattsWhenActive = AdvancedRoboMiner.HeatProduction;
+			}
+		}
 
 		[HarmonyPatch(typeof(AutoMinerConfig))]
 		[HarmonyPatch(nameof(AutoMinerConfig.DoPostConfigureComplete))]
@@ -31,6 +31,7 @@ namespace AdvancedRoboMiner
 			{
 				GeneratedBuildings.RegisterLogicPorts(go, LogicOperationalController.INPUT_PORTS_0_0);
 				go.AddOrGet<LogicOperationalController>();
+
 				AutoMiner autoMiner = go.AddOrGet<AutoMiner>();
 				autoMiner.width = AdvancedRoboMiner.Range.width;
 				autoMiner.height = AdvancedRoboMiner.Range.height;
@@ -62,6 +63,14 @@ namespace AdvancedRoboMiner
 			choreRangeVisualizer.y = 0;
 			choreRangeVisualizer.vision_offset = AdvancedRoboMiner.Range.VisionOffset;
 			choreRangeVisualizer.movable = movable;
+			choreRangeVisualizer.blocking_tile_visible = false;
+
+			go.GetComponent<KPrefabID>().instantiateFn += (prefab =>
+			{
+				StationaryChoreRangeVisualizer component = prefab.GetComponent<StationaryChoreRangeVisualizer>();
+				Func<int, bool> callback = AutoMiner.DigBlockingCB;
+				component.blocking_cb = callback;
+			});
 		}
 	}
 }

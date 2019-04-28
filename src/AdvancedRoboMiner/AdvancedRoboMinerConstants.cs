@@ -7,7 +7,7 @@ namespace AdvancedRoboMiner
 	public partial class AdvancedRoboMiner
 	{
 		public static readonly byte MaxHardness = 220;
-		public static readonly float EnergyConsumption = 120f;
+		public static readonly float EnergyConsumption = 240f;
 		public static readonly float HeatProduction = 2;
 
 		public partial class Range
