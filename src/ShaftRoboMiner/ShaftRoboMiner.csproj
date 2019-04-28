@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3E4E13AB-86EB-4670-B1D4-89F2E7D279B8}</ProjectGuid>
+    <ProjectGuid>{6D0DA3AF-0C38-4237-AD2B-DA907BC8A8D6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AdvancedRoboMiner</RootNamespace>
+    <RootNamespace>ShaftRoboMiner</RootNamespace>
     <AssemblyName>$(ProjectName)</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -52,9 +52,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdvancedRoboMinerConstants.cs" />
-    <Compile Include="AutoMinerConfigPatches.cs" />
-    <Compile Include="AutoMinerPatches.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="ShaftAutoMiner.cs" />
+    <Compile Include="ShaftRoboMiner.cs" />
+    <Compile Include="ShaftRoboMinerConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

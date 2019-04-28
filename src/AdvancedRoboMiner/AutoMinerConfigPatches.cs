@@ -36,7 +36,7 @@ namespace AdvancedRoboMiner
 				autoMiner.width = AdvancedRoboMiner.Range.width;
 				autoMiner.height = AdvancedRoboMiner.Range.height;
 				autoMiner.x = AdvancedRoboMiner.Range.xOffset;
-				autoMiner.y = 0;
+				autoMiner.y = AdvancedRoboMiner.Range.yOffset;
 				autoMiner.vision_offset = AdvancedRoboMiner.Range.VisionOffset;
 
 				AddVisualizer(go, false);
@@ -60,7 +60,7 @@ namespace AdvancedRoboMiner
 			choreRangeVisualizer.width = AdvancedRoboMiner.Range.width;
 			choreRangeVisualizer.height = AdvancedRoboMiner.Range.height;
 			choreRangeVisualizer.x = AdvancedRoboMiner.Range.xOffset;
-			choreRangeVisualizer.y = 0;
+			choreRangeVisualizer.y = AdvancedRoboMiner.Range.yOffset;
 			choreRangeVisualizer.vision_offset = AdvancedRoboMiner.Range.VisionOffset;
 			choreRangeVisualizer.movable = movable;
 			choreRangeVisualizer.blocking_tile_visible = false;

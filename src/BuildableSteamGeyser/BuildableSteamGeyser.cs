@@ -117,7 +117,6 @@ namespace BuildableSteamGeyser
 
 		public void DefineEmitter(GameObject go)
 		{
-
 			float kelvinOffset = 273.15f;
 			var emitter = go.AddComponent<ElementEmitter>();
 			emitter.emitRange = 2;

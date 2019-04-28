@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketOverhaul", "RocketOve
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedRoboMiner", "AdvancedRoboMiner\AdvancedRoboMiner.csproj", "{3E4E13AB-86EB-4670-B1D4-89F2E7D279B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShaftRoboMiner", "ShaftRoboMiner\ShaftRoboMiner.csproj", "{6D0DA3AF-0C38-4237-AD2B-DA907BC8A8D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{3E4E13AB-86EB-4670-B1D4-89F2E7D279B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E4E13AB-86EB-4670-B1D4-89F2E7D279B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E4E13AB-86EB-4670-B1D4-89F2E7D279B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D0DA3AF-0C38-4237-AD2B-DA907BC8A8D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D0DA3AF-0C38-4237-AD2B-DA907BC8A8D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D0DA3AF-0C38-4237-AD2B-DA907BC8A8D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D0DA3AF-0C38-4237-AD2B-DA907BC8A8D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
