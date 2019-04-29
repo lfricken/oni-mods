@@ -7,7 +7,7 @@
 Otherwise:
 1. [Click here](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/lfricken/oni-mods/tree/master/Mods) to download all my mods via DownGit.
 2. Move the _unzipped_ folder to the game's local mods directory which is: 
-    * C:\Users\leon\Documents\Klei\OxygenNotIncluded\mods\local
+    * Documents\Klei\OxygenNotIncluded\mods\local
 3. The directory tree should look like this:
     * ...mods\local\
         * Mod1\
