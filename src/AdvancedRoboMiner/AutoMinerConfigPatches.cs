@@ -4,21 +4,30 @@
 
 using Harmony;
 using System;
+using TUNING;
 using UnityEngine;
 
 namespace AdvancedRoboMiner
 {
-	class AutoMinerConfigPatches
+	public class AutoMinerConfigPatches
 	{
 		[HarmonyPatch(typeof(AutoMinerConfig))]
 		[HarmonyPatch(nameof(AutoMinerConfig.CreateBuildingDef))]
 		public static class CreateBuildingDef
 		{
-			static bool Prefix() { return false; }
+			static bool Prefix() { return true; }
 			static void Postfix(ref BuildingDef __result)
 			{
-				__result.EnergyConsumptionWhenActive = AdvancedRoboMiner.EnergyConsumption;
-				__result.SelfHeatKilowattsWhenActive = AdvancedRoboMiner.HeatProduction;
+				BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef(AdvancedRoboMiner.Id, 2, 2, "auto_miner_kanim", 10, 10f, BUILDINGS.CONSTRUCTION_MASS_KG.TIER3, MATERIALS.REFINED_METALS, 1600f, BuildLocationRule.OnFoundationRotatable, BUILDINGS.DECOR.PENALTY.TIER2, NOISE_POLLUTION.NOISY.TIER0, 0.2f);
+				buildingDef.Floodable = false;
+				buildingDef.AudioCategory = "Metal";
+				buildingDef.RequiresPowerInput = true;
+				buildingDef.EnergyConsumptionWhenActive = AdvancedRoboMiner.EnergyConsumption;
+				buildingDef.ExhaustKilowattsWhenActive = 0.0f;
+				buildingDef.SelfHeatKilowattsWhenActive = AdvancedRoboMiner.HeatProduction;
+				buildingDef.PermittedRotations = PermittedRotations.R360;
+				GeneratedBuildings.RegisterWithOverlay(OverlayScreen.SolidConveyorIDs, AdvancedRoboMiner.Id);
+				__result = buildingDef;
 			}
 		}
 
