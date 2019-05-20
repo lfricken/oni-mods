@@ -1,6 +1,16 @@
 
 All mapping is done in Unity.
 
+### Setting Up your workspace
+You should have the following windows open. Some may already be open. To open a window go to the _Window_ tab at the top of Unity.
+* Window > General > __Scene__
+* Window > General > __Project__
+* Window > General > __Hierarchy__
+* Window > 2D > __Tile Palette__
+
+
+
+
 ### Tile Palette
 Window > 2D > Tile Palette
 
