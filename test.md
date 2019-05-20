@@ -1,6 +1,7 @@
 
-# Setting Up
-## Open the Tile Palette
+All mapping is done in Unity.
+
+# Open the Tile Palette
 Window > 2D > Tile Palette
 
 From here you can
