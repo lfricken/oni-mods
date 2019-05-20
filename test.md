@@ -6,6 +6,7 @@ You should have the following windows open. To open a window, go to the _Window_
 * Window > General > __Scene__
 * Window > General > __Project__
 * Window > General > __Hierarchy__
+* Window > General > __Inspector__
 * Window > 2D > __Tile Palette__
 
 ### Introduction to Scenes
@@ -14,13 +15,15 @@ Unity uses [scenes](https://docs.unity3d.com/Manual/CreatingScenes.html) to defi
 * Make sure you have your Scene window focused
 * Look around the Scene with the [Hand Tool](https://docs.unity3d.com/Manual/SceneViewNavigation.html)
 
-Notice that in the Hierarchy window selecting _OutpostStation_ selects the entire station, but not 
+Notice that in the Hierarchy window selecting _OutpostStation_ selects the entire station, but not other shuttles, etc.
+You can save maps and areas as [prefabs](https://docs.unity3d.com/Manual/Prefabs.html) by dragging them from the Hierarchy tab into the Project tab.
 
 ### Tile Palette
 * The Tile Palette tab lets you place walls, floors, doors, tables etc.
-* Make sure to select the right Active Tilemap. The available tile maps correspond to the game objects in the Hierarchy tab that have the _Grid_ component. Components of an object can be seen in the Inspector tab with the game object selected.
+* Make sure to select the right Active Tilemap when editing.
 * The new tiles and objects will be added to the right categories within the active tilemap automatically. 
 
+### Edit a Palette
 Tiles are added to the palettes as they are created. To create a new Tile follow this example:
 - Choose a tile from /Tilemaps/Tiles/Objects
 - Drag a tile to a palette
