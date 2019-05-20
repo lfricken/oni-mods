@@ -1,14 +1,16 @@
 
 All mapping is done in Unity.
 
-### Open the Tile Palette
+### Tile Palette
 Window > 2D > Tile Palette
 
 From here you can
 
 
+### Scene View
+At the top right of a Unity sub-window > Dropdown > Add Tab > Scene
 
-* Open the Scene view: At the top right of a Unity sub-window > Dropdown > Add Tab > Scene
+This is where you wll
 
 
 
