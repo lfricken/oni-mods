@@ -20,7 +20,7 @@ You can save maps and areas as [prefabs](https://docs.unity3d.com/Manual/Prefabs
 
 ### Tile Palette
 * The Tile Palette tab lets you place walls, floors, doors, tables etc. into the Scene tab
-* Make sure to select the right Active Tilemap when editing
+* Make sure to select the right Active Tilemap in the Tile Palette when editing
 * The new tiles and objects will be added to the right categories within the active tilemap automatically
 
 ### Edit a Palette
