@@ -28,7 +28,9 @@ Tiles are added to the palettes as they are created. To create a new Tile follow
 - Choose a tile from /Tilemaps/Tiles/Objects
 - Drag a tile to a palette
 
-### [Testing custom maps in Multiplayer](https://github.com/unitystation/unitystation/wiki/Building-And-Testing#testing-custom-maps-in-multiplayer)
+### Create a new map
+* TODO: How do you create a new map from a station palette?
+* TODO: How do you add your new map for map selection, other than this: [Testing custom maps in Multiplayer](https://github.com/unitystation/unitystation/wiki/Building-And-Testing#testing-custom-maps-in-multiplayer)?
 
 ## Object-Specific Mapping Info
 This section describes the specifics of how various objects are mapped (anything that isn't obvious from within the editor).
