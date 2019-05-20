@@ -13,23 +13,13 @@ Unity uses [scenes](https://docs.unity3d.com/Manual/CreatingScenes.html) to defi
 * Open an existing scene: Project > Assets > Scenes > OutpostStation
 * Make sure you have your Scene window focused
 * Look around the Scene with the [Hand Tool](https://docs.unity3d.com/Manual/SceneViewNavigation.html)
+
 Notice that in the Hierarchy window selecting _OutpostStation_ selects the entire station, but not 
 
 ### Tile Palette
-Window > 2D > Tile Palette
-
-From here you can
-
-
-### Scene View
-At the top right of a Unity sub-window > Dropdown > Add Tab > Scene
-
-This is where you wll
-
-
-
-
-The Map Editor will create the child GameObjects (walls, floors, doors, tables etc) in the right categories automatically and place the tiles accordingly. 
+* The Tile Palette tab lets you place walls, floors, doors, tables etc.
+* Make sure to select the right Active Tilemap. The available tile maps correspond to the game objects in the Hierarchy tab that have the _Grid_ component. Components of an object can be seen in the Inspector tab with the game object selected.
+* The new tiles and objects will be added to the right categories within the active tilemap automatically. 
 
 Tiles are added to the palettes as they are created. To create a new Tile follow this example:
 - Choose a tile from /Tilemaps/Tiles/Objects
