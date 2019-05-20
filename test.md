@@ -19,9 +19,9 @@ Notice that in the Hierarchy window selecting _OutpostStation_ selects the entir
 You can save maps and areas as [prefabs](https://docs.unity3d.com/Manual/Prefabs.html) by dragging them from the Hierarchy tab into the Project tab.
 
 ### Tile Palette
-* The Tile Palette tab lets you place walls, floors, doors, tables etc.
-* Make sure to select the right Active Tilemap when editing.
-* The new tiles and objects will be added to the right categories within the active tilemap automatically. 
+* The Tile Palette tab lets you place walls, floors, doors, tables etc. into the Scene tab
+* Make sure to select the right Active Tilemap when editing
+* The new tiles and objects will be added to the right categories within the active tilemap automatically
 
 ### Edit a Palette
 Tiles are added to the palettes as they are created. To create a new Tile follow this example:
