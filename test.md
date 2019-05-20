@@ -1,7 +1,7 @@
 
 All mapping is done in Unity.
 
-# Open the Tile Palette
+### Open the Tile Palette
 Window > 2D > Tile Palette
 
 From here you can
