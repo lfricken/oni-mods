@@ -1,15 +1,19 @@
 
 All mapping is done in Unity.
 
-### Setting Up your workspace
-You should have the following windows open. Some may already be open. To open a window go to the _Window_ tab at the top of Unity.
+### Setting Up Your Workspace
+You should have the following windows open. To open a window, go to the _Window_ tab at the top of Unity.
 * Window > General > __Scene__
 * Window > General > __Project__
 * Window > General > __Hierarchy__
 * Window > 2D > __Tile Palette__
 
-
-
+### Introduction to Scenes
+Unity uses [scenes](https://docs.unity3d.com/Manual/CreatingScenes.html) to define environments and menus. Let's look at one.
+* Open an existing scene: Project > Assets > Scenes > OutpostStation
+* Make sure you have your Scene window focused
+* Look around the Scene with the [Hand Tool](https://docs.unity3d.com/Manual/SceneViewNavigation.html)
+Notice that in the Hierarchy window selecting _OutpostStation_ selects the entire station, but not 
 
 ### Tile Palette
 Window > 2D > Tile Palette
