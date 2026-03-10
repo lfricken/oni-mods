@@ -12,13 +12,13 @@ cargo_bays = 0
 other_modules = 0
 
 # must be in descending efficiency! km of range per kg of fuel burned
-fuel_efficiencies = [60, 40, 20]
-fuel_names = ['Hydrogen', 'Petroleum', 'Steam']
+fuel_efficiencies = [80, 60, 40, 20]
+fuel_names = ['Methane', 'Hydrogen', 'Petroleum', 'Steam']
 
 # oxylite is 1.0, lox is 1.33
 oxidizer_efficiency = 1.33
 
-stop_graph_at_peak_range: bool = True
+stop_graph_at_peak_range = True
 fuel_tank_capacity = 900
 oxy_tank_capacity = 2700
 empty_tank_mass = 100
@@ -30,19 +30,19 @@ cargo_bay_mass = 2000
 other_module_mass = 200
 
 
-def get_num_tanks(amount: float, amount_per: float) -> int:
+def get_num_tanks(amount, amount_per):
 	return math.ceil(max(float(1), amount) / amount_per)
 
 
-def get_num_fuel_tanks(kg_fuel: float) -> int:
+def get_num_fuel_tanks(kg_fuel):
 	return get_num_tanks(kg_fuel, fuel_tank_capacity)
 
 
-def get_num_oxy_tanks(kg_oxy: float) -> int:
+def get_num_oxy_tanks(kg_oxy):
 	return get_num_tanks(kg_oxy, oxy_tank_capacity)
 
 
-def get_weight(kg_fuel: float, kg_oxy: float, cargo_bays_units: int, other_modules_units: int) -> float:
+def get_weight(kg_fuel, kg_oxy, cargo_bays_units, other_modules_units):
 	num_fuel_tanks = get_num_fuel_tanks(kg_fuel)
 	num_oxy_tanks = get_num_oxy_tanks(kg_oxy)
 
@@ -54,16 +54,16 @@ def get_weight(kg_fuel: float, kg_oxy: float, cargo_bays_units: int, other_modul
 	return fuel + oxidizer + capsule_engine + storage + other
 
 
-def distance_penalty(weight: float) -> float:
-	weight: float = float(weight)
+def distance_penalty(weight):
+	weight = float(weight)
 	return max(weight, (weight / 300.0) ** 3.2)
 
 
-def distance(kg_fuel: float, kg_oxy: float, km_per_kg_fuel: float) -> float:
+def distance(kg_fuel, kg_oxy, km_per_kg_fuel):
 	return oxidizer_efficiency * min(kg_fuel, kg_oxy) * km_per_kg_fuel
 
 
-def calc_total_distance(kg_fuel: float, km_per_kg_fuel: float):
+def calc_total_distance(kg_fuel, km_per_kg_fuel):
 	kg_oxy = kg_fuel
 
 	weight = get_weight(kg_fuel, kg_oxy, cargo_bays, other_modules)
@@ -83,7 +83,7 @@ def test_this():
 	assert (3 == get_num_tanks(fuel_tank_capacity * 2 + 1, fuel_tank_capacity))
 
 
-def only_gets_worse(distance_delta_queue: deque) -> bool:
+def only_gets_worse(distance_delta_queue):
 	a = distance_delta_queue[0]
 	b = distance_delta_queue[1]
 	c = distance_delta_queue[2]
@@ -91,7 +91,7 @@ def only_gets_worse(distance_delta_queue: deque) -> bool:
 
 	is_getting_worse = 0 > a
 	if stop_graph_at_peak_range:
-		is_getting_worse: bool = True
+		is_getting_worse = True
 
 	return is_getting_worse and a > b > c > d
 
@@ -99,13 +99,13 @@ def only_gets_worse(distance_delta_queue: deque) -> bool:
 def main():
 	max_fuel_amount = 50000
 	max_distance = 0
-	distance_delta_queue: deque = deque()
+	distance_delta_queue = deque()
 
 	for i in range(len(fuel_efficiencies)):
 		efficiency = fuel_efficiencies[i]
-		is_most_efficient_fuel: bool = efficiency == fuel_efficiencies[0]
-		x_axis: [int] = []
-		y_axis: [int] = []
+		is_most_efficient_fuel = efficiency == fuel_efficiencies[0]
+		x_axis = []
+		y_axis = []
 		for fuel_amount in range(max_fuel_amount):
 			new_range = calc_total_distance(fuel_amount, efficiency)
 
